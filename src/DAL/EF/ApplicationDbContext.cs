@@ -22,5 +22,11 @@ namespace DAL.EF
 
         public DbSet<Company> Companies { get; set; }
         public DbSet<Employee> Employees { get; set; }
+
+
+        public DbSet<Project> Projects { get; set; }
+        public DbSet<Report> Reports { get; set; }
+        public DbSet<Task> Tasks { get; set; }
+        public DbSet<Attachment> Attachments { get; set; }
     }
 }
