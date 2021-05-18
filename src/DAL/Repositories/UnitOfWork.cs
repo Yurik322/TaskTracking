@@ -1,52 +1,43 @@
 ﻿using System;
-using System.Threading.Tasks;
+using System.Collections.Generic;
+using System.Text;
 using DAL.EF;
-using DAL.Entities;
 using DAL.Interfaces;
-using Microsoft.EntityFrameworkCore;
 
 namespace DAL.Repositories
 {
-   public class UnitOfWork : IUnitOfWork
+    public class UnitOfWork : IUnitOfWork
     {
-        private readonly ApplicationDbContext _db;
-        private IRepositoryBase<ArticleRepository> _articleRepository;
-        private IRepositoryBase<CompanyRepository> _companyRepository;
-        private IRepositoryBase<EmployeeRepository> _employeeRepository;
-        private IRepositoryBase<RepositoryManager> _repositoryManager;
+        private readonly ApplicationDbContext _repositoryContext;
+        private ICompanyRepository _companyRepository;
+        private IEmployeeRepository _employeeRepository;
 
-        public UnitOfWork(DbContextOptions<ApplicationDbContext> options)
+        public UnitOfWork(ApplicationDbContext repositoryContext)
         {
-            _db = new ApplicationDbContext(options);
+            _repositoryContext = repositoryContext;
         }
 
-        public IRepositoryBase<IArticleRepository> ArticleRepository { get; }
-        public IRepositoryBase<ICompanyRepository> CompanyRepository { get; }
-        public IRepositoryBase<IEmployeeRepository> EmployeeRepository { get; }
-        public IRepositoryBase<IRepositoryManager> RepositoryManager { get; }
-
-        public async Task SaveAsync()
+        public ICompanyRepository Company
         {
-            await _db.SaveChangesAsync();
-        }
-
-        private bool _disposed = false;
-
-        public virtual void Dispose(bool disposing)
-        {
-            if (this._disposed)
-                return;
-            if (disposing)
+            get
             {
-                _db.Dispose();
+                if (_companyRepository == null)
+                    _companyRepository = new CompanyRepository(_repositoryContext);
+
+                return _companyRepository;
             }
-            this._disposed = true;
         }
 
-        public void Dispose()
+        public IEmployeeRepository Employee
         {
-            Dispose(true);
-            GC.SuppressFinalize(this);
+            get
+            {
+                if (_employeeRepository == null)
+                    _employeeRepository = new EmployeeRepository(_repositoryContext);
+
+                return _employeeRepository;
+            }
         }
+        public void Save() => _repositoryContext.SaveChanges();
     }
 }

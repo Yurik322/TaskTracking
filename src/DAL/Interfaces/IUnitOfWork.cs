@@ -1,14 +1,13 @@
 ﻿using System;
-using System.Threading.Tasks;
+using System.Collections.Generic;
+using System.Text;
 
 namespace DAL.Interfaces
 {
-    public interface IUnitOfWork : IDisposable
+    public interface IUnitOfWork
     {
-        IRepositoryBase<IArticleRepository> ArticleRepository { get; }
-        IRepositoryBase<ICompanyRepository> CompanyRepository { get; }
-        IRepositoryBase<IEmployeeRepository> EmployeeRepository { get; }
-        IRepositoryBase<IRepositoryManager> RepositoryManager { get; }
-        Task SaveAsync();
+        ICompanyRepository Company { get; }
+        IEmployeeRepository Employee { get; }
+        void Save();
     }
 }

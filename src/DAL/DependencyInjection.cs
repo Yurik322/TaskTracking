@@ -17,7 +17,8 @@ namespace DAL
                     opt.Password.RequireDigit = false;
                     opt.User.RequireUniqueEmail = true;
                 })
-                 .AddEntityFrameworkStores<ApplicationDbContext>();
+                 .AddEntityFrameworkStores<ApplicationDbContext>()
+                 .AddDefaultTokenProviders();
 
             services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));

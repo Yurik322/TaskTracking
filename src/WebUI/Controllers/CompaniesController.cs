@@ -6,19 +6,21 @@ using AutoMapper;
 using BLL.EtitiesDTO;
 using BLL.Interfaces;
 using DAL.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebUI.Controllers
 {
     [Route("api/companies")]
+    [Authorize]
     [ApiController]
     public class CompaniesController : ControllerBase
     {
-        private readonly IRepositoryManager _repository;
+        private readonly IUnitOfWork _repository;
         private readonly ILoggerManager _logger;
         private readonly IMapper _mapper;
 
-        public CompaniesController(IRepositoryManager repository, ILoggerManager logger, IMapper mapper)
+        public CompaniesController(IUnitOfWork repository, ILoggerManager logger, IMapper mapper)
         {
             _repository = repository;
             _logger = logger;
@@ -33,6 +35,7 @@ namespace WebUI.Controllers
             {
                 var claims = User.Claims;
 
+                //TODO ERROR
                 var companies = _repository.Company.GetAllCompanies(trackChanges: false);
 
                 var companiesDto = _mapper.Map<IEnumerable<CompanyDto>>(companies);
@@ -44,6 +47,17 @@ namespace WebUI.Controllers
                 _logger.LogError($"Something went wrong in the {nameof(GetCompanies)} action {ex}");
                 return StatusCode(500, "Internal server error");
             }
+        }
+
+        [HttpGet("Privacy")]
+        [Authorize(Roles = "Administrator")]
+        public IActionResult Privacy()
+        {
+            var claims = User.Claims
+                .Select(c => new { c.Type, c.Value })
+                .ToList();
+
+            return Ok(claims);
         }
     }
 }

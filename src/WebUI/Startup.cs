@@ -1,19 +1,27 @@
+using System;
+using System.IO;
 using System.Text;
 using AutoMapper;
 using BLL;
+using BLL.EmailService;
 using BLL.Interfaces;
 using BLL.JwtFeatures;
 using BLL.Services;
 using DAL;
+using DAL.EF;
+using DAL.Entities;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
+using NLog;
+using WebUI.Extensions;
 
 namespace WebUI
 {
@@ -21,6 +29,7 @@ namespace WebUI
     {
         public Startup(IConfiguration configuration)
         {
+            LogManager.LoadConfiguration(string.Concat(Directory.GetCurrentDirectory(), "/nlog.config"));
             Configuration = configuration;
         }
 
@@ -30,6 +39,13 @@ namespace WebUI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.ConfigureLoggerService();
+            services.ConfigureRepositoryManager();
+            services.AddAutoMapper(typeof(Startup));
+
+            services.Configure<DataProtectionTokenProviderOptions>(opt =>
+                opt.TokenLifespan = TimeSpan.FromHours(2));
+
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
@@ -64,6 +80,21 @@ namespace WebUI
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.GetSection("securityKey").Value))
                 };
             });
+
+            var emailConfig = Configuration
+                .GetSection("EmailConfiguration")
+                .Get<EmailConfiguration>();
+            services.AddSingleton(emailConfig);
+            services.AddScoped<IEmailSender, EmailSender>();
+
+            //services.AddIdentity<User, IdentityRole>(opt =>
+            //    {
+            //        opt.Password.RequiredLength = 7;
+            //        opt.Password.RequireDigit = false;
+
+            //        opt.User.RequireUniqueEmail = true;
+            //    })
+            //    .AddEntityFrameworkStores<ApplicationDbContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

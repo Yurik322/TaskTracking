@@ -20,7 +20,6 @@ namespace DAL.EF
             modelBuilder.ApplyConfiguration(new RoleConfiguration());
         }
 
-        public DbSet<Articles> Articles { get; set; }
         public DbSet<Company> Companies { get; set; }
         public DbSet<Employee> Employees { get; set; }
     }

@@ -1,3 +1,5 @@
+import { Router } from '@angular/router';
+import { PasswordConfirmationValidatorService } from './../../shared/custom-validators/password-confirmation-validator.service';
 import { UserForRegistrationDto } from './../../_interfaces/user/userForRegistrationDto.model';
 import { AuthenticationService } from './../../shared/services/authentication.service';
 import { Component, OnInit } from '@angular/core';
@@ -10,8 +12,11 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class RegisterUserComponent implements OnInit {
   public registerForm: FormGroup;
+  public errorMessage = '';
+  public showError: boolean;
 
-  constructor(private _authService: AuthenticationService) { }
+  constructor(private _authService: AuthenticationService, private _passConfValidator: PasswordConfirmationValidatorService,
+              private _router: Router) { }
 
   ngOnInit(): void {
     this.registerForm = new FormGroup({
@@ -21,17 +26,20 @@ export class RegisterUserComponent implements OnInit {
       password: new FormControl('', [Validators.required]),
       confirm: new FormControl('')
     });
+    this.registerForm.get('confirm').setValidators([Validators.required,
+      this._passConfValidator.validateConfirmPassword(this.registerForm.get('password'))]);
   }
 
   public validateControl = (controlName: string) => {
-    return this.registerForm.controls[controlName].invalid && this.registerForm.controls[controlName].touched
+    return this.registerForm.controls[controlName].invalid && this.registerForm.controls[controlName].touched;
   }
 
   public hasError = (controlName: string, errorName: string) => {
-    return this.registerForm.controls[controlName].hasError(errorName)
+    return this.registerForm.controls[controlName].hasError(errorName);
   }
 
   public registerUser = (registerFormValue) => {
+    this.showError = false;
     const formValues = { ...registerFormValue };
 
     const user: UserForRegistrationDto = {
@@ -42,12 +50,13 @@ export class RegisterUserComponent implements OnInit {
       confirmPassword: formValues.confirm
     };
 
-    this._authService.registerUser("api/accounts/registration", user)
+    this._authService.registerUser('api/accounts/registration', user)
       .subscribe(_ => {
-          console.log("Successful registration");
+          this._router.navigate(['/authentication/login']);
         },
         error => {
-          console.log(error.error.errors);
-        })
+          this.errorMessage = error;
+          this.showError = true;
+        });
   }
 }
