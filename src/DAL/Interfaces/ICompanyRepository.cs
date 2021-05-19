@@ -8,5 +8,6 @@ namespace DAL.Interfaces
     public interface ICompanyRepository
     {
         IEnumerable<Company> GetAllCompanies(bool trackChanges);
+
     }
 }

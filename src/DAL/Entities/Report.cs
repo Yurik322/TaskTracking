@@ -13,12 +13,12 @@ namespace DAL.Entities
         [ForeignKey(nameof(Employee))]
         public Guid EmployeeId { get; set; }
 
-        [ForeignKey(nameof(Task))]
-        public Guid TaskId { get; set; }
+        [ForeignKey(nameof(Issue))]
+        public Guid IssueId { get; set; }
         public DateTime AssignmentDate { get; set; }
         public string ReportDescription { get; set; }
 
         public Employee Employee { get; set; }
-        public Task Task { get; set; }
+        public Issue Issue { get; set; }
     }
 }

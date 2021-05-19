@@ -7,9 +7,9 @@ using DAL.Entities.Enums;
 
 namespace DAL.Entities
 {
-    public class Task
+    public class Issue
     {
-        [Column("TaskId")]
+        [Column("IssueId")]
         public Guid Id { get; set; }
 
         [StringLength(256, MinimumLength = 5)]

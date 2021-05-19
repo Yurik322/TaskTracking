@@ -16,13 +16,13 @@ namespace WebUI.Controllers
     [ApiController]
     public class CompaniesController : ControllerBase
     {
-        private readonly IUnitOfWork _repository;
+        private readonly ICompanyService _companyService;
         private readonly ILoggerManager _logger;
         private readonly IMapper _mapper;
 
-        public CompaniesController(IUnitOfWork repository, ILoggerManager logger, IMapper mapper)
+        public CompaniesController(ICompanyService companyService, ILoggerManager logger, IMapper mapper)
         {
-            _repository = repository;
+            _companyService = companyService;
             _logger = logger;
             _mapper = mapper;
         }
@@ -34,11 +34,7 @@ namespace WebUI.Controllers
             try
             {
                 var claims = User.Claims;
-
-                //TODO ERROR
-                var companies = _repository.Company.GetAllCompanies(trackChanges: false);
-
-                var companiesDto = _mapper.Map<IEnumerable<CompanyDto>>(companies);
+                var companiesDto = _companyService.GetAllCompanies(trackChanges: false); 
 
                 return Ok(companiesDto);
             }
@@ -48,6 +44,7 @@ namespace WebUI.Controllers
                 return StatusCode(500, "Internal server error");
             }
         }
+
 
         [HttpGet("Privacy")]
         [Authorize(Roles = "Administrator")]

@@ -15,8 +15,9 @@ namespace DAL.Entities
         [Required]
         public string Name { get; set; }
         public string Description { get; set; }
+        public string Url { get; set; }
         public DateTime CreatedAt { get; set; }
 
-        public ICollection<Task> Tasks { get; set; }
+        public ICollection<Issue> Issues { get; set; }
     }
 }

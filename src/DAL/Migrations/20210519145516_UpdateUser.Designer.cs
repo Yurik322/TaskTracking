@@ -4,14 +4,16 @@ using DAL.EF;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DAL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210519145516_UpdateUser")]
+    partial class UpdateUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -32,18 +34,18 @@ namespace DAL.Migrations
                     b.Property<int>("FileType")
                         .HasColumnType("int");
 
-                    b.Property<Guid?>("IssueId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Path")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid?>("TaskId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("IssueId");
+                    b.HasIndex("TaskId");
 
                     b.ToTable("Attachments");
                 });
@@ -152,46 +154,6 @@ namespace DAL.Migrations
                         });
                 });
 
-            modelBuilder.Entity("DAL.Entities.Issue", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnName("IssueId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Priority")
-                        .HasColumnType("int");
-
-                    b.Property<Guid?>("ProjectId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("StatusType")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TaskType")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
-
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProjectId");
-
-                    b.ToTable("Tasks");
-                });
-
             modelBuilder.Entity("DAL.Entities.Project", b =>
                 {
                     b.Property<Guid>("Id")
@@ -231,19 +193,59 @@ namespace DAL.Migrations
                     b.Property<Guid>("EmployeeId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("IssueId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("ReportDescription")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("TaskId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
                     b.HasIndex("EmployeeId");
 
-                    b.HasIndex("IssueId");
+                    b.HasIndex("TaskId");
 
                     b.ToTable("Reports");
+                });
+
+            modelBuilder.Entity("DAL.Entities.Task", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("TaskId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Priority")
+                        .HasColumnType("int");
+
+                    b.Property<Guid?>("ProjectId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("StatusType")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TaskType")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(256)")
+                        .HasMaxLength(256);
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProjectId");
+
+                    b.ToTable("Tasks");
                 });
 
             modelBuilder.Entity("DAL.Entities.User", b =>
@@ -346,15 +348,15 @@ namespace DAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "f2360529-57f7-484f-8138-eb707b27771d",
-                            ConcurrencyStamp = "7244c3ca-f1d6-40b4-9c6f-ddc54522ec74",
+                            Id = "93304d99-18cf-49a8-86e9-74f9f53a1b8c",
+                            ConcurrencyStamp = "2da795bd-3a2a-4ff4-9edf-6523b7560115",
                             Name = "Viewer",
                             NormalizedName = "VIEWER"
                         },
                         new
                         {
-                            Id = "1b1c1dea-6873-458a-8152-4ff2258ea3f8",
-                            ConcurrencyStamp = "7f5fb6f0-846d-455b-b39a-fa193e480a76",
+                            Id = "2024caa4-5b34-45fe-9ca7-d44f3c940ef0",
+                            ConcurrencyStamp = "c2b32c62-7979-49f7-a7e2-e22bcff2e3e8",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         });
@@ -466,9 +468,9 @@ namespace DAL.Migrations
 
             modelBuilder.Entity("DAL.Entities.Attachment", b =>
                 {
-                    b.HasOne("DAL.Entities.Issue", "Issue")
+                    b.HasOne("DAL.Entities.Task", "Task")
                         .WithMany("Attachments")
-                        .HasForeignKey("IssueId");
+                        .HasForeignKey("TaskId");
                 });
 
             modelBuilder.Entity("DAL.Entities.Employee", b =>
@@ -484,13 +486,6 @@ namespace DAL.Migrations
                         .HasForeignKey("DAL.Entities.Employee", "UserId");
                 });
 
-            modelBuilder.Entity("DAL.Entities.Issue", b =>
-                {
-                    b.HasOne("DAL.Entities.Project", "Project")
-                        .WithMany("Issues")
-                        .HasForeignKey("ProjectId");
-                });
-
             modelBuilder.Entity("DAL.Entities.Report", b =>
                 {
                     b.HasOne("DAL.Entities.Employee", "Employee")
@@ -499,11 +494,18 @@ namespace DAL.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DAL.Entities.Issue", "Issue")
+                    b.HasOne("DAL.Entities.Task", "Task")
                         .WithMany("Reports")
-                        .HasForeignKey("IssueId")
+                        .HasForeignKey("TaskId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("DAL.Entities.Task", b =>
+                {
+                    b.HasOne("DAL.Entities.Project", "Project")
+                        .WithMany("Tasks")
+                        .HasForeignKey("ProjectId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

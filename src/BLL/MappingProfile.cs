@@ -4,7 +4,7 @@ using DAL.Entities;
 
 namespace BLL
 {
-    public class MappingProfile:Profile
+    public class MappingProfile : Profile
     {
         public MappingProfile()
         {

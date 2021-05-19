@@ -41,6 +41,7 @@ namespace WebUI
             services.AddControllersWithViews();
             services.ConfigureLoggerService();
             services.ConfigureRepositoryManager();
+            services.ConfigureCompanyService();
             services.AddAutoMapper(typeof(Startup));
 
             services.Configure<DataProtectionTokenProviderOptions>(opt =>
@@ -59,7 +60,7 @@ namespace WebUI
             IMapper mapper = mapperConfig.CreateMapper();
             services.AddSingleton(mapper);
             services.AddControllers();
-            services.AddScoped<IAuthService, AuthService>();
+            //services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<JwtHandler>();
             services.AddDataServices(Configuration);
             var jwtSettings = Configuration.GetSection("JwtSettings");
@@ -86,16 +87,8 @@ namespace WebUI
                 .Get<EmailConfiguration>();
             services.AddSingleton(emailConfig);
             services.AddScoped<IEmailSender, EmailSender>();
-
-            //services.AddIdentity<User, IdentityRole>(opt =>
-            //    {
-            //        opt.Password.RequiredLength = 7;
-            //        opt.Password.RequireDigit = false;
-
-            //        opt.User.RequireUniqueEmail = true;
-            //    })
-            //    .AddEntityFrameworkStores<ApplicationDbContext>();
         }
+
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

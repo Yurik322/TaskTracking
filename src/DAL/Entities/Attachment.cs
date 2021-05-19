@@ -15,6 +15,6 @@ namespace DAL.Entities
         public FileType FileType { get; set; }
         public DateTime CreatedAt { get; set; }
 
-        public Task Task { get; set; }
+        public Issue Issue { get; set; }
     }
 }
