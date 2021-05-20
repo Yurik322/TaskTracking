@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using AutoMapper;
 using BLL.EmailService;
 using BLL.EtitiesDTO;
-using BLL.Interfaces;
 using BLL.JwtFeatures;
 using DAL.Entities;
 using Microsoft.AspNetCore.Identity;

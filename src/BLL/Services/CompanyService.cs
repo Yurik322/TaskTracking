@@ -26,5 +26,23 @@ namespace BLL.Services
             
             return _mapper.Map<IEnumerable<CompanyDto>>(companies);
         }
+
+        public async Task AddAsync(CompanyDto model)
+        {
+            //if (model.Author.Length == 0 || model.Title.Length == 0 || model.Year < 0 || model.Year > DateTime.Today.Year)
+            //{
+            //    throw new LibraryException("");
+            //}
+            var newModel = _mapper.Map<CompanyDto, Company>(model);
+            _repository.Company.Create(newModel);
+            await _repository.SaveAsync();
+            //var newCompany = new Company()
+            //{
+            //    Name = company.Name,
+            //    FullAddress = company.FullAddress
+            //};
+            //var model = await _repository.Company.CreateAsync(newCompany);
+            //return new CompanyDto(model);
+        }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using DAL.EF;
 using DAL.Entities;
 using DAL.Interfaces;
@@ -18,5 +19,11 @@ namespace DAL.Repositories
             FindAll(trackChanges)
                 .OrderBy(c => c.Name)
                 .ToList();
+
+        //TODO
+        public void CreateAsync(Company company)
+        {
+            Create(company);
+        }
     }
 }

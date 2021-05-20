@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using DAL.Entities;
 
 namespace DAL.Interfaces
@@ -8,6 +9,6 @@ namespace DAL.Interfaces
     public interface ICompanyRepository
     {
         IEnumerable<Company> GetAllCompanies(bool trackChanges);
-
+        void Create(Company company);
     }
 }

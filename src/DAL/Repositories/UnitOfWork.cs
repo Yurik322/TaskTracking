@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using DAL.EF;
 using DAL.Interfaces;
 
@@ -38,6 +39,9 @@ namespace DAL.Repositories
                 return _employeeRepository;
             }
         }
-        public void Save() => _repositoryContext.SaveChanges();
+        public async Task SaveAsync()
+        {
+            await _repositoryContext.SaveChangesAsync();
+        }
     }
 }
