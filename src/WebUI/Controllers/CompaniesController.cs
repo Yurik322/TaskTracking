@@ -52,6 +52,33 @@ namespace WebUI.Controllers
             }
         }
 
+        //TODO
+        [HttpGet("{id}", Name = "CompanyById")]
+        public IActionResult GetCompanyById(int id)
+        {
+            try
+            {
+                var company = _repository.Company.GetOwnerById(id);
+                if (company == null)
+                {
+                    _logger.LogError($"Company with id: {id}, hasn't been found in db.");
+                    return NotFound();
+                }
+                else
+                {
+                    _logger.LogInfo($"Returned company with id: {id}");
+
+                    var companyResult = _mapper.Map<CompanyDto>(company);
+                    return Ok(companyResult);
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong inside GetCompanyById action: {ex.Message}");
+                return StatusCode(500, "Internal server error");
+            }
+        }
+
         // GET: /company/companies/5
         [HttpGet("{id}")]
         public IActionResult Details(int id)
@@ -67,28 +94,28 @@ namespace WebUI.Controllers
         //TODO
         // POST: /company/companies/create
         [HttpPost]
-        public async Task<IActionResult> CreateCompany([FromForm] CompanyDto company)
+        public async Task<IActionResult> CreateCompany([FromForm] CompanyForCreationDto company)
         {
             try
             {
                 if (company == null)
                 {
-                    _logger.LogError("Owner object sent from client is null.");
-                    return BadRequest("Owner object is null");
+                    _logger.LogError("Company object sent from client is null.");
+                    return BadRequest("Company object is null");
                 }
 
                 if (!ModelState.IsValid)
                 {
-                    _logger.LogError("Invalid owner object sent from client.");
+                    _logger.LogError("Invalid company object sent from client.");
                     return BadRequest("Invalid model object");
                 }
 
-                var ownerEntity = _mapper.Map<Company>(company);
+                var companyEntity = _mapper.Map<Company>(company);
 
-                _repository.Company.Create(ownerEntity);
+                _repository.Company.Create(companyEntity);
                 await _repository.SaveAsync();
 
-                var createdCompany = _mapper.Map<CompanyDto>(ownerEntity);
+                var createdCompany = _mapper.Map<CompanyDto>(companyEntity);
 
                 return CreatedAtRoute("CompanyById", new { id = createdCompany.Id }, createdCompany);
                 //return CreatedAtRoute("OwnerById", new { id = createdOwner.Id }, createdOwner);

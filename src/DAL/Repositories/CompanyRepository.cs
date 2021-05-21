@@ -20,6 +20,33 @@ namespace DAL.Repositories
                 .OrderBy(c => c.Name)
                 .ToList();
 
+        public Company GetOwnerById(int companyId)
+        {
+            return FindByCondition(x => x.Id.Equals(companyId), trackChanges: false)
+                .FirstOrDefault();
+        }
+
+        public Company GetOwnerWithDetails(Guid ownerId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void CreateCompany(Company company)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdateCompany(Company company)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteCompany(Company company)
+        {
+            throw new NotImplementedException();
+        }
+
+
         //TODO
         public void CreateAsync(Company company)
         {

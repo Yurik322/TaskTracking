@@ -14,6 +14,7 @@ import { NotFoundComponent } from './error-pages/not-found/not-found.component';
 import { PrivacyComponent } from './privacy/privacy.component';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { InternalServerComponent } from './error-pages/internal-server/internal-server.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -26,7 +27,8 @@ export function tokenGetter() {
     MenuComponent,
     NotFoundComponent,
     PrivacyComponent,
-    ForbiddenComponent
+    ForbiddenComponent,
+    InternalServerComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +39,8 @@ export function tokenGetter() {
       { path: 'authentication', loadChildren: () => import('./authentication/authentication.module').then(m => m.AuthenticationModule) },
       { path: 'privacy', component: PrivacyComponent, canActivate: [AuthGuard, AdminGuard] },
       { path: 'forbidden', component: ForbiddenComponent },
-      { path: '404', component : NotFoundComponent},
+      { path: '404', component : NotFoundComponent },
+      { path: '500', component: InternalServerComponent },
       { path: '', redirectTo: '/home', pathMatch: 'full' },
       { path: '**', redirectTo: '/404', pathMatch: 'full'}
     ]),
