@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebUI.Controllers
 {
-    [Route("api/companies")]
+    [Route("api/company")]
     [Authorize]
     [ApiController]
     public class CompaniesController : ControllerBase

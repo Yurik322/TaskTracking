@@ -1,6 +1,6 @@
 <div class="row">
   <div class="offset-10 col-md-2">
-    <a href="#">Create company</a>
+    <a [routerLink]="['/company/create']">Create company</a>
   </div>
 </div>
 <br>
@@ -18,12 +18,12 @@
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let company of companies">
+        <tr *ngFor="let company of companys">
           <td>{{company.name}}</td>
           <td>{{company.fullAddress}}</td>
-          <td><button type="button" id="details" class="btn btn-light">Details</button></td>
-          <td><button type="button" id="update" class="btn btn-success">Update</button></td>
-          <td><button type="button" id="delete" class="btn btn-danger">Delete</button></td>
+          <td><button type="button" id="details" class="btn btn-light" (click)="getCompanyDetails(company.id)">Details</button></td>
+          <td><button type="button" id="update" class="btn btn-success" (click)="redirectToUpdatePage(company.id)">Update</button></td>
+          <td><button type="button" id="delete" class="btn btn-danger" (click)="redirectToDeletePage(company.id)">Delete</button></td>
         </tr>
         </tbody>
       </table>

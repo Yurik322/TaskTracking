@@ -17,7 +17,7 @@ export class PrivacyComponent implements OnInit {
   }
 
   public getClaims = () => {
-    this._repository.getData('api/companies/privacy')
+    this._repository.getData('api/company-list/privacy')
       .subscribe(res => {
         this.claims = res as [];
       });

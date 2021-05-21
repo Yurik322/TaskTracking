@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class ErrorHandlerService implements HttpInterceptor {
+  public errorMessage = '';
 
   constructor(private _router: Router) { }
 
@@ -21,7 +22,7 @@ export class ErrorHandlerService implements HttpInterceptor {
       );
   }
 
-  private handleError = (error: HttpErrorResponse): string => {
+  public handleError = (error: HttpErrorResponse): string => {
     if (error.status === 404) {
       return this.handleNotFound(error);
     } else if (error.status === 400) {

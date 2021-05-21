@@ -1,5 +1,4 @@
-export interface Company {
-  id: number;
+export interface CompanyForCreation {
   name: string;
   fullAddress: string;
 }
