@@ -8,7 +8,6 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class ErrorHandlerService implements HttpInterceptor {
-  public errorMessage = '';
 
   constructor(private _router: Router) { }
 

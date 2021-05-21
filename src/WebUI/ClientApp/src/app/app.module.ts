@@ -13,7 +13,6 @@ import { MenuComponent } from './menu/menu.component';
 import { NotFoundComponent } from './error-pages/not-found/not-found.component';
 import { PrivacyComponent } from './privacy/privacy.component';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
-import * as $ from 'jquery';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 export function tokenGetter() {

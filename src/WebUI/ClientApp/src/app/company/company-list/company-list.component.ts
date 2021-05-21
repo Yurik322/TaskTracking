@@ -27,7 +27,6 @@ export class CompanyListComponent implements OnInit {
         },
         (error) => {
           this.errorHandler.handleError(error);
-          this.errorMessage = this.errorHandler.errorMessage;
         });
   }
 
