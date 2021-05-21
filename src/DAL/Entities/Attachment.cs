@@ -8,8 +8,7 @@ namespace DAL.Entities
 {
     public class Attachment
     {
-        [Column("AttachmentId")]
-        public Guid Id { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Path { get; set; }
         public FileType FileType { get; set; }

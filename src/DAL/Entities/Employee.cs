@@ -8,8 +8,7 @@ namespace DAL.Entities
 {
     public class Employee
     {
-        [Column("EmployeeId")]
-        public Guid Id { get; set; }
+        public int Id { get; set; }
 
         [Required(ErrorMessage = "Employee name is a required field.")]
         [MaxLength(30, ErrorMessage = "Maximum length for the Name is 30 characters.")]
@@ -21,7 +20,7 @@ namespace DAL.Entities
         public string Position { get; set; }
 
         [ForeignKey(nameof(Company))]
-        public Guid CompanyId { get; set; }
+        public int CompanyId { get; set; }
 
         [ForeignKey(nameof(User))]
         public string UserId { get; set; }

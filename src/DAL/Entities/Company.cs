@@ -8,8 +8,7 @@ namespace DAL.Entities
 {
     public class Company
     {
-        [Column("CompanyId")]
-        public Guid Id { get; set; }
+        public int Id { get; set; }
 
         [Required(ErrorMessage = "Company name is a required field.")]
         [MaxLength(60, ErrorMessage = "Maximum length for the Name is 60 characters.")]

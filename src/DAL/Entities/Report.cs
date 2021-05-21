@@ -7,14 +7,13 @@ namespace DAL.Entities
 {
     public class Report
     {
-        [Column("ReportId")]
-        public Guid Id { get; set; }
+        public int Id { get; set; }
 
         [ForeignKey(nameof(Employee))]
-        public Guid EmployeeId { get; set; }
+        public int EmployeeId { get; set; }
 
         [ForeignKey(nameof(Issue))]
-        public Guid IssueId { get; set; }
+        public int IssueId { get; set; }
         public DateTime AssignmentDate { get; set; }
         public string ReportDescription { get; set; }
 

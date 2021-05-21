@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DAL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210519184540_AddIssues")]
-    partial class AddIssues
+    [Migration("20210521134114_AddNewTables")]
+    partial class AddNewTables
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,10 +23,10 @@ namespace DAL.Migrations
 
             modelBuilder.Entity("DAL.Entities.Attachment", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("AttachmentId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -34,8 +34,8 @@ namespace DAL.Migrations
                     b.Property<int>("FileType")
                         .HasColumnType("int");
 
-                    b.Property<Guid?>("IssueId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int?>("IssueId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -52,10 +52,10 @@ namespace DAL.Migrations
 
             modelBuilder.Entity("DAL.Entities.Company", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("CompanyId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Address")
                         .IsRequired()
@@ -77,14 +77,14 @@ namespace DAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("c9d4c053-49b6-410c-bc78-2d54a9991870"),
+                            Id = 1,
                             Address = "583 Wall Dr. Gwynn Oak, MD 21207",
                             Country = "USA",
                             Name = "IT_Solutions Ltd"
                         },
                         new
                         {
-                            Id = new Guid("3d490a70-94ce-4d15-9494-5248280c2ce3"),
+                            Id = 2,
                             Address = "312 Forest Avenue, BF 923",
                             Country = "USA",
                             Name = "Admin_Solutions Ltd"
@@ -93,16 +93,16 @@ namespace DAL.Migrations
 
             modelBuilder.Entity("DAL.Entities.Employee", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("EmployeeId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("Age")
                         .HasColumnType("int");
 
-                    b.Property<Guid>("CompanyId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("CompanyId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -130,25 +130,25 @@ namespace DAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("80abbca8-664d-4b20-b5de-024705497d4a"),
+                            Id = 1,
                             Age = 26,
-                            CompanyId = new Guid("c9d4c053-49b6-410c-bc78-2d54a9991870"),
+                            CompanyId = 1,
                             Name = "Sam Raiden",
                             Position = "Software developer"
                         },
                         new
                         {
-                            Id = new Guid("86dba8c0-d178-41e7-938c-ed49778fb52a"),
+                            Id = 2,
                             Age = 30,
-                            CompanyId = new Guid("c9d4c053-49b6-410c-bc78-2d54a9991870"),
+                            CompanyId = 1,
                             Name = "Jana McLeaf",
                             Position = "Software developer"
                         },
                         new
                         {
-                            Id = new Guid("021ca3c1-0deb-4afd-ae94-2159a8479811"),
+                            Id = 3,
                             Age = 35,
-                            CompanyId = new Guid("3d490a70-94ce-4d15-9494-5248280c2ce3"),
+                            CompanyId = 2,
                             Name = "Kane Miller",
                             Position = "Administrator"
                         });
@@ -156,10 +156,10 @@ namespace DAL.Migrations
 
             modelBuilder.Entity("DAL.Entities.Issue", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("IssueId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -170,8 +170,8 @@ namespace DAL.Migrations
                     b.Property<int>("Priority")
                         .HasColumnType("int");
 
-                    b.Property<Guid?>("ProjectId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int?>("ProjectId")
+                        .HasColumnType("int");
 
                     b.Property<int>("StatusType")
                         .HasColumnType("int");
@@ -196,10 +196,10 @@ namespace DAL.Migrations
 
             modelBuilder.Entity("DAL.Entities.Project", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("ProjectId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -222,19 +222,19 @@ namespace DAL.Migrations
 
             modelBuilder.Entity("DAL.Entities.Report", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("ReportId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("AssignmentDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("EmployeeId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("EmployeeId")
+                        .HasColumnType("int");
 
-                    b.Property<Guid>("IssueId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("IssueId")
+                        .HasColumnType("int");
 
                     b.Property<string>("ReportDescription")
                         .HasColumnType("nvarchar(max)");
@@ -348,15 +348,15 @@ namespace DAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "f2360529-57f7-484f-8138-eb707b27771d",
-                            ConcurrencyStamp = "7244c3ca-f1d6-40b4-9c6f-ddc54522ec74",
+                            Id = "88511283-fcaf-42a6-a3c8-7ebf3d8fd357",
+                            ConcurrencyStamp = "b75a2628-c320-47a2-bc23-8f0f52b7ccf1",
                             Name = "Viewer",
                             NormalizedName = "VIEWER"
                         },
                         new
                         {
-                            Id = "1b1c1dea-6873-458a-8152-4ff2258ea3f8",
-                            ConcurrencyStamp = "7f5fb6f0-846d-455b-b39a-fa193e480a76",
+                            Id = "fba44ca9-5257-448f-9dff-20d5321ebf5c",
+                            ConcurrencyStamp = "141db1f3-b80a-4fd4-ab47-692ed1910748",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         });

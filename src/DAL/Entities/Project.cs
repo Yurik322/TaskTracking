@@ -8,8 +8,7 @@ namespace DAL.Entities
 {
     public class Project
     {
-        [Column("ProjectId")]
-        public Guid Id { get; set; }
+        public int Id { get; set; }
 
         [StringLength(256, MinimumLength = 5)]
         [Required]
