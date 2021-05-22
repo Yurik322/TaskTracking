@@ -1,0 +1,37 @@
+<div class="card card-body bg-light mb-2 mt-2">
+  <div class="row">
+    <div class="col-md-3">
+      <strong>Company name:</strong>
+    </div>
+    <div class="col-md-3">
+      {{company?.name}}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3">
+      <strong>Full Address:</strong>
+    </div>
+    <div class="col-md-3">
+      {{company?.fullAddress}}
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th>Account type</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let employee of company?.employees">
+          <td>{{employee?.name}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -5,7 +5,7 @@ import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { CompanyListComponent } from './company-list/company-list.component';
-// import { CompanyDetailsComponent } from './company-details/company-details.component';
+import { CompanyDetailsComponent } from './company-details/company-details.component';
 import { CompanyCreateComponent } from './company-create/company-create.component';
 // import { CompanyUpdateComponent } from './company-update/company-update.component';
 // import { CompanyDeleteComponent } from './company-delete/company-delete.component';
@@ -17,7 +17,7 @@ import { CompanyCreateComponent } from './company-create/company-create.componen
     ReactiveFormsModule,
     RouterModule.forChild([
       { path: 'list', component: CompanyListComponent },
-      // { path: 'details/:id', component: CompanyDetailsComponent },
+      { path: 'details/:id', component: CompanyDetailsComponent },
       { path: 'create', component: CompanyCreateComponent },
       // { path: 'update/:id', component: CompanyUpdateComponent },
       // { path: 'delete/:id', component: CompanyDeleteComponent }
@@ -25,7 +25,7 @@ import { CompanyCreateComponent } from './company-create/company-create.componen
   ],
   declarations: [
     CompanyListComponent,
-    // CompanyDetailsComponent,
+    CompanyDetailsComponent,
     CompanyCreateComponent,
     // CompanyUpdateComponent,
     // CompanyDeleteComponent

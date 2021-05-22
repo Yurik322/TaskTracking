@@ -30,11 +30,11 @@ export class CompanyListComponent implements OnInit {
         });
   }
 
-  // public getCompanyDetails = (id) => {
-  //   const detailsUrl = `/company/details/${id}`;
-  //   this.router.navigate([detailsUrl]);
-  // }
-  //
+  public getCompanyDetails = (id) => {
+    const detailsUrl = `/company/details/${id}`;
+    this.router.navigate([detailsUrl]);
+  }
+
   // public redirectToUpdatePage = (id) => {
   //   const updateUrl = `/company/update/${id}`;
   //   this.router.navigate([updateUrl]);
