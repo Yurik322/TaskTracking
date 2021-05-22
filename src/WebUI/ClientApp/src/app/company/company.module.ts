@@ -7,7 +7,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CompanyListComponent } from './company-list/company-list.component';
 import { CompanyDetailsComponent } from './company-details/company-details.component';
 import { CompanyCreateComponent } from './company-create/company-create.component';
-// import { CompanyUpdateComponent } from './company-update/company-update.component';
+import { CompanyUpdateComponent } from './company-update/company-update.component';
 // import { CompanyDeleteComponent } from './company-delete/company-delete.component';
 
 @NgModule({
@@ -19,7 +19,7 @@ import { CompanyCreateComponent } from './company-create/company-create.componen
       { path: 'list', component: CompanyListComponent },
       { path: 'details/:id', component: CompanyDetailsComponent },
       { path: 'create', component: CompanyCreateComponent },
-      // { path: 'update/:id', component: CompanyUpdateComponent },
+      { path: 'update/:id', component: CompanyUpdateComponent },
       // { path: 'delete/:id', component: CompanyDeleteComponent }
     ])
   ],
@@ -27,7 +27,7 @@ import { CompanyCreateComponent } from './company-create/company-create.componen
     CompanyListComponent,
     CompanyDetailsComponent,
     CompanyCreateComponent,
-    // CompanyUpdateComponent,
+    CompanyUpdateComponent,
     // CompanyDeleteComponent
   ]
 })

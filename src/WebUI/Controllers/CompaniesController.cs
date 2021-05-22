@@ -80,7 +80,7 @@ namespace WebUI.Controllers
         }
 
         //TODO
-        // GET: /company/companies/5
+        // GET: /company/5/employee
         [HttpGet("{id}/employee")]
         public IActionResult GetCompanyWithDetails(int id)
         {
@@ -127,7 +127,7 @@ namespace WebUI.Controllers
 
                 var companyEntity = _mapper.Map<Company>(company);
 
-                _repository.Company.Create(companyEntity);
+                _repository.Company.CreateCompany(companyEntity);
                 await _repository.SaveAsync();
 
                 var createdCompany = _mapper.Map<CompanyDto>(companyEntity);
@@ -141,94 +141,46 @@ namespace WebUI.Controllers
             }
         }
 
-
-        //[HttpPost]
-        //public IActionResult Create([FromBody] CompanyDto issue)
-        //{
-        //    throw new NotImplementedException();
-        //    //if (!ModelState.IsValid)
-        //    //    return BadRequest();
-
-        //    //// Validate enums
-        //    //if (!Enum.IsDefined(typeof(Priority), issue.Priority) ||
-        //    //    !Enum.IsDefined(typeof(IssueType), issue.IssueType) ||
-        //    //    !Enum.IsDefined(typeof(Status), issue.StatusType))
-        //    //{
-        //    //    return BadRequest();
-        //    //}
-
-        //    //// A small trick. Do not tell anyone... :)
-        //    //var projectId = issue.IssueId;
-        //    //var project = _context.Projects.Where(p => p.ProjectId == projectId).FirstOrDefault();
-        //    //if (project == null)
-        //    //    return NotFound();
-
-        //    //var userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-        //    //var user = _context.Users.Find(userId);
-        //    //try
-        //    //{
-        //    //    // Create new issue
-        //    //    var newIssue = new Issue()
-        //    //    {
-        //    //        Title = issue.Title,
-        //    //        Description = issue.Description,
-        //    //        Priority = issue.Priority,
-        //    //        IssueType = issue.IssueType,
-        //    //        StatusType = issue.StatusType,
-        //    //        CreatedAt = DateTime.Now,
-        //    //        UpdatedAt = DateTime.Now,
-        //    //        Creator = user.UserName,
-        //    //        Project = project
-        //    //    };
-
-        //    //    _context.Issues.Add(newIssue);
-        //    //    _context.SaveChanges();
-
-        //    //    // Fix for net::ERR_INCOMPLETE_CHUNKED_ENCODING
-        //    //    newIssue.Project = null;
-
-        //    //    return Ok(newIssue);
-        //    //}
-        //    //catch (DbUpdateException)
-        //    //{
-        //    //    return BadRequest();
-        //    //}
-        //}
-
-        // PUT: /company/companies/5/edit
+        // PUT: /company/5/edit
         [HttpPut("{id}")]
-        public IActionResult Edit(int id, [FromBody] CompanyDto company)
+        public async Task<IActionResult> UpdateCompany(int id, [FromBody] CompanyForCreationDto company)
         {
-            throw new NotImplementedException();
-            //if (!ModelState.IsValid)
-            //    return BadRequest();
+            try
+            {
+                if (company == null)
+                {
+                    _logger.LogError("Company object sent from client is null.");
+                    return BadRequest("Company object is null");
+                }
 
-            //var _issue = _context.Issues.Where(i => i.IssueId == id).FirstOrDefault();
-            //if (_issue == null)
-            //    return NotFound();
+                if (!ModelState.IsValid)
+                {
+                    _logger.LogError("Invalid company object sent from client.");
+                    return BadRequest("Invalid model object");
+                }
 
-            //// Validate enums
-            //if (!Enum.IsDefined(typeof(Priority), issue.Priority) ||
-            //    !Enum.IsDefined(typeof(IssueType), issue.IssueType) ||
-            //    !Enum.IsDefined(typeof(Status), issue.StatusType))
-            //{
-            //    return BadRequest();
-            //}
+                var companyEntity = _repository.Company.GetCompanyById(id);
+                if (companyEntity == null)
+                {
+                    _logger.LogError($"Company with id: {id}, hasn't been found in db.");
+                    return NotFound();
+                }
 
-            //// Only the fields we want to update
-            //_issue.Title = issue.Title;
-            //_issue.Priority = issue.Priority;
-            //_issue.IssueType = issue.IssueType;
-            //_issue.StatusType = issue.StatusType;
-            //_issue.Description = issue.Description;
+                _mapper.Map(company, companyEntity);
 
-            //_context.Issues.Update(_issue);
-            //_context.SaveChanges();
+                _repository.Company.UpdateCompany(companyEntity);
+                await _repository.SaveAsync();
 
-            //return Ok();
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong inside UpdateCompany action: {ex.Message}");
+                return StatusCode(500, "Internal server error");
+            }
         }
 
-        // DELETE: /company/companies/5
+        // DELETE: /company/5
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {

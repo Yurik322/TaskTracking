@@ -36,12 +36,13 @@ namespace DAL.Repositories
 
         public void CreateCompany(Company company)
         {
-            throw new NotImplementedException();
+            Create(company);
         }
 
+        //TODO
         public void UpdateCompany(Company company)
         {
-            throw new NotImplementedException();
+            Update(company);
         }
 
         public void DeleteCompany(Company company)
