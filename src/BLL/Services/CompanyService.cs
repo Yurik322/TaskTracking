@@ -20,14 +20,14 @@ namespace BLL.Services
             _mapper = mapper;
         }
 
-        public IEnumerable<CompanyDto> GetAllCompanies(bool trackChanges)
+        public IEnumerable<CompanyDto> GetAllCompanies()
         {
             var companies = _mapper.Map<IEnumerable<Company>, IEnumerable<CompanyDto>>(_repository.Company.GetAllCompanies(trackChanges: false));
             
             return _mapper.Map<IEnumerable<CompanyDto>>(companies);
         }
 
-        public async Task AddAsync(CompanyDto model)
+        public void AddAsync(CompanyDto model)
         {
             //if (model.Author.Length == 0 || model.Title.Length == 0 || model.Year < 0 || model.Year > DateTime.Today.Year)
             //{
@@ -35,7 +35,7 @@ namespace BLL.Services
             //}
             var newModel = _mapper.Map<CompanyDto, Company>(model);
             _repository.Company.Create(newModel);
-            await _repository.SaveAsync();
+            _repository.SaveAsync();
             //var newCompany = new Company()
             //{
             //    Name = company.Name,

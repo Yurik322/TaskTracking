@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using DAL.EF;
 using DAL.Entities;
 using DAL.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace DAL.Repositories
 {
@@ -20,15 +21,17 @@ namespace DAL.Repositories
                 .OrderBy(c => c.Name)
                 .ToList();
 
-        public Company GetOwnerById(int companyId)
+        public Company GetCompanyById(int companyId)
         {
-            return FindByCondition(x => x.Id.Equals(companyId), trackChanges: false)
+            return FindByCondition(x => x.Id.Equals(companyId))
                 .FirstOrDefault();
         }
 
-        public Company GetOwnerWithDetails(Guid ownerId)
+        public Company GetCompanyWithDetails(int companyId)
         {
-            throw new NotImplementedException();
+            return FindByCondition(owner => owner.Id.Equals(companyId))
+                .Include(ac => ac.Employees)
+                .FirstOrDefault();
         }
 
         public void CreateCompany(Company company)
@@ -44,13 +47,6 @@ namespace DAL.Repositories
         public void DeleteCompany(Company company)
         {
             throw new NotImplementedException();
-        }
-
-
-        //TODO
-        public void CreateAsync(Company company)
-        {
-            Create(company);
         }
     }
 }

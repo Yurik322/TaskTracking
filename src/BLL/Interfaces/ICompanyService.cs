@@ -8,8 +8,8 @@ namespace BLL.Interfaces
 {
     public interface ICompanyService
     {
-        IEnumerable<CompanyDto> GetAllCompanies(bool trackChanges);
-        Task AddAsync(CompanyDto model);
+        IEnumerable<CompanyDto> GetAllCompanies();
+        void AddAsync(CompanyDto model);
 
 
         //IEnumerable<CompanyDto> FindBooks(string searchName);

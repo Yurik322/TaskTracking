@@ -56,7 +56,7 @@ export class CompanyCreateComponent implements OnInit {
     };
 
     const apiUrl = 'api/company';
-    this.repository.create(apiUrl, company);
+    this.repository.create(apiUrl, company).subscribe();
       // .subscribe(
       //   res => {
       //     $('#successModal').modal();
