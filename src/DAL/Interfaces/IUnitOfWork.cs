@@ -9,6 +9,10 @@ namespace DAL.Interfaces
     {
         ICompanyRepository Company { get; }
         IEmployeeRepository Employee { get; }
+        IIssueRepository Issue { get; }
+        IProjectRepository Project { get; }
+        IReportRepository Report { get; }
+        IAttachmentRepository Attachment { get; }
         Task SaveAsync();
     }
 }

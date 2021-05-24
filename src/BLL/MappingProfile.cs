@@ -15,8 +15,6 @@ namespace BLL
                         x => string.Join(' ', x.Address, x.Country)));
 
 
-
-
             CreateMap<CompanyForCreationDto, Company>()
                 .ForMember(b =>
                         b.Address,
@@ -25,6 +23,8 @@ namespace BLL
                 .ForMember(b=>b.Country, opt=>opt.MapFrom(x=>x.FullAddress)
                 );
 
+            CreateMap<Issue, IssueDto>();
+            CreateMap<IssueForCreationDto, Issue>();
 
 
 
