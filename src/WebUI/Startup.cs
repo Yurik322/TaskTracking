@@ -43,6 +43,8 @@ namespace WebUI
             services.ConfigureRepositoryManager();
             services.ConfigureCompanyService();
             services.ConfigureIssueService();
+            services.ConfigureProjectService();
+            services.ConfigureAttachmentService();
 
             services.AddAutoMapper(typeof(Startup));
 

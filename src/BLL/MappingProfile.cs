@@ -26,6 +26,12 @@ namespace BLL
             CreateMap<Issue, IssueDto>();
             CreateMap<IssueForCreationDto, Issue>();
 
+            CreateMap<Attachment, AttachmentDto>();
+            CreateMap<AttachmentForCreationDto, Attachment>();
+
+            CreateMap<Project, ProjectDto>();
+            CreateMap<ProjectForCreationDto, Project>();
+
 
 
             CreateMap<UserForRegistrationDto, User>()
