@@ -8,6 +8,7 @@ import { CompanyListComponent } from './company-list/company-list.component';
 import { CompanyDetailsComponent } from './company-details/company-details.component';
 import { CompanyCreateComponent } from './company-create/company-create.component';
 import { CompanyUpdateComponent } from './company-update/company-update.component';
+import { CompanyDeleteComponent } from './company-delete/company-delete.component';
 // import { CompanyDeleteComponent } from './company-delete/company-delete.component';
 
 @NgModule({
@@ -28,6 +29,7 @@ import { CompanyUpdateComponent } from './company-update/company-update.componen
     CompanyDetailsComponent,
     CompanyCreateComponent,
     CompanyUpdateComponent,
+    CompanyDeleteComponent,
     // CompanyDeleteComponent
   ]
 })

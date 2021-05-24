@@ -15,7 +15,9 @@ namespace DAL.Repositories
         }
 
         public IEnumerable<Report> GetAllReports(bool trackChanges) =>
-            FindAll(trackChanges).ToList();
+            FindAll(trackChanges)
+                .OrderBy(c => c.ReportDescription)
+                .ToList();
 
         public Report GetReportById(int reportId)
         {

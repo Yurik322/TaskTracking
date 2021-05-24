@@ -36,5 +36,7 @@ namespace WebUI.Extensions
             services.AddScoped<IUnitOfWork, UnitOfWork>();
         public static void ConfigureCompanyService(this IServiceCollection services) =>
             services.AddScoped<ICompanyService, CompanyService>();
+        public static void ConfigureIssueService(this IServiceCollection services) =>
+            services.AddScoped<IIssueService, IssueService>();
     }
 }

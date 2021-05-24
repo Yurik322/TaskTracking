@@ -15,7 +15,9 @@ namespace DAL.Repositories
         }
 
         public IEnumerable<Issue> GetAllIssues(bool trackChanges) =>
-            FindAll(trackChanges).ToList();
+            FindAll(trackChanges)
+                .OrderBy(c=>c.Title)
+                .ToList();
 
         public Issue GetIssueById(int issueId)
         {

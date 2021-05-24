@@ -15,7 +15,9 @@ namespace DAL.Repositories
         }
 
         public IEnumerable<Attachment> GetAllAttachments(bool trackChanges) =>
-            FindAll(trackChanges).ToList();
+            FindAll(trackChanges)
+                .OrderBy(c => c.Name)
+                .ToList();
 
         public Attachment GetAttachmentById(int attachmentId)
         {

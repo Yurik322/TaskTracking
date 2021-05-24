@@ -42,6 +42,8 @@ namespace WebUI
             services.ConfigureLoggerService();
             services.ConfigureRepositoryManager();
             services.ConfigureCompanyService();
+            services.ConfigureIssueService();
+
             services.AddAutoMapper(typeof(Startup));
 
             services.Configure<DataProtectionTokenProviderOptions>(opt =>

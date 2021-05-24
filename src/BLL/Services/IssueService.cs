@@ -22,9 +22,9 @@ namespace BLL.Services
 
         public IEnumerable<IssueDto> GetAllIssues()
         {
-            var companies = _mapper.Map<IEnumerable<Issue>, IEnumerable<IssueDto>>(_repository.Issue.GetAllIssues(trackChanges: false));
+            var issues = _mapper.Map<IEnumerable<Issue>, IEnumerable<IssueDto>>(_repository.Issue.GetAllIssues(trackChanges: false));
 
-            return _mapper.Map<IEnumerable<IssueDto>>(companies);
+            return _mapper.Map<IEnumerable<IssueDto>>(issues);
         }
 
         public void AddAsync(IssueDto model)

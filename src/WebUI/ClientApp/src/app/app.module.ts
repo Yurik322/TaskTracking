@@ -36,6 +36,7 @@ export function tokenGetter() {
     RouterModule.forRoot([
       { path: 'home', component: HomeComponent },
       { path: 'company', loadChildren: () => import('./company/company.module').then(m => m.CompanyModule), canActivate: [AuthGuard] },
+      { path: 'issue', loadChildren: () => import('./issue/issue.module').then(m => m.IssueModule), canActivate: [AuthGuard] },
       { path: 'authentication', loadChildren: () => import('./authentication/authentication.module').then(m => m.AuthenticationModule) },
       { path: 'privacy', component: PrivacyComponent, canActivate: [AuthGuard, AdminGuard] },
       { path: 'forbidden', component: ForbiddenComponent },
