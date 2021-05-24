@@ -10,6 +10,5 @@ namespace DAL.Interfaces
         ICompanyRepository Company { get; }
         IEmployeeRepository Employee { get; }
         Task SaveAsync();
-        //void SaveAsync();
     }
 }

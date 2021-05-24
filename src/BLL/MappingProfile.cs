@@ -20,10 +20,8 @@ namespace BLL
             CreateMap<CompanyForCreationDto, Company>()
                 .ForMember(b =>
                         b.Address,
-
                     opt => 
                         opt.MapFrom(x=>x.FullAddress))
-                
                 .ForMember(b=>b.Country, opt=>opt.MapFrom(x=>x.FullAddress)
                 );
 
