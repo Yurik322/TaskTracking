@@ -1,10 +1,11 @@
 export interface Issue {
-  id?: number;
+  issueId?: number;
   title: string;
   description: string;
-  taskType: number;
+  issueType: number;
   priority: number;
   statusType: number;
   createdAt?: string;
   updatedAt?: string;
+  creator?: string;
 }

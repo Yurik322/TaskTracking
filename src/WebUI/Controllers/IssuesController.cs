@@ -15,7 +15,7 @@ namespace WebUI.Controllers
     [Route("api/issue")]
     [Authorize]
     [ApiController]
-    public class IssuesController : Controller
+    public class IssuesController : ControllerBase
     {
         private readonly IIssueService _issueService;
         private readonly ILoggerManager _logger;

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { IssueForCreation } from '../../_interfaces/issueForCreation.model';
+import { IssueForCreation } from '../shared/issueForCreation.model';
 import { ErrorHandlerService } from './../../shared/services/error-handler.service';
 import { RepositoryService } from './../../shared/services/repository.service';
 import { Router } from '@angular/router';

@@ -3,7 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ErrorHandlerService } from './../../shared/services/error-handler.service';
 import { RepositoryService } from './../../shared/services/repository.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Company } from './../../_interfaces/company.model';
+import { Company } from '../shared/company.model';
 
 @Component({
   selector: 'app-company-update',

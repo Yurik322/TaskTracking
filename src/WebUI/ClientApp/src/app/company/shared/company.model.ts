@@ -1,4 +1,4 @@
-import {Employee} from './employee.model';
+import {Employee} from '../../_interfaces/employee.model';
 
 export interface Company {
   id: number;

@@ -1,7 +1,7 @@
 import { ErrorHandlerService } from './../../shared/services/error-handler.service';
 import { Component, OnInit } from '@angular/core';
 import { RepositoryService } from './../../shared/services/repository.service';
-import { Company } from './../../_interfaces/company.model';
+import { Company } from '../shared/company.model';
 import { Router } from '@angular/router';
 
 @Component({
@@ -40,8 +40,8 @@ export class CompanyListComponent implements OnInit {
     this.router.navigate([updateUrl]);
   }
 
-  // public redirectToDeletePage = (id) => {
-  //   const deleteUrl = `/company/delete/${id}`;
-  //   this.router.navigate([deleteUrl]);
-  // }
+  public redirectToDeletePage = (id) => {
+    const deleteUrl = `/company/delete/${id}`;
+    this.router.navigate([deleteUrl]);
+  }
 }

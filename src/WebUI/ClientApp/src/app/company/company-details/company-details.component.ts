@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Company } from './../../_interfaces/company.model';
+import { Company } from '../shared/company.model';
 import { Router, ActivatedRoute } from '@angular/router';
 import { RepositoryService } from './../../shared/services/repository.service';
 import { ErrorHandlerService } from './../../shared/services/error-handler.service';

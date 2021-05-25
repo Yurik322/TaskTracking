@@ -1,6 +1,13 @@
-import { SharedModule } from './../shared/shared.module';
+// import { SharedModule } from './../shared/shared.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { IssueFilterPipe } from './shared/issue-filter.pipe';
+import { IssueFilterByPriorityPipe } from './shared/issue-filter-by-priority.pipe';
+import { IssueFilterByStatusPipe } from './shared/issue-filter-by-status.pipe';
+import { IssueFilterByTypePipe } from './shared/issue-filter-by-type.pipe';
+// import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
+
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 
@@ -14,7 +21,9 @@ import { IssueDeleteComponent } from './issue-delete/issue-delete.component';
 @NgModule({
   imports: [
     CommonModule,
-    SharedModule,
+    // BrowserModule,
+    FormsModule,
+    // SharedModule,
     ReactiveFormsModule,
     RouterModule.forChild([
       { path: 'list', component: IssueListComponent },
@@ -30,7 +39,11 @@ import { IssueDeleteComponent } from './issue-delete/issue-delete.component';
     IssueCreateComponent,
     IssueUpdateComponent,
     IssueDeleteComponent,
-    // IssueDeleteComponent
+    // IssueDeleteComponent,
+    IssueFilterPipe,
+    IssueFilterByPriorityPipe,
+    IssueFilterByStatusPipe,
+    IssueFilterByTypePipe
   ]
 })
 export class IssueModule { }

@@ -15,7 +15,7 @@ namespace WebUI.Controllers
     [Route("api/project")]
     [Authorize]
     [ApiController]
-    public class ProjectsController : Controller
+    public class ProjectsController : ControllerBase
     {
         private readonly IProjectService _projectService;
         private readonly ILoggerManager _logger;
