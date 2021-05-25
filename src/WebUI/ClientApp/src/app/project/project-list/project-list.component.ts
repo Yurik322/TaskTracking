@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Project } from '../shared/project.module';
+import { Project } from '../shared/project.model';
 import { RepositoryService } from '../../shared/services/repository.service';
 import { ErrorHandlerService } from '../../shared/services/error-handler.service';
 

@@ -1,85 +1,174 @@
-<!--<div class="container-fluid">-->
-<!--  <form [formGroup]="issueForm" autocomplete="off" novalidate (ngSubmit)="createIssue(issueForm.value)">-->
-<!--    <div class="form-horizontal card card-body bg-light mb-2 mt-2">-->
+<div *ngIf="!projects">There are no projects to assign a new issue...</div>
+<div *ngIf="issue && projects" class="container-fluid">
+  <div *ngIf="errorMessage" class="alert alert-danger" role="alert">Error: {{ errorMessage }}</div>
 
-<!--      <div class="form-group row">-->
-<!--        <label for="title" class="control-label col-md-2">Name of the issue: </label>-->
-<!--        <div class="col-md-5">-->
-<!--          <input type="text" formControlName="title" id="title" class="form-control" />-->
-<!--        </div>-->
-<!--        <div class="col-md-5">-->
-<!--          <em *ngIf="validateControl('title') && hasError('title', 'required')">Name is required</em>-->
-<!--          <em *ngIf="validateControl('title') && hasError('title', 'maxlength')">Maximum allowed length is 60 characters.</em>-->
-<!--        </div>-->
-<!--      </div>-->
+  <form #form="ngForm" (submit)="onSubmit(form)" novalidate>
 
-<!--      <div class="form-group row">-->
-<!--        <label for="title" class="control-label col-md-2">Name of the issue: </label>-->
-<!--        <div class="col-md-5">-->
-<!--          <input type="text" formControlName="title" id="title" class="form-control" />-->
-<!--        </div>-->
-<!--        <div class="col-md-5">-->
-<!--          <em *ngIf="validateControl('title') && hasError('title', 'required')">Name is required</em>-->
-<!--          <em *ngIf="validateControl('title') && hasError('title', 'maxlength')">Maximum allowed length is 60 characters.</em>-->
-<!--        </div>-->
-<!--      </div>-->
+    <div class="form-horizontal card card-body bg-light mb-2 mt-2">
+      <h4>Create Issue</h4>
+      <div class="form-group row">
 
-<!--      <div class="form-group row">-->
-<!--        <label for="title" class="control-label col-md-2">Name of the issue: </label>-->
-<!--        <div class="col-md-5">-->
-<!--          <input type="text" formControlName="title" id="title" class="form-control" />-->
-<!--        </div>-->
-<!--        <div class="col-md-5">-->
-<!--          <em *ngIf="validateControl('title') && hasError('title', 'required')">Name is required</em>-->
-<!--          <em *ngIf="validateControl('title') && hasError('title', 'maxlength')">Maximum allowed length is 60 characters.</em>-->
-<!--        </div>-->
-<!--      </div>-->
+        <div class="col-md-6 ">
+          <label>Project</label>
+          <select name="project" class="form-control" data-width="100%" required ngModel
+                  [(ngModel)]="issue.issueId"
+                  (ngModelChange)="issue.issueId=$event">
+            <option [ngValue]='project.projectId' *ngFor="let project of projects">{{ project.name }}</option>
+          </select>
+        </div>
+        <div class="col-md-6"></div>
 
-<!--      <div class="form-group row">-->
-<!--        <div class="col-md-6">-->
-<!--          <label>Priority</label>-->
-<!--          <select name="priority" class="form-control" data-width="100%"-->
-<!--                  [(ngModel)]="issue.priority"-->
-<!--                  (ngModelChange)="issue.priority=$event">-->
-<!--            <option [ngValue]="0">Low</option>-->
-<!--            <option [ngValue]="1">Normal</option>-->
-<!--            <option [ngValue]="2">High</option>-->
-<!--          </select>-->
-<!--        </div>-->
-<!--      </div>-->
+      </div>
 
-<!--      <div class="form-group row">-->
-<!--        <label for="title" class="control-label col-md-2">Name of the issue: </label>-->
-<!--        <div class="col-md-5">-->
-<!--          <input type="text" formControlName="title" id="title" class="form-control" />-->
-<!--        </div>-->
-<!--        <div class="col-md-5">-->
-<!--          <em *ngIf="validateControl('title') && hasError('title', 'required')">Name is required</em>-->
-<!--          <em *ngIf="validateControl('title') && hasError('title', 'maxlength')">Maximum allowed length is 60 characters.</em>-->
-<!--        </div>-->
-<!--      </div>-->
+      <div class="form-group">
+        <label>Title</label>
+        <input #pname="ngModel" pattern=".....+" type="text" class="form-control" name="name" placeholder="Title" required
+               [ngModel]="issue.title"
+               (ngModelChange)="issue.title=$event">
+      </div>
+
+      <div class="form-group">
+
+        <div class="row">
+          <div class="col-md-6">
+            <label>Priority</label>
+            <select name="priority" class="form-control" data-width="100%"
+                    [(ngModel)]="issue.priority"
+                    (ngModelChange)="issue.priority=$event">
+              <option [ngValue]="0">Low</option>
+              <option [ngValue]="1">Normal</option>
+              <option [ngValue]="2">High</option>
+            </select>
+          </div>
+          <div class="col-md-6">
+            <label>Issue Type</label>
+            <select name="issuetype" class="form-control" data-width="100%"
+                    [(ngModel)]="issue.issueType"
+                    (ngModelChange)="issue.issueType=$event">
+              <option [ngValue]='0'>Bug</option>
+              <option [ngValue]='1'>Task</option>
+              <option [ngValue]='2'>Change</option>
+              <option [ngValue]='3'>Enhancement</option>
+            </select>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="form-group">
+        <label>Description</label>
+        <textarea rows="4" name="description" class="form-control" placeholder="Details"
+                  [ngModel]="issue.description"
+                  (ngModelChange)="issue.description=$event"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>Attachments</label>
+        <input type="file" (change)="fileChange($event)" placeholder="Upload file" accept=".pdf,.png,.jpg,.jpeg,.doc,.docx">
+        <!-- <input type="file" id="files" name="files" (click)="addFile()" class="btn btn-default" /> -->
+      </div>
+
+      <div class="text-center form-group">
+        <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Save</button>
+        <a [routerLink]="['/issue']" class="btn btn-primary">Cancel</a>
+      </div>
+
+
+    </div>
+
+  </form>
+
+</div>
 
 
 
-<!--      <br><br>-->
 
-<!--      <div class="form-group row">-->
-<!--        <div class="offset-5 col-md-1">-->
-<!--          <button type="submit" class="btn btn-info" [disabled]="!issueForm.valid">Save</button>-->
+
+
+
+
+<!--&lt;!&ndash;<div *ngIf="!projects">There are no projects to assign a new issue...</div>&ndash;&gt;-->
+
+<!--&lt;!&ndash;<div *ngIf="issue && projects" class="container-fluid form-group form-new">&ndash;&gt;-->
+<!--  <div *ngIf="errorMessage" class="alert alert-danger" role="alert">Error: {{ errorMessage }}</div>-->
+<!--  <div class="row">-->
+<!--    <div class="col-md-2 visible-lg"></div>-->
+<!--    <div class="col-xs-12 col-md-8 py-2" style="background:#eee;">-->
+
+
+<!--      <h4>Create Issue</h4>-->
+<!--      <form #form="ngForm" (submit)="onSubmit(form)" novalidate>-->
+<!--        <div class="form-group row">-->
+
+<!--          <div class="col-md-6 ">-->
+<!--            <label>Project</label>-->
+<!--            <select name="project" class="form-control" data-width="100%" required ngModel-->
+<!--                    [(ngModel)]="issue.issueId"-->
+<!--                    (ngModelChange)="issue.issueId=$event">-->
+<!--              <option [ngValue]='project.projectId' *ngFor="let project of projects">{{ project.name }}</option>-->
+<!--            </select>-->
+<!--          </div>-->
+<!--          <div class="col-md-6"></div>-->
+
 <!--        </div>-->
-<!--        <div class="col-md-1">-->
-<!--          <button type="button" class="btn btn-danger" (click)="redirectToIssueList()">Cancel</button>-->
+
+<!--        <div class="form-group">-->
+<!--          <label>Title</label>-->
+<!--          <input #pname="ngModel" pattern=".....+" type="text" class="form-control" name="name" placeholder="Title" required-->
+<!--                 [ngModel]="issue.title"-->
+<!--                 (ngModelChange)="issue.title=$event">-->
 <!--        </div>-->
-<!--      </div>-->
+
+<!--        <div class="form-group">-->
+
+<!--          <div class="row">-->
+<!--            <div class="col-md-6">-->
+<!--              <label>Priority</label>-->
+<!--              <select name="priority" class="form-control" data-width="100%"-->
+<!--                      [(ngModel)]="issue.priority"-->
+<!--                      (ngModelChange)="issue.priority=$event">-->
+<!--                <option [ngValue]="0">Low</option>-->
+<!--                <option [ngValue]="1">Normal</option>-->
+<!--                <option [ngValue]="2">High</option>-->
+<!--              </select>-->
+<!--            </div>-->
+<!--            <div class="col-md-6">-->
+<!--              <label>Issue Type</label>-->
+<!--              <select name="issuetype" class="form-control" data-width="100%"-->
+<!--                      [(ngModel)]="issue.issueType"-->
+<!--                      (ngModelChange)="issue.issueType=$event">-->
+<!--                <option [ngValue]='0'>Bug</option>-->
+<!--                <option [ngValue]='1'>Task</option>-->
+<!--                <option [ngValue]='2'>Change</option>-->
+<!--                <option [ngValue]='3'>Enhancement</option>-->
+<!--              </select>-->
+<!--            </div>-->
+<!--          </div>-->
+
+<!--        </div>-->
+
+<!--        <div class="form-group">-->
+<!--          <label>Description</label>-->
+<!--          <textarea rows="4" name="description" class="form-control" placeholder="Details"-->
+<!--                    [ngModel]="issue.description"-->
+<!--                    (ngModelChange)="issue.description=$event"></textarea>-->
+<!--        </div>-->
+
+<!--        <div class="form-group">-->
+<!--          <label>Attachments</label>-->
+<!--          <input type="file" (change)="fileChange($event)" placeholder="Upload file" accept=".pdf,.png,.jpg,.jpeg,.doc,.docx">-->
+<!--          &lt;!&ndash; <input type="file" id="files" name="files" (click)="addFile()" class="btn btn-default" /> &ndash;&gt;-->
+<!--        </div>-->
+
+<!--        <div class="text-center form-group">-->
+<!--          <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Create</button>-->
+<!--          <a [routerLink]="['/issues']" class="btn btn-primary">Cancel</a>-->
+<!--        </div>-->
+
+<!--      </form>-->
+
 
 <!--    </div>-->
-<!--  </form>-->
-
-<!--  <app-success-modal [modalHeaderText]="'Success message'"-->
-<!--                     [modalBodyText]="'Action completed successfully'" [okButtonText]="'OK'"-->
-<!--                     (redirectOnOK)="redirectToIssueList()"></app-success-modal>-->
-
-<!--  <app-error-modal [modalHeaderText]="'Error message'"-->
-<!--                   [modalBodyText]="errorMessage" [okButtonText]="'OK'"></app-error-modal>-->
-
-<!--</div>-->
+<!--    <div class="col-md-2 visible-lg"></div>-->
+<!--  </div>-->
+<!--&lt;!&ndash;</div>&ndash;&gt;-->

@@ -4,7 +4,7 @@ import { ProjectForCreation } from '../shared/projectForCreation.model';
 import { ErrorHandlerService } from './../../shared/services/error-handler.service';
 import { RepositoryService } from './../../shared/services/repository.service';
 import { Router } from '@angular/router';
-import {Project} from '../shared/project.module';
+import {Project} from '../shared/project.model';
 import {getLocaleDateTimeFormat} from '@angular/common';
 
 @Component({

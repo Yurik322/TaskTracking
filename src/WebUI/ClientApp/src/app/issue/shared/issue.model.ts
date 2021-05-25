@@ -7,5 +7,4 @@ export interface Issue {
   statusType: number;
   createdAt?: string;
   updatedAt?: string;
-  creator?: string;
 }

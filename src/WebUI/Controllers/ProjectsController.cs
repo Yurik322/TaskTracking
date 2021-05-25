@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace WebUI.Controllers
 {
-    [Route("api/project")]
+    [Route("api/projects")]
     [Authorize]
     [ApiController]
     public class ProjectsController : ControllerBase
@@ -33,7 +33,7 @@ namespace WebUI.Controllers
             _repository = repository;
         }
 
-        // GET: /project/projects
+        // GET: /projects
         //[Authorize]
         [HttpGet]
         public IActionResult GetProjects()
@@ -53,7 +53,8 @@ namespace WebUI.Controllers
         }
 
         //TODO
-        [HttpGet("{id}", Name = "ProjectsById")]
+        // GET: /projects/5
+        [HttpGet("{id}")]
         public IActionResult GetProjectsById(int id)
         {
             try
@@ -79,7 +80,7 @@ namespace WebUI.Controllers
             }
         }
 
-        // POST: /project/create
+        // POST: /projects/create
         [HttpPost]
         public async Task<IActionResult> CreateProjects([FromBody] ProjectForCreationDto project)
         {
@@ -113,7 +114,7 @@ namespace WebUI.Controllers
             }
         }
 
-        // PUT: /project/5/edit
+        // PUT: /projects/5
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateProjects(int id, [FromBody] ProjectForCreationDto project)
         {
@@ -152,7 +153,7 @@ namespace WebUI.Controllers
             }
         }
 
-        // DELETE: /project/5
+        // DELETE: /projects/5
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {

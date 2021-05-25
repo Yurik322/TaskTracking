@@ -1,10 +1,9 @@
-import { ErrorHandlerService } from '../../shared/services/error-handler.service';
 import { Component, OnInit } from '@angular/core';
-import { RepositoryService } from '../../shared/services/repository.service';
+import { IssueService } from '../shared/issue.service';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Issue } from '../shared/issue.model';
-import { Router } from '@angular/router';
 import { SharedService } from '../../shared/services/shared.service';
+
 
 @Component({
   selector: 'app-issue-list',
@@ -18,41 +17,36 @@ export class IssueListComponent implements OnInit {
   filter2 = -1;
   filter3 = -1;
 
-  // tslint:disable-next-line:max-line-length
-  constructor(private repository: RepositoryService, public sharedService: SharedService, private errorHandler: ErrorHandlerService, private router: Router) { }
+  constructor(private issueService: IssueService,
+              private sharedService: SharedService,
+              private activatedRoute: ActivatedRoute) { }
 
-  ngOnInit(): void {
-    this.getAllIssues();
+  ngOnInit() {
+    // jQuery('.selectpicker').selectpicker();
+    // subscribe to router event
+    this.activatedRoute.params.subscribe((params: Params) => {
+      const projectId = params['id'];
+      if (projectId > -1) {
+        this.issueService.getIssuesByProject(projectId)
+          .subscribe(issues => this.issues = issues, error => this.errorMessage = <any>error);
+      }
+      else {
+        this.issueService.getIssues()
+          .subscribe(issues => this.issues = issues, error => this.errorMessage = <any>error);
+      }
+    });
   }
 
-  public getAllIssues = () => {
-    const apiAddress = 'api/issue';
-    this.repository.getData(apiAddress)
-      .subscribe(res => {
-          this.issues = res as Issue[];
-        },
-        (error) => {
-          this.errorHandler.handleError(error);
-        });
+  deleteIssue(issue: Issue): void {
+    if (confirm('Are you sure you want to delete this issue?')) {
+      this.issueService.deleteIssue(issue.issueId).subscribe(result => {
+        const index = this.issues.indexOf(issue);
+        if (index > -1) {
+          this.issues.splice(index, 1);
+        }
+      }, error => this.errorMessage = <any>error);
+    }
   }
-
-  public getIssueDetails = (id) => {
-    const detailsUrl = `/issue/details/${id}`;
-    this.router.navigate([detailsUrl]);
-  }
-
-  public redirectToUpdatePage = (id) => {
-    const updateUrl = `/issue/update/${id}`;
-    this.router.navigate([updateUrl]);
-  }
-
-  public redirectToDeletePage = (id) => {
-    const deleteUrl = `/issue/delete/${id}`;
-    this.router.navigate([deleteUrl]);
-  }
-
-
-
 
   priorityToClass(priority: number) {
     switch (priority) {

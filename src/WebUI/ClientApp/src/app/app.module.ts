@@ -38,7 +38,7 @@ export function tokenGetter() {
       { path: 'company', loadChildren: () => import('./company/company.module').then(m => m.CompanyModule), canActivate: [AuthGuard] },
       { path: 'issue', loadChildren: () => import('./issue/issue.module').then(m => m.IssueModule), canActivate: [AuthGuard] },
       { path: 'project', loadChildren: () => import('./project/project.module').then(m => m.ProjectModule), canActivate: [AuthGuard] },
-      //TODO
+      // TODO
       { path: 'authentication', loadChildren: () => import('./authentication/authentication.module').then(m => m.AuthenticationModule) },
       { path: 'privacy', component: PrivacyComponent, canActivate: [AuthGuard, AdminGuard] },
       { path: 'forbidden', component: ForbiddenComponent },

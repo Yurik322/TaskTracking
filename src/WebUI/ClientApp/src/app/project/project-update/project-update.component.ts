@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Project } from '../shared/project.module';
+import { Project } from '../shared/project.model';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormControl, FormGroup, NgForm, Validators} from '@angular/forms';
 import { RepositoryService } from '../../shared/services/repository.service';

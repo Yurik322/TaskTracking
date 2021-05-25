@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace WebUI.Controllers
 {
-    [Route("api/issue")]
+    [Route("api/issues")]
     [Authorize]
     [ApiController]
     public class IssuesController : ControllerBase
@@ -33,7 +33,7 @@ namespace WebUI.Controllers
             _repository = repository;
         }
 
-        // GET: /issue/issues
+        // GET: /issues
         //[Authorize]
         [HttpGet]
         public IActionResult GetIssues()
@@ -53,7 +53,8 @@ namespace WebUI.Controllers
         }
 
         //TODO
-        [HttpGet("{id}", Name = "IssueById")]
+        // GET: /issues/5
+        [HttpGet("{id}")]
         public IActionResult GetIssueById(int id)
         {
             try
@@ -113,7 +114,7 @@ namespace WebUI.Controllers
             }
         }
 
-        // PUT: /issue/5/edit
+        // PUT: /issues/5
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateIssue(int id, [FromBody] IssueForCreationDto issue)
         {

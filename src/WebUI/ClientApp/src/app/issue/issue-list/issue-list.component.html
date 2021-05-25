@@ -35,13 +35,12 @@
           <option value='4'>Closed</option>
           <option data-divider="true"></option>
           <option value='-1'>All</option>
-
         </select>
       </li>
     </ul>
   </div>
   <div class="col-md-2 text-right">
-    <a [routerLink]="['/issues', 'create']" class="btn btn-primary">New Issue</a>
+    <a [routerLink]="['/issue/create']" class="btn btn-primary">New Issue</a>
   </div>
 </div>
 
@@ -62,7 +61,7 @@
   <tr *ngFor='let issue of issues | issueFilter:listFilter | issueFilterByType:filter1 | issueFilterByPriority:filter2 | issueFilterByStatus:filter3'>
     <td>{{ issue.issueId }}</td>
     <td>
-      <a [routerLink]="['/issues', issue.issueId, 'edit']">{{issue.title}}</a>
+      <a [routerLink]="['/issue', issue.issueId, 'edit']">{{issue.title}}</a>
     </td>
     <td>{{ issue.createdAt | date:'yyyy-MM-dd HH:mm a'}}</td>
     <td>
@@ -75,7 +74,7 @@
         </span>
     </td>
     <td>
-      <a title="Issues" [routerLink]="['/issues', issue.issueId, 'attachments']" class="action-button">
+      <a title="Issues" [routerLink]="['/issue', issue.issueId, 'attachments']" class="action-button">
         <i class="fas fa-paperclip"></i>
       </a>
       <a (click)="deleteIssue(issue)" role="button" class="action-button">
@@ -85,49 +84,3 @@
   </tr>
   </tbody>
 </table>
-
-
-<!--<div class="row">-->
-<!--  <div class="offset-10 col-md-2">-->
-<!--    <a [routerLink]="['/issue/create']">Create issue</a>-->
-<!--  </div>-->
-<!--</div>-->
-<!--<br>-->
-<!--<div class="row">-->
-<!--  <div class="col-md-12">-->
-<!--    <div class="table-responsive">-->
-<!--      <table class="table table-striped">-->
-<!--        <thead>-->
-<!--        <tr>-->
-<!--          <th>Issue title</th>-->
-<!--          <th>Issue description</th>-->
-<!--          <th>Issue taskType</th>-->
-<!--          <th>Issue priority</th>-->
-<!--          <th>Issue statusType</th>-->
-<!--          <th>Issue createdAt</th>-->
-<!--          <th>Issue updatedAt</th>-->
-
-<!--          <th>Details</th>-->
-<!--          <th>Update</th>-->
-<!--          <th>Delete</th>-->
-<!--        </tr>-->
-<!--        </thead>-->
-<!--        <tbody>-->
-<!--        <tr *ngFor="let issue of issues">-->
-<!--          <td>{{issue.title}}</td>-->
-<!--          <td>{{issue.description}}</td>-->
-<!--          <td>{{issue.taskType}}</td>-->
-<!--          <td>{{issue.priority}}</td>-->
-<!--          <td>{{issue.statusType}}</td>-->
-<!--          <td>{{issue.createdAt}}</td>-->
-<!--          <td>{{issue.updatedAt}}</td>-->
-
-<!--          <td><button type="button" id="details" class="btn btn-light" (click)="getIssueDetails(issue.id)">Details</button></td>-->
-<!--          <td><button type="button" id="update" class="btn btn-success" (click)="redirectToUpdatePage(issue.id)">Update</button></td>-->
-<!--          <td><button type="button" id="delete" class="btn btn-danger" (click)="redirectToDeletePage(issue.id)">Delete</button></td>-->
-<!--        </tr>-->
-<!--        </tbody>-->
-<!--      </table>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</div>-->
