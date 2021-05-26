@@ -5880,11 +5880,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Final Project\\TaskTracking\\src\\DAL\\DAL.csproj",
+      "projectUniqueName": "C:\\Final Project\\TaskTracking Upgrade\\src\\DAL\\DAL.csproj",
       "projectName": "DAL",
-      "projectPath": "C:\\Final Project\\TaskTracking\\src\\DAL\\DAL.csproj",
+      "projectPath": "C:\\Final Project\\TaskTracking Upgrade\\src\\DAL\\DAL.csproj",
       "packagesPath": "C:\\Users\\fytru\\.nuget\\packages\\",
-      "outputPath": "C:\\Final Project\\TaskTracking\\src\\DAL\\obj\\",
+      "outputPath": "C:\\Final Project\\TaskTracking Upgrade\\src\\DAL\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

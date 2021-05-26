@@ -22,3 +22,15 @@ C:\Final Project\TaskTracking\src\DAL\obj\Debug\netcoreapp3.1\DAL.dll
 C:\Final Project\TaskTracking\src\DAL\obj\Debug\netcoreapp3.1\DAL.pdb
 C:\Final Project\TaskTracking\src\DAL\obj\Debug\netcoreapp3.1\DAL.genruntimeconfig.cache
 C:\Final Project\TaskTracking\src\DAL\obj\Debug\netcoreapp3.1\DAL.csprojAssemblyReference.cache
+C:\Final Project\TaskTracking Upgrade\src\DAL\bin\Debug\netcoreapp3.1\DAL.deps.json
+C:\Final Project\TaskTracking Upgrade\src\DAL\bin\Debug\netcoreapp3.1\DAL.runtimeconfig.json
+C:\Final Project\TaskTracking Upgrade\src\DAL\bin\Debug\netcoreapp3.1\DAL.runtimeconfig.dev.json
+C:\Final Project\TaskTracking Upgrade\src\DAL\bin\Debug\netcoreapp3.1\DAL.dll
+C:\Final Project\TaskTracking Upgrade\src\DAL\bin\Debug\netcoreapp3.1\DAL.pdb
+C:\Final Project\TaskTracking Upgrade\src\DAL\obj\Debug\netcoreapp3.1\DAL.csprojAssemblyReference.cache
+C:\Final Project\TaskTracking Upgrade\src\DAL\obj\Debug\netcoreapp3.1\DAL.AssemblyInfoInputs.cache
+C:\Final Project\TaskTracking Upgrade\src\DAL\obj\Debug\netcoreapp3.1\DAL.AssemblyInfo.cs
+C:\Final Project\TaskTracking Upgrade\src\DAL\obj\Debug\netcoreapp3.1\DAL.csproj.CoreCompileInputs.cache
+C:\Final Project\TaskTracking Upgrade\src\DAL\obj\Debug\netcoreapp3.1\DAL.dll
+C:\Final Project\TaskTracking Upgrade\src\DAL\obj\Debug\netcoreapp3.1\DAL.pdb
+C:\Final Project\TaskTracking Upgrade\src\DAL\obj\Debug\netcoreapp3.1\DAL.genruntimeconfig.cache

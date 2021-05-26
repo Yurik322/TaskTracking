@@ -1,5 +1,5 @@
 import { Injectable, Inject } from '@angular/core';
-import { Project } from '../../project/shared/project.model';
+import { Project } from '../../projects/shared/project';
 import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs';
 

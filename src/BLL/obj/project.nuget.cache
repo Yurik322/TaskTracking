@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "2qbI+k9dSbqKcMxCYUixLGe35z45VwavW3ZaPip3jZYWCsHEfo8Me39qFD6fZnS9PJiu7uq0MY1YDAtkyqpNCw==",
+  "dgSpecHash": "px1CPGfh79BUB2Le+OygSFzOiBNErwfMwPajkF1maNQLv0LBhpTZXSXeCsM2AlOqSMoXYOEZK4IVOi6lzoB2ZA==",
   "success": true,
-  "projectFilePath": "C:\\Final Project\\TaskTracking\\src\\BLL\\BLL.csproj",
+  "projectFilePath": "C:\\Final Project\\TaskTracking Upgrade\\src\\BLL\\BLL.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\fytru\\.nuget\\packages\\automapper\\10.1.1\\automapper.10.1.1.nupkg.sha512",
     "C:\\Users\\fytru\\.nuget\\packages\\mailkit\\2.6.0\\mailkit.2.6.0.nupkg.sha512",

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "GxwJIVVTzR1K3ve4CunGF5585MVWrBF5Qvf05wGIlIhShXc4zbRgjpBkZNM0fG/sF523JHHSIEG/qqNMEtzwfw==",
+  "dgSpecHash": "pZXAaSm2Gb4S3ExwpclW6WEUHeeFBmlWsMY20whKuSqoYDpu/2iYukJ6aIyDQA5aNDaSzS+bWsCaDvNMHyNq1g==",
   "success": true,
-  "projectFilePath": "C:\\Final Project\\TaskTracking\\src\\DAL\\DAL.csproj",
+  "projectFilePath": "C:\\Final Project\\TaskTracking Upgrade\\src\\DAL\\DAL.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\fytru\\.nuget\\packages\\microsoft.aspnetcore.authentication\\2.2.0\\microsoft.aspnetcore.authentication.2.2.0.nupkg.sha512",
     "C:\\Users\\fytru\\.nuget\\packages\\microsoft.aspnetcore.authentication.abstractions\\2.2.0\\microsoft.aspnetcore.authentication.abstractions.2.2.0.nupkg.sha512",

@@ -28,3 +28,18 @@ C:\Final Project\TaskTracking\src\BLL\obj\Debug\netcoreapp3.1\BLL.csproj.CopyCom
 C:\Final Project\TaskTracking\src\BLL\obj\Debug\netcoreapp3.1\BLL.dll
 C:\Final Project\TaskTracking\src\BLL\obj\Debug\netcoreapp3.1\BLL.pdb
 C:\Final Project\TaskTracking\src\BLL\obj\Debug\netcoreapp3.1\BLL.genruntimeconfig.cache
+C:\Final Project\TaskTracking Upgrade\src\BLL\bin\Debug\netcoreapp3.1\BLL.deps.json
+C:\Final Project\TaskTracking Upgrade\src\BLL\bin\Debug\netcoreapp3.1\BLL.runtimeconfig.json
+C:\Final Project\TaskTracking Upgrade\src\BLL\bin\Debug\netcoreapp3.1\BLL.runtimeconfig.dev.json
+C:\Final Project\TaskTracking Upgrade\src\BLL\bin\Debug\netcoreapp3.1\BLL.dll
+C:\Final Project\TaskTracking Upgrade\src\BLL\bin\Debug\netcoreapp3.1\BLL.pdb
+C:\Final Project\TaskTracking Upgrade\src\BLL\bin\Debug\netcoreapp3.1\DAL.dll
+C:\Final Project\TaskTracking Upgrade\src\BLL\bin\Debug\netcoreapp3.1\DAL.pdb
+C:\Final Project\TaskTracking Upgrade\src\BLL\obj\Debug\netcoreapp3.1\BLL.csprojAssemblyReference.cache
+C:\Final Project\TaskTracking Upgrade\src\BLL\obj\Debug\netcoreapp3.1\BLL.AssemblyInfoInputs.cache
+C:\Final Project\TaskTracking Upgrade\src\BLL\obj\Debug\netcoreapp3.1\BLL.AssemblyInfo.cs
+C:\Final Project\TaskTracking Upgrade\src\BLL\obj\Debug\netcoreapp3.1\BLL.csproj.CoreCompileInputs.cache
+C:\Final Project\TaskTracking Upgrade\src\BLL\obj\Debug\netcoreapp3.1\BLL.csproj.CopyComplete
+C:\Final Project\TaskTracking Upgrade\src\BLL\obj\Debug\netcoreapp3.1\BLL.dll
+C:\Final Project\TaskTracking Upgrade\src\BLL\obj\Debug\netcoreapp3.1\BLL.pdb
+C:\Final Project\TaskTracking Upgrade\src\BLL\obj\Debug\netcoreapp3.1\BLL.genruntimeconfig.cache
