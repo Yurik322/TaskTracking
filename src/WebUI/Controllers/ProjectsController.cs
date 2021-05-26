@@ -55,7 +55,7 @@ namespace WebUI.Controllers
         //TODO
         // GET: /projects/5
         [HttpGet("{id}")]
-        public IActionResult GetProjectsById(int id)
+        public IActionResult GetProjectById(int id)
         {
             try
             {
@@ -82,7 +82,7 @@ namespace WebUI.Controllers
 
         // POST: /projects/create
         [HttpPost]
-        public async Task<IActionResult> CreateProjects([FromBody] ProjectForCreationDto project)
+        public async Task<IActionResult> CreateProject([FromBody] ProjectForCreationDto project)
         {
             try
             {
@@ -117,7 +117,7 @@ namespace WebUI.Controllers
 
         // PUT: /projects/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateProjects(int id, [FromBody] ProjectForCreationDto project)
+        public async Task<IActionResult> UpdateProject(int id, [FromBody] ProjectForCreationDto project)
         {
             try
             {
@@ -160,14 +160,14 @@ namespace WebUI.Controllers
         {
             try
             {
-                var owner = _repository.Project.GetProjectById(id);
-                if (owner == null)
+                var project = _repository.Project.GetProjectById(id);
+                if (project == null)
                 {
                     _logger.LogError($"Project with id: {id}, hasn't been found in db.");
                     return NotFound();
                 }
 
-                _repository.Project.DeleteProject(owner);
+                _repository.Project.DeleteProject(project);
                 await _repository.SaveAsync();
 
                 return NoContent();

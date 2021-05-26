@@ -35,7 +35,6 @@ namespace DAL.Repositories
             Create(issue);
         }
 
-        //TODO
         public void UpdateIssue(Issue issue)
         {
             Update(issue);
@@ -43,7 +42,7 @@ namespace DAL.Repositories
 
         public void DeleteIssue(Issue issue)
         {
-            throw new NotImplementedException();
+            Delete(issue);
         }
     }
 }

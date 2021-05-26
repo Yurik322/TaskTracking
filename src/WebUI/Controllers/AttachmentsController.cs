@@ -182,23 +182,27 @@ namespace WebUI.Controllers
 
         // DELETE: /attachment/5
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> DeleteAttachment(int id)
         {
-            throw new NotImplementedException();
-            //var issue = _context.Issues.Where(i => i.IssueId == id).FirstOrDefault();
-            //if (issue == null)
-            //    return NotFound();
+            try
+            {
+                var attachment = _repository.Attachment.GetAttachmentById(id);
+                if (attachment == null)
+                {
+                    _logger.LogError($"Attachment with id: {id}, hasn't been found in db.");
+                    return NotFound();
+                }
 
-            //try
-            //{
-            //    _context.Issues.Remove(issue);
-            //    _context.SaveChanges();
-            //    return Ok();
-            //}
-            //catch (DbUpdateException)
-            //{
-            //    return BadRequest();
-            //}
+                _repository.Attachment.DeleteAttachment(attachment);
+                await _repository.SaveAsync();
+
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong inside DeleteAttachment action: {ex.Message}");
+                return StatusCode(500, "Internal server error");
+            }
         }
 
 

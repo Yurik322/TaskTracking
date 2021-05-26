@@ -35,7 +35,6 @@ namespace DAL.Repositories
             Create(attachment);
         }
 
-        //TODO
         public void UpdateAttachment(Attachment attachment)
         {
             Update(attachment);
@@ -43,7 +42,7 @@ namespace DAL.Repositories
 
         public void DeleteAttachment(Attachment attachment)
         {
-            throw new NotImplementedException();
+            Delete(attachment);
         }
     }
 }

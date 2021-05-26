@@ -35,7 +35,6 @@ namespace DAL.Repositories
             Create(report);
         }
 
-        //TODO
         public void UpdateReport(Report report)
         {
             Update(report);
@@ -43,7 +42,7 @@ namespace DAL.Repositories
 
         public void DeleteReport(Report report)
         {
-            throw new NotImplementedException();
+            Delete(report);
         }
     }
 }

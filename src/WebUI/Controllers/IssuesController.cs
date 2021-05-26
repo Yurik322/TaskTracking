@@ -155,23 +155,27 @@ namespace WebUI.Controllers
 
         // DELETE: /issue/5
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> DeleteIssue(int id)
         {
-            throw new NotImplementedException();
-            //var issue = _context.Issues.Where(i => i.IssueId == id).FirstOrDefault();
-            //if (issue == null)
-            //    return NotFound();
+            try
+            {
+                var issue = _repository.Issue.GetIssueById(id);
+                if (issue == null)
+                {
+                    _logger.LogError($"Issue with id: {id}, hasn't been found in db.");
+                    return NotFound();
+                }
 
-            //try
-            //{
-            //    _context.Issues.Remove(issue);
-            //    _context.SaveChanges();
-            //    return Ok();
-            //}
-            //catch (DbUpdateException)
-            //{
-            //    return BadRequest();
-            //}
+                _repository.Issue.DeleteIssue(issue);
+                await _repository.SaveAsync();
+
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong inside DeleteIssue action: {ex.Message}");
+                return StatusCode(500, "Internal server error");
+            }
         }
 
 
