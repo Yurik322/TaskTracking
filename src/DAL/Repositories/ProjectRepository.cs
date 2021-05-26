@@ -35,7 +35,6 @@ namespace DAL.Repositories
             Create(project);
         }
 
-        //TODO
         public void UpdateProject(Project project)
         {
             Update(project);
@@ -43,7 +42,7 @@ namespace DAL.Repositories
 
         public void DeleteProject(Project project)
         {
-            throw new NotImplementedException();
+            Delete(project);
         }
     }
 }

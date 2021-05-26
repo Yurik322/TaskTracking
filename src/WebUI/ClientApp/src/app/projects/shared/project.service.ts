@@ -14,36 +14,22 @@ export class ProjectService {
   public getProjects = (route: string) => {
     return this.http.get(this.createCompleteRoute(route, this.envUrl.urlAddress));
   }
-  // getProjects(): Observable<Project[]> {
-  //   return this.http.get<Project[]>(this.baseUrl + 'api/projects');
-  // }
 
-  // TODO
-  getProject(id: number): Observable<Project> {
-    return this.http.get<Project>(this.baseUrl + 'api/projects/' + id);
-  }
-  // public getCompanyDetails = (id) => {
-  //   const detailsUrl = `/company/details/${id}`;
-  //   this.router.navigate([detailsUrl]);
-  // }
-
-  // public createProject = (route: string, body) => {
-  //   return this.http.post(this.createCompleteRoute(route, this.envUrl.urlAddress), body, this.generateHeaders());
-  // }
-  createProject(project: Project): Observable<any> {
-    return this.http.post(this.baseUrl + 'api/projects', project);
+  public getData = (route: string) => {
+    return this.http.get(this.createCompleteRoute(route, this.envUrl.urlAddress));
   }
 
-  // public updateProject = (route: string, body) => {
-  //   return this.http.put(this.createCompleteRoute(route, this.envUrl.urlAddress), body, this.generateHeaders());
-  // }
-  updateProject(project: Project): Observable<any> {
-    return this.http.put(this.baseUrl + 'api/projects/' + project.id, project);
+  public createProject = (route: string, body) => {
+    return this.http.post(this.createCompleteRoute(route, this.envUrl.urlAddress), body, this.generateHeaders());
   }
 
-  // public deleteProject = (route: string) => {
-  //   return this.http.delete(this.createCompleteRoute(route, this.envUrl.urlAddress));
-  // }
+  public updateProject = (route: string, body) => {
+    return this.http.put(this.createCompleteRoute(route, this.envUrl.urlAddress), body, this.generateHeaders());
+  }
+
+  public deleteProject = (route: string) => {
+    return this.http.delete(this.createCompleteRoute(route, this.envUrl.urlAddress));
+  }
   // deleteProject(id: number): Observable<any> {
   //   return this.http.delete(this.baseUrl + 'api/projects/' + id);
   // }
@@ -54,7 +40,7 @@ export class ProjectService {
 
   private generateHeaders = () => {
     return {
-      headers: new HttpHeaders({'Content-Type': 'application/json'})
+      headers: new HttpHeaders({'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'})
     };
   }
 }

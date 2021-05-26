@@ -22,22 +22,32 @@ export class ProjectEditComponent implements OnInit {
     this.id = +this.activatedRoute.snapshot.params['id'];
 
     if (this.id >= 0) {
-      this.projectService.getProject(this.id).subscribe(result => {
-        this.project = result;
+        const companyByIdUrl = `api/projects/${this.id}`;
+        this.projectService.getData(companyByIdUrl).subscribe(result => {
+        this.project = <Project>result;
       }, error => this.errorMessage = <any>error);
     }
   }
 
-  // onSubmit(form: NgForm) {
-  //   if (this.id >= 0) {
-  //     this.projectService.updateProject(this.project).subscribe(data => {
-  //       this.router.navigate(['/projects']);
-  //     }, error => this.errorMessage = <any>error);
-  //   }
-  //   else {
-  //     this.projectService.createProject(this.project).subscribe(data => {
-  //       this.router.navigate(['/projects']);
-  //     }, error => this.errorMessage = <any>error);
-  //   }
-  // }
+
+  onSubmit(form: NgForm) {
+    if (this.id >= 0) {
+      // this.projectService.updateProject(this.project)
+        // const apiUrl = 'api/projects';
+        const apiUrl = `api/projects/${this.project.id}`;
+        this.projectService.updateProject(apiUrl, this.project)
+
+        .subscribe(data => {
+        this.router.navigate(['/projects/list']);
+      }, error => this.errorMessage = <any>error);
+    } else {
+        const apiUrl = 'api/projects';
+        console.log(this.project);
+
+        this.projectService.createProject(apiUrl, this.project)
+        .subscribe(data => {
+        this.router.navigate(['/projects/list']);
+      }, error => this.errorMessage = <any>error);
+    }
+  }
 }

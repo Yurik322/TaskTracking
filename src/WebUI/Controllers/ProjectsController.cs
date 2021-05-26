@@ -105,7 +105,8 @@ namespace WebUI.Controllers
 
                 var createdProjects = _mapper.Map<ProjectDto>(projectEntity);
 
-                return CreatedAtRoute("ProjectsById", new { id = createdProjects.Id }, createdProjects);
+                return Ok();
+                //return CreatedAtRoute("ProjectsById", new { id = createdProjects.Id }, createdProjects);
             }
             catch (Exception ex)
             {
@@ -155,23 +156,27 @@ namespace WebUI.Controllers
 
         // DELETE: /projects/5
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> DeleteProject(int id)
         {
-            throw new NotImplementedException();
-            //var project = _context.Projects.Where(i => i.ProjectsId == id).FirstOrDefault();
-            //if (project == null)
-            //    return NotFound();
+            try
+            {
+                var owner = _repository.Project.GetProjectById(id);
+                if (owner == null)
+                {
+                    _logger.LogError($"Project with id: {id}, hasn't been found in db.");
+                    return NotFound();
+                }
 
-            //try
-            //{
-            //    _context.Projects.Remove(project);
-            //    _context.SaveChanges();
-            //    return Ok();
-            //}
-            //catch (DbUpdateException)
-            //{
-            //    return BadRequest();
-            //}
+                _repository.Project.DeleteProject(owner);
+                await _repository.SaveAsync();
+
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong inside DeleteProject action: {ex.Message}");
+                return StatusCode(500, "Internal server error");
+            }
         }
 
 

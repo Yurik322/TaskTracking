@@ -24,12 +24,11 @@ import { ProjectService } from './shared/project.service';
         component: ProjectListComponent
       },
       {
-        path: 'projects/:id/edit',
+        path: ':id/edit',
         component: ProjectEditComponent,
       },
       {
-        // path: 'projects/create',
-        path: 'projects/create',
+        path: 'create',
         component: ProjectEditComponent
       }
     ])
