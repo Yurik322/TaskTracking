@@ -39,8 +39,6 @@ export class ProjectEditComponent implements OnInit {
       }, error => this.errorMessage = <any>error);
     } else {
         const apiUrl = 'api/projects';
-        console.log(this.project);
-
         this.projectService.createProject(apiUrl, this.project)
         .subscribe(data => {
         this.router.navigate(['/projects/list']);

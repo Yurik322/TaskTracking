@@ -26,7 +26,11 @@ export class IssueService {
   // getIssuesByProject(projectId: number): Observable<Issue[]> {
   //   return this.http.get<Issue[]>(this.baseUrl + 'api/projects/' + projectId + '/issues');
   // }
-  //
+
+  // TODO
+  public createIssue = (route: string, body) => {
+    return this.http.post(this.createCompleteRoute(route, this.envUrl.urlAddress), body, this.generateHeaders());
+  }
   // createIssue(issue: Issue): Observable<any> {
   //   return this.http.post(this.baseUrl + 'api/issues', issue);
   // }
@@ -39,6 +43,11 @@ export class IssueService {
   //   return this.http.delete(this.baseUrl + 'api/issues/' + id);
   // }
   //
+
+  // TODO
+  // uploadFile(issueId: any, fileToUpload: any) {
+  //
+  // }
   // uploadFile(issueId: any, file: any): Observable<any> {
   //   let input = new FormData();
   //   input.append("file", file);
