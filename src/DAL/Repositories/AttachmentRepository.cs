@@ -44,5 +44,15 @@ namespace DAL.Repositories
         {
             Delete(attachment);
         }
+
+        public IEnumerable<Attachment> WhereIsAttachment(int attachmentId)
+        {
+            return FindByCondition(i => i.Issue.Id == attachmentId)
+                .OrderByDescending(a => a.Id).ToList();
+
+            //return _context.Attachments.Where(i => i.Issue.IssueId == id)
+            //    .OrderByDescending(a => a.AttachmentId)
+            //    .ToList();
+        }
     }
 }

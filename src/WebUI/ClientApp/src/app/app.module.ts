@@ -3,6 +3,8 @@ import { AuthGuard } from './shared/guards/auth.guard';
 import { ErrorHandlerService } from './shared/services/error-handler.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtModule } from '@auth0/angular-jwt';
@@ -31,12 +33,14 @@ export function tokenGetter() {
     InternalServerComponent
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
     RouterModule.forRoot([
       { path: 'home', component: HomeComponent },
       { path: 'company', loadChildren: () => import('./company/company.module').then(m => m.CompanyModule), canActivate: [AuthGuard] },
-      // { path: 'issues', loadChildren: () => import('./issues/issues.module').then(m => m.IssuesModule), canActivate: [AuthGuard] },
+      { path: 'issues', loadChildren: () => import('./issues/issues.module').then(m => m.IssuesModule), canActivate: [AuthGuard] },
       { path: 'projects', loadChildren: () => import('./projects/projects.module').then(m => m.ProjectsModule), canActivate: [AuthGuard] },
       // TODO
       { path: 'authentication', loadChildren: () => import('./authentication/authentication.module').then(m => m.AuthenticationModule) },

@@ -179,6 +179,14 @@ namespace WebUI.Controllers
             }
         }
 
+        //TODO
+        // GET: /projects/5/issues
+        [HttpGet("{id}/[action]")]
+        public IEnumerable<Issue> Issues(int id)
+        {
+            return _repository.Issue.WhereIsIssue(id);
+        }
+
 
         [HttpGet("Privacy")]
         [Authorize(Roles = "Administrator")]

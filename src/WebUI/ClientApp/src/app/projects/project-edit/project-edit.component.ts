@@ -32,11 +32,8 @@ export class ProjectEditComponent implements OnInit {
 
   onSubmit(form: NgForm) {
     if (this.id >= 0) {
-      // this.projectService.updateProject(this.project)
-        // const apiUrl = 'api/projects';
-        const apiUrl = `api/projects/${this.project.id}`;
-        this.projectService.updateProject(apiUrl, this.project)
-
+      const apiUrl = `api/projects/${this.project.id}`;
+      this.projectService.updateProject(apiUrl, this.project)
         .subscribe(data => {
         this.router.navigate(['/projects/list']);
       }, error => this.errorMessage = <any>error);

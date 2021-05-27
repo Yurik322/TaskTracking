@@ -13,5 +13,7 @@ namespace DAL.Interfaces
         void CreateIssue(Issue issue);
         void UpdateIssue(Issue issue);
         void DeleteIssue(Issue issue);
+        //TODO
+        IEnumerable<Issue> WhereIsIssue(int issueId);
     }
 }

@@ -30,9 +30,6 @@ export class ProjectService {
   public deleteProject = (route: string) => {
     return this.http.delete(this.createCompleteRoute(route, this.envUrl.urlAddress));
   }
-  // deleteProject(id: number): Observable<any> {
-  //   return this.http.delete(this.baseUrl + 'api/projects/' + id);
-  // }
 
   private createCompleteRoute = (route: string, envAddress: string) => {
     return `${envAddress}/${route}`;
@@ -40,7 +37,7 @@ export class ProjectService {
 
   private generateHeaders = () => {
     return {
-      headers: new HttpHeaders({'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'})
+      headers: new HttpHeaders({'Content-Type': 'application/json'})
     };
   }
 }

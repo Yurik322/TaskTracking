@@ -178,6 +178,13 @@ namespace WebUI.Controllers
             }
         }
 
+        // TODO
+        // GET: /issues/5/attachments
+        [HttpGet("{id}/[action]")]
+        public IEnumerable<Attachment> Attachments(int id)
+        {
+            return _repository.Attachment.WhereIsAttachment(id);
+        }
 
         [HttpGet("Privacy")]
         [Authorize(Roles = "Administrator")]

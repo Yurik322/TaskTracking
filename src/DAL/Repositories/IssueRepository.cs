@@ -44,5 +44,16 @@ namespace DAL.Repositories
         {
             Delete(issue);
         }
+
+        public IEnumerable<Issue> WhereIsIssue(int issueId)
+        {
+            return FindByCondition(i => i.Project.Id == issueId)
+                .OrderByDescending(i => i.Id).ToList();
+
+            //return FindByCondition(owner => owner.Id.Equals(issueId)).FirstOrDefault();
+            //return Issue.WhereIsIssue(i => i.Project.ProjectId == id)
+            //    .OrderByDescending(i => i.IssueId)
+            //    .ToList();
+        }
     }
 }

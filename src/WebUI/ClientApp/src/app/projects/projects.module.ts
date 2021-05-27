@@ -4,7 +4,8 @@ import { ProjectFilterPipe } from './shared/project-filter.pipe';
 import { ProjectListComponent } from './project-list/project-list.component';
 import { ProjectEditComponent } from './project-edit/project-edit.component';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 import { RouterModule } from '@angular/router';
 import { ProjectService } from './shared/project.service';
 
@@ -18,6 +19,7 @@ import { ProjectService } from './shared/project.service';
     CommonModule,
     // BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     RouterModule.forChild([
       {
         path: 'list',

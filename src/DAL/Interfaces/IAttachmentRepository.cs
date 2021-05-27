@@ -13,5 +13,7 @@ namespace DAL.Interfaces
         void CreateAttachment(Attachment attachment);
         void UpdateAttachment(Attachment attachment);
         void DeleteAttachment(Attachment attachment);
+        // TODO
+        IEnumerable<Attachment> WhereIsAttachment(int attachmentId);
     }
 }
