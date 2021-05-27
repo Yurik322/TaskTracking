@@ -1,24 +1,33 @@
 import { Injectable, Inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { Attachment } from './attachment';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import { EnvironmentUrlService } from '../../shared/services/environment-url.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AttachmentService {
 
-  constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string) { }
+  constructor(private http: HttpClient, private envUrl: EnvironmentUrlService, @Inject('BASE_URL') private baseUrl: string) { }
 
-  getAttachments(): Observable<Attachment[]> {
-    return this.http.get<Attachment[]>(this.baseUrl + 'api/attachments');
+  public getAttachments = (route: string) => {
+    return this.http.get(this.createCompleteRoute(route, this.envUrl.urlAddress));
   }
 
-  getAttachmentsByIssue(issueId: number): Observable<Attachment[]> {
-    return this.http.get<Attachment[]>(this.baseUrl + 'api/issues/' + issueId + '/attachments');
+  public getData = (route: string) => {
+    return this.http.get(this.createCompleteRoute(route, this.envUrl.urlAddress));
   }
 
-  deleteAttachment(id: number): Observable<any> {
-    return this.http.delete(this.baseUrl + 'api/attachments/' + id);
+  public deleteAttachment = (route: string) => {
+    return this.http.delete(this.createCompleteRoute(route, this.envUrl.urlAddress));
+  }
+
+  private createCompleteRoute = (route: string, envAddress: string) => {
+    return `${envAddress}/${route}`;
+  }
+
+  private generateHeaders = () => {
+    return {
+      headers: new HttpHeaders({'Content-Type': 'application/json'})
+    };
   }
 }

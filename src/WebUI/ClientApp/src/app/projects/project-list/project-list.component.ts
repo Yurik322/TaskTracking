@@ -50,8 +50,6 @@ export class ProjectListComponent implements OnInit {
         if (index > -1) {
           this.projects.splice(index, 1);
         }
-
-
       }, error => this.errorMessage = <any>error);
     }
   }

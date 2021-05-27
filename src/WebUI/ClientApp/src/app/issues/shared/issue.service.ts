@@ -18,12 +18,7 @@ export class IssueService {
   public getData = (route: string) => {
     return this.http.get(this.createCompleteRoute(route, this.envUrl.urlAddress));
   }
-  // TODO
-  // getIssuesByProject(projectId: number): Observable<Issue[]> {
-  //   return this.http.get<Issue[]>(this.baseUrl + 'api/projects/' + projectId + '/issues');
-  // }
 
-  // TODO
   public createIssue = (route: string, body) => {
     return this.http.post(this.createCompleteRoute(route, this.envUrl.urlAddress), body, this.generateHeaders());
   }
@@ -31,14 +26,10 @@ export class IssueService {
   public updateIssue = (route: string, body) => {
     return this.http.put(this.createCompleteRoute(route, this.envUrl.urlAddress), body, this.generateHeaders());
   }
-  // updateIssue(issue: Issue): Observable<any> {
-  //   return this.http.put(this.baseUrl + 'api/issues/' + issue.issueId, issue);
-  // }
-  //
-  // deleteIssue(id: number): Observable<any> {
-  //   return this.http.delete(this.baseUrl + 'api/issues/' + id);
-  // }
-  //
+
+  public deleteIssue = (route: string) => {
+    return this.http.delete(this.createCompleteRoute(route, this.envUrl.urlAddress));
+  }
 
   // TODO
   // uploadFile(issueId: any, fileToUpload: any) {

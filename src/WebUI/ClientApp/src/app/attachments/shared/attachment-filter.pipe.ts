@@ -11,5 +11,4 @@ export class AttachmentFilterPipe implements PipeTransform {
     return filterBy ? value.filter((issue: Attachment) =>
       issue.name.toLocaleLowerCase().indexOf(filterBy) !== -1) : value;
   }
-
 }

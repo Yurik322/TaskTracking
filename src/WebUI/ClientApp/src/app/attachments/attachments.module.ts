@@ -7,8 +7,6 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { AttachmentService } from './shared/attachment.service';
 
-
-
 @NgModule({
   declarations: [
     AttachmentListComponent,
@@ -16,15 +14,15 @@ import { AttachmentService } from './shared/attachment.service';
   ],
   imports: [
     CommonModule,
-    BrowserModule,
+    // BrowserModule,
     FormsModule,
-    RouterModule.forRoot([
+    RouterModule.forChild([
       {
-        path: 'attachments',
+        path: 'list',
         component: AttachmentListComponent
       },
       {
-        path: 'issues/:id/attachments',
+        path: ':id/issues',
         component: AttachmentListComponent,
       },
     ])

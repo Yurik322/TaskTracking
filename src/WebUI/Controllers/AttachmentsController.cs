@@ -17,7 +17,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace WebUI.Controllers
 {
-    [Route("api/attachment")]
+    [Route("api/attachments")]
     [Authorize]
     [ApiController]
     public class AttachmentsController : ControllerBase
@@ -40,7 +40,7 @@ namespace WebUI.Controllers
             _env = env;
         }
 
-        // GET: /attachment/companies
+        // GET: /attachments/companies
         //[Authorize]
         [HttpGet]
         public IActionResult GetAttachments()
@@ -87,7 +87,7 @@ namespace WebUI.Controllers
         }
 
         //TODO
-        // GET: /attachment/5/employee
+        // GET: /attachments/5/employee
         [HttpGet("{id}/employee")]
         public IActionResult GetAttachmentWithDetails(int id)
         {
@@ -114,7 +114,7 @@ namespace WebUI.Controllers
             }
         }
 
-        // POST: /attachment/create
+        // POST: /attachments/create
         [HttpPost]
         public async Task<IActionResult> CreateAttachment([FromBody] AttachmentForCreationDto attachment)
         {
@@ -149,7 +149,7 @@ namespace WebUI.Controllers
             }
         }
 
-        // PUT: /attachment/5/edit
+        // PUT: /attachments/5/edit
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateAttachment(int id, [FromBody] AttachmentForCreationDto attachment)
         {
@@ -188,7 +188,7 @@ namespace WebUI.Controllers
             }
         }
 
-        // DELETE: /attachment/5
+        // DELETE: /attachments/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAttachment(int id)
         {
@@ -214,7 +214,7 @@ namespace WebUI.Controllers
         }
 
         // TODO
-        // POST: /Attachments/Upload/{issueId}
+        // POST: /attachments/upload/{issueId}
         [HttpPut("[action]/{issueId}")]
         public async Task<IActionResult> Upload(int issueId, IFormFile file)
         {

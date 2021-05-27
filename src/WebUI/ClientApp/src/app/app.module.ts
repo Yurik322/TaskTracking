@@ -40,9 +40,9 @@ export function tokenGetter() {
     RouterModule.forRoot([
       { path: 'home', component: HomeComponent },
       { path: 'company', loadChildren: () => import('./company/company.module').then(m => m.CompanyModule), canActivate: [AuthGuard] },
+      { path: 'attachments', loadChildren: () => import('./attachments/attachments.module').then(m => m.AttachmentsModule), canActivate: [AuthGuard] },
       { path: 'issues', loadChildren: () => import('./issues/issues.module').then(m => m.IssuesModule), canActivate: [AuthGuard] },
       { path: 'projects', loadChildren: () => import('./projects/projects.module').then(m => m.ProjectsModule), canActivate: [AuthGuard] },
-      // TODO
       { path: 'authentication', loadChildren: () => import('./authentication/authentication.module').then(m => m.AuthenticationModule) },
       { path: 'privacy', component: PrivacyComponent, canActivate: [AuthGuard, AdminGuard] },
       { path: 'forbidden', component: ForbiddenComponent },

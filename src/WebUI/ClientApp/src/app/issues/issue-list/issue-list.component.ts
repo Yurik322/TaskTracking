@@ -22,26 +22,16 @@ export class IssueListComponent implements OnInit {
               private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
-
     this.activatedRoute.params.subscribe((params: Params) => {
       const projectId = params['id'];
       if (projectId > -1) {
-
-        // this.issueService.getIssuesByProject(projectId)
         const issuesByProjectUrl = `api/projects/${projectId}/issues`;
-        console.log(issuesByProjectUrl);
         this.issueService.getData(issuesByProjectUrl)
-        // getIssuesByProject(projectId: number): Observable<Issue[]> {
-        //   return this.http.get<Issue[]>(this.baseUrl + 'api/projects/' + projectId + '/issues');
-        // }
-
           .subscribe(issues => this.issues = <Issue[]>issues, error => this.errorMessage = <any>error);
       } else {
-        // this.issueService.getIssues()
         this.getAllIssues();
       }
     });
-    // this.getAllIssues();
   }
 
   public getAllIssues = () => {
@@ -57,14 +47,16 @@ export class IssueListComponent implements OnInit {
 
 
   deleteIssue(issue: Issue): void {
-    // if (confirm("Are you sure you want to delete this issue?")) {
-    //   this.issueService.deleteIssue(issue.issueId).subscribe(result => {
-    //     var index = this.issues.indexOf(issue);
-    //     if (index > -1) {
-    //       this.issues.splice(index, 1);
-    //     }
-    //   }, error => this.errorMessage = <any>error);
-    // }
+    if (confirm('Are you sure you want to delete this issue?')) {
+      const deleteUrl = `api/issues/${issue.issueId}`;
+      this.issueService.deleteIssue(deleteUrl)
+        .subscribe(result => {
+        const index = this.issues.indexOf(issue);
+        if (index > -1) {
+          this.issues.splice(index, 1);
+        }
+      }, error => this.errorMessage = <any>error);
+    }
   }
 
   priorityToClass(priority: number) {

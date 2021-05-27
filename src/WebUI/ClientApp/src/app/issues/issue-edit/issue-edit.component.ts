@@ -3,8 +3,6 @@ import { Issue } from '../shared/issue';
 import { IssueService } from '../shared/issue.service';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { NgForm } from '@angular/forms';
-import {Company} from '../../company/shared/company.model';
-import {Project} from '../../projects/shared/project';
 
 @Component({
   selector: 'app-issue-edit',

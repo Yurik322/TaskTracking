@@ -76,7 +76,7 @@
         </span>
     </td>
     <td>
-      <a title="Issues" [routerLink]="['/issues', issue.issueId, 'attachments']" class="action-button">
+      <a title="Issues" [routerLink]="['/attachments', issue.issueId, 'issues']" class="action-button">
         <i class="fas fa-paperclip"></i>
       </a>
       <a (click)="deleteIssue(issue)" role="button" class="action-button">
