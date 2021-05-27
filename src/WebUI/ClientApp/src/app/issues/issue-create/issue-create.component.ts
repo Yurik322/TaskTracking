@@ -28,7 +28,7 @@ export class IssueCreateComponent implements OnInit {
       id: -1,
       title: '',
       description: '',
-      issueType: 0,
+      taskType: 0,
       priority: 1,
       statusType: 0
     };
@@ -58,6 +58,8 @@ export class IssueCreateComponent implements OnInit {
     // TODO
     // this.issueService.createIssue(this.issue)
     const apiUrl = 'api/issues';
+
+    console.log(this.issue);
     this.issueService.createIssue(apiUrl, this.issue)
       // .subscribe(data => {
       //   this.router.navigate(['/issues/list']);

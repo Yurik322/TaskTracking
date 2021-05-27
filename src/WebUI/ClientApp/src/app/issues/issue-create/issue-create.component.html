@@ -40,8 +40,8 @@
             <div class="col-md-6">
               <label>Issue Type</label>
               <select name="issuetype" class="form-control" data-width="100%"
-                      [(ngModel)]="issue.issueType"
-                      (ngModelChange)="issue.issueType=$event">
+                      [(ngModel)]="issue.taskType"
+                      (ngModelChange)="issue.taskType=$event">
                 <option [ngValue]='0'>Bug</option>
                 <option [ngValue]='1'>Task</option>
                 <option [ngValue]='2'>Change</option>

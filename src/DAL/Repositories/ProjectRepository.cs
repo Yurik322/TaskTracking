@@ -44,5 +44,21 @@ namespace DAL.Repositories
         {
             Delete(project);
         }
+
+        // TODO
+        public Issue GetIssueWithProject(Project project, Issue issue)
+        {
+            return new Issue
+            {
+                Title = issue.Title,
+                Description = issue.Description,
+                Priority = issue.Priority,
+                TaskType = issue.TaskType,
+                StatusType = issue.StatusType,
+                CreatedAt = DateTime.Now,
+                UpdatedAt = DateTime.Now,
+                Project = project
+            };
+        }
     }
 }

@@ -82,7 +82,7 @@ namespace WebUI.Controllers
 
         // POST: /issue/create
         [HttpPost]
-        public async Task<IActionResult> CreateIssue([FromBody] IssueForCreationDto issue)
+        public async Task<IActionResult> CreateIssue([FromBody] Issue issue)
         {
             try
             {
@@ -98,14 +98,44 @@ namespace WebUI.Controllers
                     return BadRequest("Invalid model object");
                 }
 
-                var issueEntity = _mapper.Map<Issue>(issue);
+                ////// TODO Add projectId
+                var projectId = issue.Id;
+                var project = _repository.Project.GetProjectById(projectId);
 
-                _repository.Issue.CreateIssue(issueEntity);
+                //var issueEntity = _repository.Project.GetIssueWithProject(project, issue);
+
+                var newIssue = new Issue()
+                {
+                    Title = issue.Title,
+                    Description = issue.Description,
+                    Priority = issue.Priority,
+                    TaskType = issue.TaskType,
+                    StatusType = issue.StatusType,
+                    CreatedAt = DateTime.Now,
+                    UpdatedAt = DateTime.Now,
+                    Project = project
+                };
+
+                _repository.Issue.CreateIssue(newIssue);
                 await _repository.SaveAsync();
 
-                var createdIssue = _mapper.Map<IssueDto>(issueEntity);
+                //var createdIssue = _mapper.Map<IssueDto>(issueEntity);
 
-                return CreatedAtRoute("IssueById", new { id = createdIssue.Id }, createdIssue);
+                return Ok();
+                //return CreatedAtRoute("IssueById", new { id = createdIssue.Id }, createdIssue);
+
+                ////// TODO Add projectId
+                //var projectId = issue.Id;
+                //var project = _repository.Project.GetProjectById(projectId);
+
+                ////var issueEntity = _mapper.Map<Issue>(issue);
+                //var issueEntity = _repository.Project.GetIssueWithProject(project, issue);
+                //var FinalissueEntity = _mapper.Map<Issue>(issueEntity);
+
+                //_repository.Issue.CreateIssue(FinalissueEntity);
+                //await _repository.SaveAsync();
+
+                //var createdIssue = _mapper.Map<IssueDto>(FinalissueEntity);
             }
             catch (Exception ex)
             {
@@ -198,3 +228,44 @@ namespace WebUI.Controllers
         }
     }
 }
+
+
+
+//// POST: /issue/create
+//[HttpPost]
+//public async Task<IActionResult> CreateIssue([FromBody] IssueForCreationDto issue)
+//{
+//    try
+//    {
+//        if (issue == null)
+//        {
+//            _logger.LogError("Issue object sent from client is null.");
+//            return BadRequest("Issue object is null");
+//        }
+
+//        if (!ModelState.IsValid)
+//        {
+//            _logger.LogError("Invalid issue object sent from client.");
+//            return BadRequest("Invalid model object");
+//        }
+
+//        //// TODO Add projectId
+//        //var projectId = issue.IssueId;
+//        //var project = _context.Projects.Where(p => p.ProjectId == projectId).FirstOrDefault();
+
+//        var issueEntity = _mapper.Map<Issue>(issue);
+
+//        _repository.Issue.CreateIssue(issueEntity);
+//        await _repository.SaveAsync();
+
+//        var createdIssue = _mapper.Map<IssueDto>(issueEntity);
+
+//        return Ok();
+//        //return CreatedAtRoute("IssueById", new { id = createdIssue.Id }, createdIssue);
+//    }
+//    catch (Exception ex)
+//    {
+//        _logger.LogError($"Something went wrong inside CreateIssue action: {ex.Message}");
+//        return StatusCode(500, "Internal server error" + ex);
+//    }
+//}
