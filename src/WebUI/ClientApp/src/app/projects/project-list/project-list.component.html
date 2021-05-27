@@ -24,9 +24,9 @@
   </thead>
   <tbody>
   <tr *ngFor='let project of projects | projectFilter:listFilter'>
-    <td>{{ project.id }}</td>
+    <td>{{ project.projectId }}</td>
     <td>
-      <a [routerLink]="['/projects', project.id, 'edit']">{{ project.name }}</a>
+      <a [routerLink]="['/projects', project.projectId, 'edit']">{{ project.name }}</a>
     </td>
     <td>{{ project.description }}</td>
     <td>
@@ -34,7 +34,7 @@
       <span *ngIf="!project.url">No URL</span>
     </td>
     <td>
-      <a title="Issues" (click)="updateProject(project)" [routerLink]="['/projects', project.id, 'issues']" class="action-button">
+      <a title="Issues" (click)="updateProject(project)" [routerLink]="['/projects', project.projectId, 'issues']" class="action-button">
         <i class="fas fa-tasks"></i>
       </a>
       <a (click)="deleteProject(project)" role="button" class="action-button">

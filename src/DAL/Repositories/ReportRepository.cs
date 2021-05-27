@@ -21,13 +21,13 @@ namespace DAL.Repositories
 
         public Report GetReportById(int reportId)
         {
-            return FindByCondition(x => x.Id.Equals(reportId))
+            return FindByCondition(x => x.ReportId.Equals(reportId))
                 .FirstOrDefault();
         }
 
         public Report GetReportWithDetails(int reportId)
         {
-            return FindByCondition(owner => owner.Id.Equals(reportId)).FirstOrDefault();
+            return FindByCondition(owner => owner.ReportId.Equals(reportId)).FirstOrDefault();
         }
 
         public void CreateReport(Report report)

@@ -51,7 +51,7 @@ export class IssueListComponent implements OnInit {
 
   deleteIssue(issue: Issue): void {
     // if (confirm("Are you sure you want to delete this issue?")) {
-    //   this.issueService.deleteIssue(issue.id).subscribe(result => {
+    //   this.issueService.deleteIssue(issue.issueId).subscribe(result => {
     //     var index = this.issues.indexOf(issue);
     //     if (index > -1) {
     //       this.issues.splice(index, 1);

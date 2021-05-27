@@ -7,7 +7,7 @@ namespace BLL.EtitiesDTO
 {
     public class ProjectDto
     {
-        public int Id { get; set; }
+        public int ProjectId { get; set; }
 
         [StringLength(256, MinimumLength = 5)]
         [Required]

@@ -21,13 +21,13 @@ namespace DAL.Repositories
 
         public Issue GetIssueById(int issueId)
         {
-            return FindByCondition(x => x.Id.Equals(issueId))
+            return FindByCondition(x => x.IssueId.Equals(issueId))
                 .FirstOrDefault();
         }
 
         public Issue GetIssueWithDetails(int issueId)
         {
-            return FindByCondition(owner => owner.Id.Equals(issueId)).FirstOrDefault();
+            return FindByCondition(owner => owner.IssueId.Equals(issueId)).FirstOrDefault();
         }
 
         public void CreateIssue(Issue issue)
@@ -47,8 +47,8 @@ namespace DAL.Repositories
 
         public IEnumerable<Issue> WhereIsIssue(int issueId)
         {
-            return FindByCondition(i => i.Project.Id == issueId)
-                .OrderByDescending(i => i.Id).ToList();
+            return FindByCondition(i => i.Project.ProjectId == issueId)
+                .OrderByDescending(i => i.IssueId).ToList();
 
             //return FindByCondition(owner => owner.Id.Equals(issueId)).FirstOrDefault();
             //return Issue.WhereIsIssue(i => i.Project.ProjectId == id)

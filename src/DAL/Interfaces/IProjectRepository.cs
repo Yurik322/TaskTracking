@@ -13,7 +13,5 @@ namespace DAL.Interfaces
         void CreateProject(Project project);
         void UpdateProject(Project project);
         void DeleteProject(Project project);
-        // TODO
-        Issue GetIssueWithProject(Project project, Issue issue);
     }
 }

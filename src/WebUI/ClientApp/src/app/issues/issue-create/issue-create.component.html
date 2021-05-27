@@ -11,10 +11,10 @@
           <div class="col-md-6 ">
             <label>Project</label>
             <select name="project" class="form-control" data-width="100%" required ngModel
-                    [(ngModel)]="issue.id"
-                    (ngModelChange)="issue.id=$event">
-<!--              TODO-->
-              <option [ngValue]='project.id' *ngFor="let project of projects">{{ project.name }}</option>
+                    [(ngModel)]="issue.projectId"
+                    (ngModelChange)="issue.projectId=$event">
+              <!--                    TODO-->
+              <option [ngValue]='project.projectId' *ngFor="let project of projects">{{ project.name }}</option>
             </select>
           </div>
           <div class="col-md-6"></div>

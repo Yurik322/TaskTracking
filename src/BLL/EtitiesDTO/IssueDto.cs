@@ -9,7 +9,7 @@ namespace BLL.EtitiesDTO
 {
     public class IssueDto
     {
-        public int Id { get; set; }
+        public int IssueId { get; set; }
 
         [StringLength(256, MinimumLength = 5)]
         [Required]
@@ -18,6 +18,7 @@ namespace BLL.EtitiesDTO
         public TaskType TaskType { get; set; }
         public Priority Priority { get; set; }
         public Status StatusType { get; set; }
+        //public int ProjectId { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
     }

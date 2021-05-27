@@ -61,9 +61,9 @@
   </thead>
   <tbody>
   <tr *ngFor='let issue of issues | issueFilter:listFilter | issueFilterByType:filter1 | issueFilterByPriority:filter2 | issueFilterByStatus:filter3'>
-    <td>{{ issue.id }}</td>
+    <td>{{ issue.issueId }}</td>
     <td>
-      <a [routerLink]="['/issues', issue.id, 'edit']">{{issue.title}}</a>
+      <a [routerLink]="['/issues', issue.issueId, 'edit']">{{issue.title}}</a>
     </td>
 <!--    <td>{{ issue.creator }}</td>-->
     <td>{{ issue.createdAt | date:'yyyy-MM-dd HH:mm a'}}</td>
@@ -77,7 +77,7 @@
         </span>
     </td>
     <td>
-      <a title="Issues" [routerLink]="['/issues', issue.id, 'attachments']" class="action-button">
+      <a title="Issues" [routerLink]="['/issues', issue.issueId, 'attachments']" class="action-button">
         <i class="fas fa-paperclip"></i>
       </a>
       <a (click)="deleteIssue(issue)" role="button" class="action-button">

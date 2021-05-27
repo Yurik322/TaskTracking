@@ -7,7 +7,7 @@ namespace DAL.Entities
 {
     public class Report
     {
-        public int Id { get; set; }
+        public int ReportId { get; set; }
 
         [ForeignKey(nameof(Employee))]
         public int EmployeeId { get; set; }

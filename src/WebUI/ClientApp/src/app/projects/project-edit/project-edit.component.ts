@@ -11,7 +11,7 @@ import { NgForm } from '@angular/forms';
 })
 export class ProjectEditComponent implements OnInit {
   project: Project = {} as Project;
-  id: number;
+  projectId: number;
   errorMessage: string;
 
   constructor(private router: Router,
@@ -19,10 +19,10 @@ export class ProjectEditComponent implements OnInit {
               private projectService: ProjectService) { }
 
   ngOnInit() {
-    this.id = +this.activatedRoute.snapshot.params['id'];
+    this.projectId = +this.activatedRoute.snapshot.params['id'];
 
-    if (this.id >= 0) {
-        const companyByIdUrl = `api/projects/${this.id}`;
+    if (this.projectId >= 0) {
+        const companyByIdUrl = `api/projects/${this.projectId}`;
         this.projectService.getData(companyByIdUrl).subscribe(result => {
         this.project = <Project>result;
       }, error => this.errorMessage = <any>error);
@@ -31,8 +31,8 @@ export class ProjectEditComponent implements OnInit {
 
 
   onSubmit(form: NgForm) {
-    if (this.id >= 0) {
-      const apiUrl = `api/projects/${this.project.id}`;
+    if (this.projectId >= 0) {
+      const apiUrl = `api/projects/${this.project.projectId}`;
       this.projectService.updateProject(apiUrl, this.project)
         .subscribe(data => {
         this.router.navigate(['/projects/list']);

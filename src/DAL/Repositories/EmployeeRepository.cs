@@ -21,13 +21,13 @@ namespace DAL.Repositories
 
         public Employee GetEmployeeById(int employeeId)
         {
-            return FindByCondition(x => x.Id.Equals(employeeId))
+            return FindByCondition(x => x.EmployeeId.Equals(employeeId))
                 .FirstOrDefault();
         }
 
         public Employee GetEmployeeWithDetails(int employeeId)
         {
-            return FindByCondition(owner => owner.Id.Equals(employeeId))
+            return FindByCondition(owner => owner.EmployeeId.Equals(employeeId))
                 .FirstOrDefault();
         }
 

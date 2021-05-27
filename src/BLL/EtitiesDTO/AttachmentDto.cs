@@ -7,7 +7,7 @@ namespace BLL.EtitiesDTO
 {
     public class AttachmentDto
     {
-        public int Id { get; set; }
+        public int AttachmentId { get; set; }
         public string Name { get; set; }
         public string Path { get; set; }
         public FileType FileType { get; set; }

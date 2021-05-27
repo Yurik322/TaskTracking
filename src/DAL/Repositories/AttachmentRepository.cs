@@ -21,13 +21,13 @@ namespace DAL.Repositories
 
         public Attachment GetAttachmentById(int attachmentId)
         {
-            return FindByCondition(x => x.Id.Equals(attachmentId))
+            return FindByCondition(x => x.AttachmentId.Equals(attachmentId))
                 .FirstOrDefault();
         }
 
         public Attachment GetAttachmentWithDetails(int attachmentId)
         {
-            return FindByCondition(owner => owner.Id.Equals(attachmentId)).FirstOrDefault();
+            return FindByCondition(owner => owner.AttachmentId.Equals(attachmentId)).FirstOrDefault();
         }
 
         public void CreateAttachment(Attachment attachment)
@@ -47,8 +47,8 @@ namespace DAL.Repositories
 
         public IEnumerable<Attachment> WhereIsAttachment(int attachmentId)
         {
-            return FindByCondition(i => i.Issue.Id == attachmentId)
-                .OrderByDescending(a => a.Id).ToList();
+            return FindByCondition(i => i.Issue.IssueId == attachmentId)
+                .OrderByDescending(a => a.AttachmentId).ToList();
 
             //return _context.Attachments.Where(i => i.Issue.IssueId == id)
             //    .OrderByDescending(a => a.AttachmentId)

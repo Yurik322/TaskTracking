@@ -25,12 +25,13 @@ export class IssueCreateComponent implements OnInit {
   ngOnInit() {
     // Default - empty issue
     this.issue = {
-      id: -1,
+      issueId: -1,
       title: '',
       description: '',
       taskType: 0,
       priority: 1,
-      statusType: 0
+      statusType: 0,
+      projectId: 0
     };
 
     // this.projects = this.sharedService.projects;
@@ -60,13 +61,14 @@ export class IssueCreateComponent implements OnInit {
     const apiUrl = 'api/issues';
 
     console.log(this.issue);
+
     this.issueService.createIssue(apiUrl, this.issue)
       // .subscribe(data => {
       //   this.router.navigate(['/issues/list']);
 
       .subscribe(result => {
-      //   if (result.id > -1) {
-      //     this.uploadFile(result.id);
+      //   if (result.issueId > -1) {
+      //     this.uploadFile(result.issueId);
       //   } else {
       //     this.errorMessage = 'Invalid Request. Check your values!';
       //   }
@@ -78,9 +80,9 @@ export class IssueCreateComponent implements OnInit {
     );
   }
 
-  // uploadFile(id: any) {
+  // uploadFile(issueId: any) {
   //   if (this.fileToUpload != null) {
-  //     this.issueService.uploadFile(id, this.fileToUpload).subscribe(
+  //     this.issueService.uploadFile(issueId, this.fileToUpload).subscribe(
   //       data => {
   //         console.log('File uploaded!');
   //       },

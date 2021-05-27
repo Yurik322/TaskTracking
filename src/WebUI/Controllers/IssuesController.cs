@@ -52,7 +52,6 @@ namespace WebUI.Controllers
             }
         }
 
-        //TODO
         // GET: /issues/5
         [HttpGet("{id}")]
         public IActionResult GetIssueById(int id)
@@ -82,7 +81,7 @@ namespace WebUI.Controllers
 
         // POST: /issue/create
         [HttpPost]
-        public async Task<IActionResult> CreateIssue([FromBody] Issue issue)
+        public async Task<IActionResult> CreateIssue([FromBody] IssueForCreationDto issue)
         {
             try
             {
@@ -98,44 +97,14 @@ namespace WebUI.Controllers
                     return BadRequest("Invalid model object");
                 }
 
-                ////// TODO Add projectId
-                var projectId = issue.Id;
-                var project = _repository.Project.GetProjectById(projectId);
+                var issueEntity = _mapper.Map<Issue>(issue);
 
-                //var issueEntity = _repository.Project.GetIssueWithProject(project, issue);
-
-                var newIssue = new Issue()
-                {
-                    Title = issue.Title,
-                    Description = issue.Description,
-                    Priority = issue.Priority,
-                    TaskType = issue.TaskType,
-                    StatusType = issue.StatusType,
-                    CreatedAt = DateTime.Now,
-                    UpdatedAt = DateTime.Now,
-                    Project = project
-                };
-
-                _repository.Issue.CreateIssue(newIssue);
+                _repository.Issue.CreateIssue(issueEntity);
                 await _repository.SaveAsync();
 
-                //var createdIssue = _mapper.Map<IssueDto>(issueEntity);
+                var createdIssue = _mapper.Map<IssueDto>(issueEntity);
 
                 return Ok();
-                //return CreatedAtRoute("IssueById", new { id = createdIssue.Id }, createdIssue);
-
-                ////// TODO Add projectId
-                //var projectId = issue.Id;
-                //var project = _repository.Project.GetProjectById(projectId);
-
-                ////var issueEntity = _mapper.Map<Issue>(issue);
-                //var issueEntity = _repository.Project.GetIssueWithProject(project, issue);
-                //var FinalissueEntity = _mapper.Map<Issue>(issueEntity);
-
-                //_repository.Issue.CreateIssue(FinalissueEntity);
-                //await _repository.SaveAsync();
-
-                //var createdIssue = _mapper.Map<IssueDto>(FinalissueEntity);
             }
             catch (Exception ex)
             {

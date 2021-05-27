@@ -42,7 +42,7 @@ export class ProjectListComponent implements OnInit {
   deleteProject(project: Project): void {
     if (confirm('Are you sure you want to delete this project?')) {
 
-      const deleteUrl = `api/projects/${project.id}`;
+      const deleteUrl = `api/projects/${project.projectId}`;
       this.projectService.deleteProject(deleteUrl)
 
         .subscribe(data => {

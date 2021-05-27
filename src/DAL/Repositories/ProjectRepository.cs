@@ -21,13 +21,13 @@ namespace DAL.Repositories
 
         public Project GetProjectById(int projectId)
         {
-            return FindByCondition(x => x.Id.Equals(projectId))
+            return FindByCondition(x => x.ProjectId.Equals(projectId))
                 .FirstOrDefault();
         }
 
         public Project GetProjectWithDetails(int projectId)
         {
-            return FindByCondition(owner => owner.Id.Equals(projectId)).FirstOrDefault();
+            return FindByCondition(owner => owner.ProjectId.Equals(projectId)).FirstOrDefault();
         }
 
         public void CreateProject(Project project)
@@ -43,22 +43,6 @@ namespace DAL.Repositories
         public void DeleteProject(Project project)
         {
             Delete(project);
-        }
-
-        // TODO
-        public Issue GetIssueWithProject(Project project, Issue issue)
-        {
-            return new Issue
-            {
-                Title = issue.Title,
-                Description = issue.Description,
-                Priority = issue.Priority,
-                TaskType = issue.TaskType,
-                StatusType = issue.StatusType,
-                CreatedAt = DateTime.Now,
-                UpdatedAt = DateTime.Now,
-                Project = project
-            };
         }
     }
 }

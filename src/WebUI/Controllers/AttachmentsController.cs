@@ -138,7 +138,8 @@ namespace WebUI.Controllers
 
                 var createdAttachment = _mapper.Map<AttachmentDto>(attachmentEntity);
 
-                return CreatedAtRoute("AttachmentById", new { id = createdAttachment.Id }, createdAttachment);
+                return Ok();
+                //return CreatedAtRoute("AttachmentById", new { id = createdAttachment.Id }, createdAttachment);
             }
             catch (Exception ex)
             {

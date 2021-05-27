@@ -8,7 +8,7 @@ namespace DAL.Entities
 {
     public class Employee
     {
-        public int Id { get; set; }
+        public int EmployeeId { get; set; }
 
         [Required(ErrorMessage = "Employee name is a required field.")]
         [MaxLength(30, ErrorMessage = "Maximum length for the Name is 30 characters.")]

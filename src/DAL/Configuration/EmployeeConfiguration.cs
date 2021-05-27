@@ -15,7 +15,7 @@ namespace DAL.Configuration
             (
                 new Employee
                 {
-                    Id = 1,
+                    EmployeeId = 1,
                     Name = "Sam Raiden",
                     Age = 26,
                     Position = "Software developer",
@@ -23,7 +23,7 @@ namespace DAL.Configuration
                 },
                 new Employee
                 {
-                    Id = 2,
+                    EmployeeId = 2,
                     Name = "Jana McLeaf",
                     Age = 30,
                     Position = "Software developer",
@@ -31,7 +31,7 @@ namespace DAL.Configuration
                 },
                 new Employee
                 {
-                    Id = 3,
+                    EmployeeId = 3,
                     Name = "Kane Miller",
                     Age = 35,
                     Position = "Administrator",

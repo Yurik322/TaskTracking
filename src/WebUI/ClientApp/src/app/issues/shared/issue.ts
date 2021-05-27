@@ -1,5 +1,5 @@
 export interface Issue {
-  id?: number;
+  issueId?: number;
   title: string;
   description: string;
   taskType: number;
@@ -7,4 +7,5 @@ export interface Issue {
   statusType: number;
   createdAt?: string;
   updatedAt?: string;
+  projectId?: number;
 }
