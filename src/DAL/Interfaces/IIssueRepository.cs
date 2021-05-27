@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using DAL.Entities;
 
 namespace DAL.Interfaces
@@ -14,6 +15,6 @@ namespace DAL.Interfaces
         void UpdateIssue(Issue issue);
         void DeleteIssue(Issue issue);
         //TODO
-        IEnumerable<Issue> WhereIsIssue(int issueId);
+        Task<IEnumerable<Issue>> WhereIsIssue(int issueId);
     }
 }

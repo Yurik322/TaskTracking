@@ -30,9 +30,8 @@ import { IssueService } from './shared/issue.service';
         path: 'list',
         component: IssueListComponent
       },
-      // TODO
       {
-        path: ':id',
+        path: ':id/projects',
         pathMatch: 'full',
         component: IssueListComponent,
       },

@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using DAL.EF;
 using DAL.Entities;
 using DAL.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace DAL.Repositories
 {
@@ -45,15 +47,10 @@ namespace DAL.Repositories
             Delete(issue);
         }
 
-        public IEnumerable<Issue> WhereIsIssue(int issueId)
+        public async Task<IEnumerable<Issue>> WhereIsIssue(int issueId)
         {
-            return FindByCondition(i => i.Project.ProjectId == issueId)
-                .OrderByDescending(i => i.IssueId).ToList();
-
-            //return FindByCondition(owner => owner.Id.Equals(issueId)).FirstOrDefault();
-            //return Issue.WhereIsIssue(i => i.Project.ProjectId == id)
-            //    .OrderByDescending(i => i.IssueId)
-            //    .ToList();
+            return await FindByCondition(i => i.Project.ProjectId == issueId)
+                .OrderByDescending(i => i.IssueId).ToListAsync();
         }
     }
 }

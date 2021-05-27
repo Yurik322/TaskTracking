@@ -19,18 +19,11 @@ namespace WebUI.Controllers
     {
         private readonly IProjectService _projectService;
         private readonly ILoggerManager _logger;
-        private readonly IMapper _mapper;
 
-        //TODO
-        private readonly IUnitOfWork _repository;
-
-
-        public ProjectsController(IProjectService projectService, ILoggerManager logger, IMapper mapper, IUnitOfWork repository)
+        public ProjectsController(IProjectService projectService, ILoggerManager logger)
         {
             _projectService = projectService;
             _logger = logger;
-            _mapper = mapper;
-            _repository = repository;
         }
 
         // GET: /projects
@@ -52,26 +45,14 @@ namespace WebUI.Controllers
             }
         }
 
-        //TODO
         // GET: /projects/5
         [HttpGet("{id}")]
         public IActionResult GetProjectById(int id)
         {
             try
             {
-                var project = _repository.Project.GetProjectById(id);
-                if (project == null)
-                {
-                    _logger.LogError($"Projects with id: {id}, hasn't been found in db.");
-                    return NotFound();
-                }
-                else
-                {
-                    _logger.LogInfo($"Returned project with id: {id}");
-
-                    var projectResult = _mapper.Map<ProjectDto>(project);
-                    return Ok(projectResult);
-                }
+                var projectResult = _projectService.GetProjectById(id);
+                return Ok(projectResult);
             }
             catch (Exception ex)
             {
@@ -98,15 +79,9 @@ namespace WebUI.Controllers
                     return BadRequest("Invalid model object");
                 }
 
-                var projectEntity = _mapper.Map<Project>(project);
-
-                _repository.Project.CreateProject(projectEntity);
-                await _repository.SaveAsync();
-
-                var createdProjects = _mapper.Map<ProjectDto>(projectEntity);
+                await _projectService.CreateProject(project);
 
                 return Ok();
-                //return CreatedAtRoute("ProjectsById", new { id = createdProjects.Id }, createdProjects);
             }
             catch (Exception ex)
             {
@@ -133,24 +108,21 @@ namespace WebUI.Controllers
                     return BadRequest("Invalid model object");
                 }
 
-                var projectEntity = _repository.Project.GetProjectById(id);
+                var projectEntity = _projectService.GetProjectById(id);
                 if (projectEntity == null)
                 {
                     _logger.LogError($"Projects with id: {id}, hasn't been found in db.");
                     return NotFound();
                 }
 
-                _mapper.Map(project, projectEntity);
-
-                _repository.Project.UpdateProject(projectEntity);
-                await _repository.SaveAsync();
+                await _projectService.UpdateProject(id, project);
 
                 return NoContent();
             }
             catch (Exception ex)
             {
                 _logger.LogError($"Something went wrong inside UpdateProjects action: {ex.Message}");
-                return StatusCode(500, "Internal server error");
+                return StatusCode(500, "Internal server error" + ex);
             }
         }
 
@@ -160,31 +132,29 @@ namespace WebUI.Controllers
         {
             try
             {
-                var project = _repository.Project.GetProjectById(id);
+                var project = _projectService.GetProjectById(id);
                 if (project == null)
                 {
                     _logger.LogError($"Project with id: {id}, hasn't been found in db.");
                     return NotFound();
                 }
 
-                _repository.Project.DeleteProject(project);
-                await _repository.SaveAsync();
+                await _projectService.DeleteProject(id);
 
                 return NoContent();
             }
             catch (Exception ex)
             {
                 _logger.LogError($"Something went wrong inside DeleteProject action: {ex.Message}");
-                return StatusCode(500, "Internal server error");
+                return StatusCode(500, "Internal server error" + ex);
             }
         }
 
-        //TODO
         // GET: /projects/5/issues
         [HttpGet("{id}/[action]")]
-        public IEnumerable<Issue> Issues(int id)
+        public async Task<IEnumerable<IssueDto>> Issues(int id)
         {
-            return _repository.Issue.WhereIsIssue(id);
+            return await _projectService.GetIssuesByProject(id);
         }
 
 
