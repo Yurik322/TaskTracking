@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using BLL.EtitiesDTO;
+using BLL.EtitiesDTO.Attachment;
 using BLL.Interfaces;
 using DAL.Entities;
 using DAL.Entities.Enums;

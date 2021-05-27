@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using DAL.EF;
 using DAL.Entities;
 using DAL.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace DAL.Repositories
 {
@@ -14,15 +16,15 @@ namespace DAL.Repositories
         {
         }
 
-        public IEnumerable<Project> GetAllProjects(bool trackChanges) =>
-            FindAll(trackChanges)
+        public async Task<IEnumerable<Project>> GetAllProjects(bool trackChanges) =>
+            await FindAll(trackChanges)
                 .OrderBy(c => c.Name)
-                .ToList();
+                .ToListAsync();
 
-        public Project GetProjectById(int projectId)
+        public async Task<Project> GetProjectById(int projectId)
         {
-            return FindByCondition(x => x.ProjectId.Equals(projectId))
-                .FirstOrDefault();
+            return await FindByCondition(x => x.ProjectId.Equals(projectId))
+                .FirstOrDefaultAsync();
         }
 
         public Project GetProjectWithDetails(int projectId)

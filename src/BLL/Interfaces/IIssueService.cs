@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using BLL.EtitiesDTO;
+using BLL.EtitiesDTO.Issue;
 
 namespace BLL.Interfaces
 {

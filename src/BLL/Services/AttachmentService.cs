@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using AutoMapper;
 using BLL.EtitiesDTO;
+using BLL.EtitiesDTO.Attachment;
 using BLL.Interfaces;
 using DAL.Entities;
 using DAL.Interfaces;

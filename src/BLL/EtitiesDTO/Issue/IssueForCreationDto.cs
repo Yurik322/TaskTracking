@@ -1,16 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
-using DAL.Entities;
 using DAL.Entities.Enums;
 
-namespace BLL.EtitiesDTO
+namespace BLL.EtitiesDTO.Issue
 {
-    public class IssueDto
+    public class IssueForCreationDto
     {
-        public int IssueId { get; set; }
-
         [StringLength(256, MinimumLength = 5)]
         [Required]
         public string Title { get; set; }

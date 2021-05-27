@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using BLL.EtitiesDTO;
+using BLL.EtitiesDTO.Company;
 
 namespace BLL.Interfaces
 {

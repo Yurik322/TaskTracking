@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using BLL.EtitiesDTO;
+using BLL.EtitiesDTO.Company;
 using BLL.Interfaces;
 using DAL.Entities;
 using DAL.Interfaces;

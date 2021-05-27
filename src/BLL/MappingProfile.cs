@@ -1,5 +1,9 @@
 ﻿using AutoMapper;
 using BLL.EtitiesDTO;
+using BLL.EtitiesDTO.Attachment;
+using BLL.EtitiesDTO.Company;
+using BLL.EtitiesDTO.Issue;
+using BLL.EtitiesDTO.Project;
 using DAL.Entities;
 
 namespace BLL

@@ -4,6 +4,8 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using BLL.EtitiesDTO;
+using BLL.EtitiesDTO.Issue;
+using BLL.EtitiesDTO.Project;
 using BLL.Interfaces;
 using DAL.Entities;
 using DAL.Interfaces;
@@ -22,17 +24,17 @@ namespace BLL.Services
             _mapper = mapper;
         }
 
-        public IEnumerable<ProjectDto> GetAllProjects()
+        public async Task<IEnumerable<ProjectDto>> GetAllProjects()
         {
             var companies =
-                _mapper.Map<IEnumerable<Project>, IEnumerable<ProjectDto>>(_repository.Project.GetAllProjects(trackChanges: false));
+                _mapper.Map<IEnumerable<Project>, IEnumerable<ProjectDto>>(await _repository.Project.GetAllProjects(trackChanges: false));
 
             return _mapper.Map<IEnumerable<ProjectDto>>(companies);
         }
 
-        public ProjectDto GetProjectById(int id)
+        public async Task<ProjectDto> GetProjectById(int id)
         {
-            var project = _repository.Project.GetProjectById(id);
+            var project = await _repository.Project.GetProjectById(id);
 
             return _mapper.Map<ProjectDto>(project);
         }
@@ -47,7 +49,7 @@ namespace BLL.Services
 
         public async Task UpdateProject(int id, ProjectForCreationDto project)
         {
-            var projectEntity = _repository.Project.GetProjectById(id);
+            var projectEntity = await _repository.Project.GetProjectById(id);
 
             _mapper.Map(project, projectEntity);
             _repository.Project.UpdateProject(projectEntity);
@@ -56,7 +58,7 @@ namespace BLL.Services
 
         public async Task DeleteProject(int id)
         {
-            var projectEntity = _repository.Project.GetProjectById(id);
+            var projectEntity = await _repository.Project.GetProjectById(id);
 
             _repository.Project.DeleteProject(projectEntity);
             await _repository.SaveAsync();

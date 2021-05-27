@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 
-namespace BLL.EtitiesDTO
+namespace BLL.EtitiesDTO.Project
 {
-    public class ProjectForCreationDto
+    public class ProjectDto
     {
+        public int ProjectId { get; set; }
 
         [StringLength(256, MinimumLength = 5)]
         [Required]

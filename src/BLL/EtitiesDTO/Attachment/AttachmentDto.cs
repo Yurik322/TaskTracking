@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using DAL.Entities.Enums;
 
-namespace BLL.EtitiesDTO
+namespace BLL.EtitiesDTO.Attachment
 {
-    public class AttachmentForCreationDto
+    public class AttachmentDto
     {
+        public int AttachmentId { get; set; }
         public string Name { get; set; }
         public string Path { get; set; }
         public FileType FileType { get; set; }

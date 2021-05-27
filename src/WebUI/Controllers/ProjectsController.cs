@@ -5,6 +5,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using BLL.EtitiesDTO;
+using BLL.EtitiesDTO.Issue;
+using BLL.EtitiesDTO.Project;
 using BLL.Interfaces;
 using DAL.Entities;
 using DAL.Interfaces;
@@ -29,12 +31,12 @@ namespace WebUI.Controllers
         // GET: /projects
         //[Authorize]
         [HttpGet]
-        public IActionResult GetProjects()
+        public async Task<IActionResult> GetProjects()
         {
             try
             {
                 var claims = User.Claims;
-                var projectsDto = _projectService.GetAllProjects();
+                var projectsDto = await _projectService.GetAllProjects();
 
                 return Ok(projectsDto);
             }
@@ -47,11 +49,11 @@ namespace WebUI.Controllers
 
         // GET: /projects/5
         [HttpGet("{id}")]
-        public IActionResult GetProjectById(int id)
+        public async Task<IActionResult> GetProjectById(int id)
         {
             try
             {
-                var projectResult = _projectService.GetProjectById(id);
+                var projectResult = await _projectService.GetProjectById(id);
                 return Ok(projectResult);
             }
             catch (Exception ex)
