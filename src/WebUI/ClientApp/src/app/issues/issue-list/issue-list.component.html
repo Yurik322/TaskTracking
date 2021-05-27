@@ -1,5 +1,4 @@
 <h1>Issues <span class="label-small"> {{ sharedService.getCurrentProject()?.name || 'All' }} </span></h1>
-<!--<h1>Issues <span class="label-small">All</span></h1>-->
 
 <div class="header-actions d-flex">
   <div class="col-md-3">
@@ -41,7 +40,7 @@
     </ul>
   </div>
   <div class="col-md-2 text-right">
-    <a [routerLink]="['/issues', 'create']" class="btn btn-primary">New Issue</a>
+    <a [routerLink]="['/issues/create']" class="btn btn-primary">New Issue</a>
   </div>
 </div>
 

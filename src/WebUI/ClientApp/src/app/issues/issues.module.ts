@@ -5,7 +5,7 @@ import { IssueFilterByPriorityPipe } from './shared/issue-filter-by-priority.pip
 import { IssueFilterByStatusPipe } from './shared/issue-filter-by-status.pipe';
 import { IssueFilterByTypePipe } from './shared/issue-filter-by-type.pipe';
 import { IssueListComponent } from './issue-list/issue-list.component';
-// import { IssueEditComponent } from './issue-edit/issue-edit.component';
+import { IssueEditComponent } from './issue-edit/issue-edit.component';
 import { IssueCreateComponent } from './issue-create/issue-create.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
@@ -15,7 +15,7 @@ import { IssueService } from './shared/issue.service';
 @NgModule({
   declarations: [
     IssueListComponent,
-    // IssueEditComponent,
+    IssueEditComponent,
     IssueCreateComponent,
     IssueFilterPipe,
     IssueFilterByPriorityPipe,
@@ -30,15 +30,16 @@ import { IssueService } from './shared/issue.service';
         path: 'list',
         component: IssueListComponent
       },
-      // {
-      //   path: 'projects/:id/issues',
-      //   pathMatch: 'full',
-      //   component: IssueListComponent,
-      // },
-      // {
-      //   path: ':id/edit',
-      //   // component: IssueEditComponent,
-      // },
+      // TODO
+      {
+        path: ':id',
+        pathMatch: 'full',
+        component: IssueListComponent,
+      },
+      {
+        path: ':id/edit',
+        component: IssueEditComponent,
+      },
       {
         path: 'create',
         component: IssueCreateComponent

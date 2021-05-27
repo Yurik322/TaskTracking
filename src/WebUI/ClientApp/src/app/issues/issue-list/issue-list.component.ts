@@ -23,18 +23,25 @@ export class IssueListComponent implements OnInit {
 
   ngOnInit() {
 
-    // this.activatedRoute.params.subscribe((params: Params) => {
-    //   const projectId = params['id'];
-    //   if (projectId > -1) {
-    //
-    //     this.issueService.getIssuesByProject(projectId)
-    //       .subscribe(issues => this.issues = issues, error => this.errorMessage = <any>error);
-    //   } else {
-    //     // this.issueService.getIssues()
-    //     this.getAllIssues();
-    //   }
-    // });
-    this.getAllIssues();
+    this.activatedRoute.params.subscribe((params: Params) => {
+      const projectId = params['id'];
+      if (projectId > -1) {
+
+        // this.issueService.getIssuesByProject(projectId)
+        const issuesByProjectUrl = `api/projects/${projectId}/issues`;
+        console.log(issuesByProjectUrl);
+        this.issueService.getData(issuesByProjectUrl)
+        // getIssuesByProject(projectId: number): Observable<Issue[]> {
+        //   return this.http.get<Issue[]>(this.baseUrl + 'api/projects/' + projectId + '/issues');
+        // }
+
+          .subscribe(issues => this.issues = <Issue[]>issues, error => this.errorMessage = <any>error);
+      } else {
+        // this.issueService.getIssues()
+        this.getAllIssues();
+      }
+    });
+    // this.getAllIssues();
   }
 
   public getAllIssues = () => {
