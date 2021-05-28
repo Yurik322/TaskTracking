@@ -31,7 +31,8 @@ export class IssueEditComponent implements OnInit {
 
   onSubmit(form: NgForm) {
     const apiUrl = `api/issues/${this.issue.issueId}`;
-    this.issueService.updateIssue(apiUrl, this.issue).subscribe(result => {
+    this.issueService.updateIssue(apiUrl, this.issue)
+      .subscribe(result => {
       this.router.navigate(['/issues/list']);
     }, error => this.errorMessage = error);
   }

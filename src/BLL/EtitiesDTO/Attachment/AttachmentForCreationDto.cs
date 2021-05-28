@@ -9,5 +9,6 @@ namespace BLL.EtitiesDTO.Attachment
         public string Path { get; set; }
         public FileType FileType { get; set; }
         public DateTime CreatedAt { get; set; }
+        public int IssueId { get; set; }
     }
 }

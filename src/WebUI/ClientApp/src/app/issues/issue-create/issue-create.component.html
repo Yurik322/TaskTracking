@@ -11,6 +11,8 @@
           <div class="col-md-6 ">
             <label>Project</label>
             <select name="project" class="form-control" data-width="100%" required ngModel
+                    [(ngModel)]="issue.issueId"
+                    (ngModelChange)="issue.issueId=$event"
                     [(ngModel)]="issue.projectId"
                     (ngModelChange)="issue.projectId=$event">
               <!--                    TODO-->

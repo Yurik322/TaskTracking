@@ -34,44 +34,36 @@ export class IssueCreateComponent implements OnInit {
       projectId: 0
     };
 
-    // this.projects = this.sharedService.projects;
-    // TODO
-    // this.projectService.getProjects()
     this.getAllProjects();
-    //   .subscribe(result => {
-    //   this.projects = result;
-    // }, error => console.error(error));
   }
 
   public getAllProjects = () => {
     const apiAddress = 'api/projects';
     this.projectService.getProjects(apiAddress)
-      .subscribe(res => {
-          this.projects = res as Project[];
+      .subscribe(result => {
+          this.projects = result as Project[];
         },
         (error) => {
           this.errorMessage = <any>error;
         });
   }
 
+
+
   onSubmit(form: NgForm) {
     // Any file to upload?
-    // TODO
-    // this.issueService.createIssue(this.issue)
     const apiUrl = 'api/issues';
 
-    console.log(this.issue);
-
     this.issueService.createIssue(apiUrl, this.issue)
-      // .subscribe(data => {
-      //   this.router.navigate(['/issues/list']);
 
       .subscribe(result => {
-      //   if (result.issueId > -1) {
-      //     this.uploadFile(result.issueId);
-      //   } else {
-      //     this.errorMessage = 'Invalid Request. Check your values!';
-      //   }
+          console.log('result =', this.issue);
+        if (this.issue.issueId > -1) {
+          // TODO
+          this.uploadFile(this.issue.issueId);
+        } else {
+          this.errorMessage = 'Invalid Request. Check your values!';
+        }
       },
       error => {
         this.errorMessage = error;
@@ -80,23 +72,48 @@ export class IssueCreateComponent implements OnInit {
     );
   }
 
-  // uploadFile(issueId: any) {
-  //   if (this.fileToUpload != null) {
-  //     this.issueService.uploadFile(issueId, this.fileToUpload).subscribe(
-  //       data => {
-  //         console.log('File uploaded!');
-  //       },
-  //       error => {
-  //         console.error('File not uploaded!');
-  //       },
-  //       () => {
-  //         this.router.navigate(['/issues/list']);
-  //       }
-  //     );
-  //   } else {
-  //     this.router.navigate(['/issues/list']);
-  //   }
-  // }
+  uploadFile(issueId: any) {
+    if (this.fileToUpload != null) {
+      // 1
+      this.uploadMiddleFile(issueId, this.fileToUpload);
+
+      // 2
+      // uploadFile(issueId: any, file: any): Observable<any> {
+      //   let input = new FormData();
+      //   input.append("file", file);
+      //
+      //   return this.http.put(this.baseUrl + 'api/attachments/Upload/' + issueId, input);
+      // }
+
+    } else {
+      this.router.navigate(['/issues/list']);
+    }
+  }
+
+
+  public uploadMiddleFile(issueId: any, file: any) {
+    let input = new FormData();
+    input.append('file', file);
+
+    // TODO concat INTPUT
+    const apiUrl = `api/attachments/Upload/${this.issue.issueId}`;
+
+
+    this.issueService.uploadFileFromService(apiUrl, input)
+      .subscribe(
+        data => {
+          console.log('File uploaded!');
+        },
+        error => {
+          console.error('File not uploaded!');
+        },
+        () => {
+          this.router.navigate(['/issues/list']);
+        }
+      );
+  }
+
+
 
   fileChange(event) {
     const fileList: FileList = event.target.files;

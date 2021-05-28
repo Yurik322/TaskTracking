@@ -1,7 +1,5 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { Issue } from './issue';
 import { EnvironmentUrlService } from '../../shared/services/environment-url.service';
 
 @Injectable({
@@ -32,15 +30,16 @@ export class IssueService {
   }
 
   // TODO
-  // uploadFile(issueId: any, fileToUpload: any) {
-  //
-  // }
   // uploadFile(issueId: any, file: any): Observable<any> {
   //   let input = new FormData();
   //   input.append("file", file);
   //
   //   return this.http.put(this.baseUrl + 'api/attachments/Upload/' + issueId, input);
   // }
+  public uploadFileFromService = (route: string, body) => {
+    return this.http.put(this.createCompleteRoute(route, this.envUrl.urlAddress), body, this.generateHeaders());
+  }
+
   private createCompleteRoute = (route: string, envAddress: string) => {
     return `${envAddress}/${route}`;
   }

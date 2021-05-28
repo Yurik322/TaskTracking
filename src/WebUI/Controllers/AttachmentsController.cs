@@ -60,7 +60,8 @@ namespace WebUI.Controllers
         }
 
         //TODO
-        [HttpGet("{id}", Name = "AttachmentById")]
+        // GET: /attachments/5
+        [HttpGet("{id}")]
         public IActionResult GetAttachmentById(int id)
         {
             try
@@ -83,108 +84,6 @@ namespace WebUI.Controllers
             {
                 _logger.LogError($"Something went wrong inside GetAttachmentById action: {ex.Message}");
                 return StatusCode(500, "Internal server error" + ex);
-            }
-        }
-
-        //TODO
-        // GET: /attachments/5/employee
-        [HttpGet("{id}/employee")]
-        public IActionResult GetAttachmentWithDetails(int id)
-        {
-            try
-            {
-                var attachment = _repository.Attachment.GetAttachmentWithDetails(id);
-                if (attachment == null)
-                {
-                    _logger.LogError($"Attachment with id: {id}, hasn't been found in db.");
-                    return NotFound();
-                }
-                else
-                {
-                    _logger.LogInfo($"Returned attachment with details for id: {id}");
-
-                    var attachmentResult = _mapper.Map<AttachmentDto>(attachment);
-                    return Ok(attachmentResult);
-                }
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError($"Something went wrong inside GetAttachmentWithDetails action: {ex.Message}");
-                return StatusCode(500, "Internal server error");
-            }
-        }
-
-        // POST: /attachments/create
-        [HttpPost]
-        public async Task<IActionResult> CreateAttachment([FromBody] AttachmentForCreationDto attachment)
-        {
-            try
-            {
-                if (attachment == null)
-                {
-                    _logger.LogError("Attachment object sent from client is null.");
-                    return BadRequest("Attachment object is null");
-                }
-
-                if (!ModelState.IsValid)
-                {
-                    _logger.LogError("Invalid attachment object sent from client.");
-                    return BadRequest("Invalid model object");
-                }
-
-                var attachmentEntity = _mapper.Map<Attachment>(attachment);
-
-                _repository.Attachment.CreateAttachment(attachmentEntity);
-                await _repository.SaveAsync();
-
-                var createdAttachment = _mapper.Map<AttachmentDto>(attachmentEntity);
-
-                return Ok();
-                //return CreatedAtRoute("AttachmentById", new { id = createdAttachment.Id }, createdAttachment);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError($"Something went wrong inside CreateAttachment action: {ex.Message}");
-                return StatusCode(500, "Internal server error" + ex);
-            }
-        }
-
-        // PUT: /attachments/5/edit
-        [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateAttachment(int id, [FromBody] AttachmentForCreationDto attachment)
-        {
-            try
-            {
-                if (attachment == null)
-                {
-                    _logger.LogError("Attachment object sent from client is null.");
-                    return BadRequest("Attachment object is null");
-                }
-
-                if (!ModelState.IsValid)
-                {
-                    _logger.LogError("Invalid attachment object sent from client.");
-                    return BadRequest("Invalid model object");
-                }
-
-                var attachmentEntity = _repository.Attachment.GetAttachmentById(id);
-                if (attachmentEntity == null)
-                {
-                    _logger.LogError($"Attachment with id: {id}, hasn't been found in db.");
-                    return NotFound();
-                }
-
-                _mapper.Map(attachment, attachmentEntity);
-
-                _repository.Attachment.UpdateAttachment(attachmentEntity);
-                await _repository.SaveAsync();
-
-                return NoContent();
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError($"Something went wrong inside UpdateAttachment action: {ex.Message}");
-                return StatusCode(500, "Internal server error");
             }
         }
 
@@ -245,7 +144,7 @@ namespace WebUI.Controllers
                 CreatedAt = DateTime.Now,
                 Path = fileName,
                 FileType = GetFileType(file),
-                Issue = issue
+                IssueId = issueId
             };
             _repository.Attachment.CreateAttachment(attachment);
             await _repository.SaveAsync();

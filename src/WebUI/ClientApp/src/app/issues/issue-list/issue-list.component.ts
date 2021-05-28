@@ -3,7 +3,6 @@ import { IssueService } from '../shared/issue.service';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Issue } from '../shared/issue';
 import { SharedService } from '../../shared/services/shared.service';
-import { Project } from '../../projects/shared/project';
 
 @Component({
   selector: 'app-issue-list',
