@@ -46,6 +46,8 @@ namespace WebUI
             services.ConfigureIssueService();
             services.ConfigureProjectService();
             services.ConfigureAttachmentService();
+            //TODO
+            services.ConfigureReportService();
 
             services.AddAutoMapper(typeof(Startup));
 

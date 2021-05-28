@@ -159,7 +159,6 @@ namespace WebUI.Controllers
             return await _projectService.GetIssuesByProject(id);
         }
 
-
         [HttpGet("Privacy")]
         [Authorize(Roles = "Administrator")]
         public IActionResult Privacy()

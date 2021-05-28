@@ -4,6 +4,7 @@ using BLL.EtitiesDTO.Attachment;
 using BLL.EtitiesDTO.Company;
 using BLL.EtitiesDTO.Issue;
 using BLL.EtitiesDTO.Project;
+using BLL.EtitiesDTO.Report;
 using DAL.Entities;
 
 namespace BLL
@@ -35,6 +36,9 @@ namespace BLL
 
             CreateMap<Project, ProjectDto>();
             CreateMap<ProjectForCreationDto, Project>();
+
+            CreateMap<Report, ReportDto>();
+            CreateMap<ReportForCreationDto, Report>();
 
 
 

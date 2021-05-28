@@ -115,7 +115,7 @@ namespace WebUI.Controllers
         // TODO
         // POST: /attachments/upload/{issueId}
         [HttpPut("[action]/{issueId}")]
-        public async Task<IActionResult> Upload(int issueId, IFormFile file)
+        public async Task<IActionResult> Upload(int issueId, IFormFile file = null)
         {
             // Get issue to map the attachment
             var issue = _repository.Issue.GetIssueById(issueId);

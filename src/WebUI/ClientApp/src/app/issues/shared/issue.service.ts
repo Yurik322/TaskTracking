@@ -36,9 +36,13 @@ export class IssueService {
   //
   //   return this.http.put(this.baseUrl + 'api/attachments/Upload/' + issueId, input);
   // }
+
   public uploadFileFromService = (route: string, body) => {
-    return this.http.put(this.createCompleteRoute(route, this.envUrl.urlAddress), body, this.generateHeaders());
+    return this.http.put(this.createCompleteRoute(route, this.envUrl.urlAddress, ), body, this.generateHeaders());
   }
+  // public uploadFileFromService = (route: string, body) => {
+  //   return this.http.put(this.createCompleteRoute(route, this.envUrl.urlAddress), body, this.generateHeaders());
+  // }
 
   private createCompleteRoute = (route: string, envAddress: string) => {
     return `${envAddress}/${route}`;
