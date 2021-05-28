@@ -25,32 +25,28 @@ namespace WebUI.Controllers
         private readonly IWebHostEnvironment _env;
         private readonly IAttachmentService _attachmentService;
         private readonly ILoggerManager _logger;
-        private readonly IMapper _mapper;
-
         //TODO
         private readonly IUnitOfWork _repository;
 
-
-        public AttachmentsController(IAttachmentService attachmentService, ILoggerManager logger, IMapper mapper, IUnitOfWork repository, IWebHostEnvironment env)
+        public AttachmentsController(IAttachmentService attachmentService, ILoggerManager logger, IUnitOfWork repository, IWebHostEnvironment env)
         {
             _attachmentService = attachmentService;
             _logger = logger;
-            _mapper = mapper;
             _repository = repository;
             _env = env;
         }
 
-        // GET: /attachments/companies
+        // GET: /attachments
         //[Authorize]
         [HttpGet]
-        public IActionResult GetAttachments()
+        public async Task<IActionResult> GetAttachments()
         {
             try
             {
                 var claims = User.Claims;
-                var companiesDto = _attachmentService.GetAllAttachments();
+                var attachmentsDto = await _attachmentService.GetAllAttachments();
 
-                return Ok(companiesDto);
+                return Ok(attachmentsDto);
             }
             catch (Exception ex)
             {
@@ -59,30 +55,83 @@ namespace WebUI.Controllers
             }
         }
 
-        //TODO
         // GET: /attachments/5
         [HttpGet("{id}")]
-        public IActionResult GetAttachmentById(int id)
+        public async Task<IActionResult> GetAttachmentById(int id)
         {
             try
             {
-                var attachment = _repository.Attachment.GetAttachmentById(id);
-                if (attachment == null)
-                {
-                    _logger.LogError($"Attachment with id: {id}, hasn't been found in db.");
-                    return NotFound();
-                }
-                else
-                {
-                    _logger.LogInfo($"Returned attachment with id: {id}");
-
-                    var attachmentResult = _mapper.Map<AttachmentDto>(attachment);
-                    return Ok(attachmentResult);
-                }
+                var attachmentResult = await _attachmentService.GetAttachmentById(id);
+                return Ok(attachmentResult);
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Something went wrong inside GetAttachmentById action: {ex.Message}");
+                _logger.LogError($"Something went wrong inside GetAttachmentsById action: {ex.Message}");
+                return StatusCode(500, "Internal server error" + ex);
+            }
+        }
+
+        // POST: /attachments/create
+        [HttpPost]
+        public async Task<IActionResult> CreateAttachment([FromBody] AttachmentForCreationDto attachment)
+        {
+            try
+            {
+                if (attachment == null)
+                {
+                    _logger.LogError("Attachments object sent from client is null.");
+                    return BadRequest("Attachments object is null");
+                }
+
+                if (!ModelState.IsValid)
+                {
+                    _logger.LogError("Invalid attachment object sent from client.");
+                    return BadRequest("Invalid model object");
+                }
+
+                await _attachmentService.CreateAttachment(attachment);
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong inside CreateAttachments action: {ex.Message}");
+                return StatusCode(500, "Internal server error" + ex);
+            }
+        }
+
+        // PUT: /attachments/5
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateAttachment(int id, [FromBody] AttachmentForCreationDto attachment)
+        {
+            try
+            {
+                if (attachment == null)
+                {
+                    _logger.LogError("Attachments object sent from client is null.");
+                    return BadRequest("Attachments object is null");
+                }
+
+                if (!ModelState.IsValid)
+                {
+                    _logger.LogError("Invalid attachment object sent from client.");
+                    return BadRequest("Invalid model object");
+                }
+
+                var attachmentEntity = _attachmentService.GetAttachmentById(id);
+                if (attachmentEntity == null)
+                {
+                    _logger.LogError($"Attachments with id: {id}, hasn't been found in db.");
+                    return NotFound();
+                }
+
+                await _attachmentService.UpdateAttachment(id, attachment);
+
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong inside UpdateAttachments action: {ex.Message}");
                 return StatusCode(500, "Internal server error" + ex);
             }
         }
@@ -93,22 +142,21 @@ namespace WebUI.Controllers
         {
             try
             {
-                var attachment = _repository.Attachment.GetAttachmentById(id);
+                var attachment = _attachmentService.GetAttachmentById(id);
                 if (attachment == null)
                 {
                     _logger.LogError($"Attachment with id: {id}, hasn't been found in db.");
                     return NotFound();
                 }
 
-                _repository.Attachment.DeleteAttachment(attachment);
-                await _repository.SaveAsync();
+                await _attachmentService.DeleteAttachment(id);
 
                 return NoContent();
             }
             catch (Exception ex)
             {
                 _logger.LogError($"Something went wrong inside DeleteAttachment action: {ex.Message}");
-                return StatusCode(500, "Internal server error");
+                return StatusCode(500, "Internal server error" + ex);
             }
         }
 

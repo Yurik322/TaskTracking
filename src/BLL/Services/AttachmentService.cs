@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using AutoMapper;
 using BLL.EtitiesDTO;
 using BLL.EtitiesDTO.Attachment;
@@ -21,18 +22,44 @@ namespace BLL.Services
             _mapper = mapper;
         }
 
-        public IEnumerable<AttachmentDto> GetAllAttachments()
+        public async Task<IEnumerable<AttachmentDto>> GetAllAttachments()
         {
-            var attachments = _mapper.Map<IEnumerable<Attachment>, IEnumerable<AttachmentDto>>(_repository.Attachment.GetAllAttachments(trackChanges: false));
+            var attachments =
+                _mapper.Map<IEnumerable<Attachment>, IEnumerable<AttachmentDto>>(await _repository.Attachment.GetAllAttachments(trackChanges: false));
 
             return _mapper.Map<IEnumerable<AttachmentDto>>(attachments);
         }
 
-        public void AddAsync(AttachmentDto model)
+        public async Task<AttachmentDto> GetAttachmentById(int id)
         {
-            var newModel = _mapper.Map<AttachmentDto, Attachment>(model);
-            _repository.Attachment.Create(newModel);
-            _repository.SaveAsync();
+            var project = await _repository.Attachment.GetAttachmentById(id);
+
+            return _mapper.Map<AttachmentDto>(project);
+        }
+
+        public async Task CreateAttachment(AttachmentForCreationDto project)
+        {
+            var projectEntity = _mapper.Map<Attachment>(project);
+
+            _repository.Attachment.CreateAttachment(projectEntity);
+            await _repository.SaveAsync();
+        }
+
+        public async Task UpdateAttachment(int id, AttachmentForCreationDto project)
+        {
+            var projectEntity = await _repository.Attachment.GetAttachmentById(id);
+
+            _mapper.Map(project, projectEntity);
+            _repository.Attachment.UpdateAttachment(projectEntity);
+            await _repository.SaveAsync();
+        }
+
+        public async Task DeleteAttachment(int id)
+        {
+            var projectEntity = await _repository.Attachment.GetAttachmentById(id);
+
+            _repository.Attachment.DeleteAttachment(projectEntity);
+            await _repository.SaveAsync();
         }
     }
 }

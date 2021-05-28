@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using DAL.EF;
 using DAL.Entities;
 using DAL.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace DAL.Repositories
 {
@@ -14,15 +16,15 @@ namespace DAL.Repositories
         {
         }
 
-        public IEnumerable<Attachment> GetAllAttachments(bool trackChanges) =>
-            FindAll(trackChanges)
+        public async Task<IEnumerable<Attachment>> GetAllAttachments(bool trackChanges) =>
+            await FindAll(trackChanges)
                 .OrderBy(c => c.Name)
-                .ToList();
+                .ToListAsync();
 
-        public Attachment GetAttachmentById(int attachmentId)
+        public async Task<Attachment> GetAttachmentById(int attachmentId)
         {
-            return FindByCondition(x => x.AttachmentId.Equals(attachmentId))
-                .FirstOrDefault();
+            return await FindByCondition(x => x.AttachmentId.Equals(attachmentId))
+                .FirstOrDefaultAsync();
         }
 
         public Attachment GetAttachmentWithDetails(int attachmentId)
@@ -45,14 +47,10 @@ namespace DAL.Repositories
             Delete(attachment);
         }
 
-        public IEnumerable<Attachment> WhereIsAttachment(int attachmentId)
+        public async Task<IEnumerable<Attachment>> WhereIsAttachment(int attachmentId)
         {
-            return FindByCondition(i => i.Issue.IssueId == attachmentId)
-                .OrderByDescending(a => a.AttachmentId).ToList();
-
-            //return _context.Attachments.Where(i => i.Issue.IssueId == id)
-            //    .OrderByDescending(a => a.AttachmentId)
-            //    .ToList();
+            return await FindByCondition(i => i.Issue.IssueId == attachmentId)
+                .OrderByDescending(a => a.AttachmentId).ToListAsync();
         }
     }
 }

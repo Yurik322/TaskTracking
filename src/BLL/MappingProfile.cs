@@ -2,6 +2,7 @@
 using BLL.EtitiesDTO;
 using BLL.EtitiesDTO.Attachment;
 using BLL.EtitiesDTO.Company;
+using BLL.EtitiesDTO.Employee;
 using BLL.EtitiesDTO.Issue;
 using BLL.EtitiesDTO.Project;
 using BLL.EtitiesDTO.Report;
@@ -40,7 +41,8 @@ namespace BLL
             CreateMap<Report, ReportDto>();
             CreateMap<ReportForCreationDto, Report>();
 
-
+            CreateMap<Employee, EmployeeDto>();
+            CreateMap<EmployeeForCreationDto, Employee>();
 
             CreateMap<UserForRegistrationDto, User>()
                 .ForMember(u => u.UserName, opt => opt.MapFrom(x => x.Email));

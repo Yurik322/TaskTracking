@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using DAL.EF;
 using DAL.Entities;
 using DAL.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace DAL.Repositories
 {
@@ -14,21 +16,20 @@ namespace DAL.Repositories
         {
         }
 
-        public IEnumerable<Employee> GetAllEmployees(bool trackChanges) =>
-            FindAll(trackChanges)
+        public async Task<IEnumerable<Employee>> GetAllEmployees(bool trackChanges) =>
+            await FindAll(trackChanges)
                 .OrderBy(c => c.Name)
-                .ToList();
+                .ToListAsync();
 
-        public Employee GetEmployeeById(int employeeId)
+        public async Task<Employee> GetEmployeeById(int employeeId)
         {
-            return FindByCondition(x => x.EmployeeId.Equals(employeeId))
-                .FirstOrDefault();
+            return await FindByCondition(x => x.EmployeeId.Equals(employeeId))
+                .FirstOrDefaultAsync();
         }
 
         public Employee GetEmployeeWithDetails(int employeeId)
         {
-            return FindByCondition(owner => owner.EmployeeId.Equals(employeeId))
-                .FirstOrDefault();
+            return FindByCondition(owner => owner.EmployeeId.Equals(employeeId)).FirstOrDefault();
         }
 
         public void CreateEmployee(Employee employee)
@@ -36,7 +37,6 @@ namespace DAL.Repositories
             Create(employee);
         }
 
-        //TODO
         public void UpdateEmployee(Employee employee)
         {
             Update(employee);
@@ -44,7 +44,7 @@ namespace DAL.Repositories
 
         public void DeleteEmployee(Employee employee)
         {
-            throw new NotImplementedException();
+            Delete(employee);
         }
     }
 }

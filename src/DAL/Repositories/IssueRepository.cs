@@ -16,15 +16,15 @@ namespace DAL.Repositories
         {
         }
 
-        public IEnumerable<Issue> GetAllIssues(bool trackChanges) =>
-            FindAll(trackChanges)
+        public async Task<IEnumerable<Issue>> GetAllIssues(bool trackChanges) =>
+            await FindAll(trackChanges)
                 .OrderBy(c=>c.Title)
-                .ToList();
+                .ToListAsync();
 
-        public Issue GetIssueById(int issueId)
+        public async Task<Issue> GetIssueById(int issueId)
         {
-            return FindByCondition(x => x.IssueId.Equals(issueId))
-                .FirstOrDefault();
+            return await FindByCondition(x => x.IssueId.Equals(issueId))
+                .FirstOrDefaultAsync();
         }
 
         public Issue GetIssueWithDetails(int issueId)

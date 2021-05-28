@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using BLL.EtitiesDTO;
+using BLL.EtitiesDTO.Attachment;
 using BLL.EtitiesDTO.Issue;
 using BLL.Interfaces;
 using DAL.Entities;
@@ -20,29 +21,22 @@ namespace WebUI.Controllers
     {
         private readonly IIssueService _issueService;
         private readonly ILoggerManager _logger;
-        private readonly IMapper _mapper;
 
-        //TODO
-        private readonly IUnitOfWork _repository;
-
-
-        public IssuesController(IIssueService issueService, ILoggerManager logger, IMapper mapper, IUnitOfWork repository)
+        public IssuesController(IIssueService issueService, ILoggerManager logger)
         {
             _issueService = issueService;
             _logger = logger;
-            _mapper = mapper;
-            _repository = repository;
         }
 
         // GET: /issues
         //[Authorize]
         [HttpGet]
-        public IActionResult GetIssues()
+        public async Task<IActionResult> GetIssues()
         {
             try
             {
                 var claims = User.Claims;
-                var issuesDto = _issueService.GetAllIssues();
+                var issuesDto = await _issueService.GetAllIssues();
 
                 return Ok(issuesDto);
             }
@@ -55,32 +49,21 @@ namespace WebUI.Controllers
 
         // GET: /issues/5
         [HttpGet("{id}")]
-        public IActionResult GetIssueById(int id)
+        public async Task<IActionResult> GetIssueById(int id)
         {
             try
             {
-                var issue = _repository.Issue.GetIssueById(id);
-                if (issue == null)
-                {
-                    _logger.LogError($"Issue with id: {id}, hasn't been found in db.");
-                    return NotFound();
-                }
-                else
-                {
-                    _logger.LogInfo($"Returned issue with id: {id}");
-
-                    var issueResult = _mapper.Map<IssueDto>(issue);
-                    return Ok(issueResult);
-                }
+                var issueResult = await _issueService.GetIssueById(id);
+                return Ok(issueResult);
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Something went wrong inside GetIssueById action: {ex.Message}");
+                _logger.LogError($"Something went wrong inside GetIssuesById action: {ex.Message}");
                 return StatusCode(500, "Internal server error" + ex);
             }
         }
 
-        // POST: /issue/create
+        // POST: /issues/create
         [HttpPost]
         public async Task<IActionResult> CreateIssue([FromBody] IssueForCreationDto issue)
         {
@@ -88,8 +71,8 @@ namespace WebUI.Controllers
             {
                 if (issue == null)
                 {
-                    _logger.LogError("Issue object sent from client is null.");
-                    return BadRequest("Issue object is null");
+                    _logger.LogError("Issues object sent from client is null.");
+                    return BadRequest("Issues object is null");
                 }
 
                 if (!ModelState.IsValid)
@@ -98,18 +81,13 @@ namespace WebUI.Controllers
                     return BadRequest("Invalid model object");
                 }
 
-                var issueEntity = _mapper.Map<Issue>(issue);
-
-                _repository.Issue.CreateIssue(issueEntity);
-                await _repository.SaveAsync();
-
-                var createdIssue = _mapper.Map<IssueDto>(issueEntity);
+                await _issueService.CreateIssue(issue);
 
                 return Ok();
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Something went wrong inside CreateIssue action: {ex.Message}");
+                _logger.LogError($"Something went wrong inside CreateIssues action: {ex.Message}");
                 return StatusCode(500, "Internal server error" + ex);
             }
         }
@@ -122,8 +100,8 @@ namespace WebUI.Controllers
             {
                 if (issue == null)
                 {
-                    _logger.LogError("Issue object sent from client is null.");
-                    return BadRequest("Issue object is null");
+                    _logger.LogError("Issues object sent from client is null.");
+                    return BadRequest("Issues object is null");
                 }
 
                 if (!ModelState.IsValid)
@@ -132,58 +110,53 @@ namespace WebUI.Controllers
                     return BadRequest("Invalid model object");
                 }
 
-                var issueEntity = _repository.Issue.GetIssueById(id);
+                var issueEntity = _issueService.GetIssueById(id);
                 if (issueEntity == null)
                 {
-                    _logger.LogError($"Issue with id: {id}, hasn't been found in db.");
+                    _logger.LogError($"Issues with id: {id}, hasn't been found in db.");
                     return NotFound();
                 }
 
-                _mapper.Map(issue, issueEntity);
-
-                _repository.Issue.UpdateIssue(issueEntity);
-                await _repository.SaveAsync();
+                await _issueService.UpdateIssue(id, issue);
 
                 return NoContent();
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Something went wrong inside UpdateIssue action: {ex.Message}");
+                _logger.LogError($"Something went wrong inside UpdateIssues action: {ex.Message}");
                 return StatusCode(500, "Internal server error" + ex);
             }
         }
 
-        // DELETE: /issue/5
+        // DELETE: /issues/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteIssue(int id)
         {
             try
             {
-                var issue = _repository.Issue.GetIssueById(id);
+                var issue = _issueService.GetIssueById(id);
                 if (issue == null)
                 {
                     _logger.LogError($"Issue with id: {id}, hasn't been found in db.");
                     return NotFound();
                 }
 
-                _repository.Issue.DeleteIssue(issue);
-                await _repository.SaveAsync();
+                await _issueService.DeleteIssue(id);
 
                 return NoContent();
             }
             catch (Exception ex)
             {
                 _logger.LogError($"Something went wrong inside DeleteIssue action: {ex.Message}");
-                return StatusCode(500, "Internal server error");
+                return StatusCode(500, "Internal server error" + ex);
             }
         }
 
-        // TODO
         // GET: /issues/5/attachments
         [HttpGet("{id}/[action]")]
-        public IEnumerable<Attachment> Attachments(int id)
+        public async Task<IEnumerable<AttachmentDto>> Attachments(int id)
         {
-            return _repository.Attachment.WhereIsAttachment(id);
+            return await _issueService.GetAttachmentsByIssue(id);
         }
 
         [HttpGet("Privacy")]

@@ -44,5 +44,7 @@ namespace WebUI.Extensions
             services.AddScoped<IAttachmentService, AttachmentService>();
         public static void ConfigureReportService(this IServiceCollection services) =>
             services.AddScoped<IReportService, ReportService>();
+        public static void ConfigureEmployeeService(this IServiceCollection services) =>
+            services.AddScoped<IEmployeeService, EmployeeService>();
     }
 }
