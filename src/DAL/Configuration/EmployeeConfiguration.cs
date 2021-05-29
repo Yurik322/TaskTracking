@@ -16,26 +16,20 @@ namespace DAL.Configuration
                 new Employee
                 {
                     EmployeeId = 1,
-                    Name = "Sam Raiden",
                     Age = 26,
                     Position = "Software developer",
-                    CompanyId = 1
                 },
                 new Employee
                 {
                     EmployeeId = 2,
-                    Name = "Jana McLeaf",
                     Age = 30,
                     Position = "Software developer",
-                    CompanyId = 1
                 },
                 new Employee
                 {
                     EmployeeId = 3,
-                    Name = "Kane Miller",
                     Age = 35,
                     Position = "Administrator",
-                    CompanyId = 2
                 }
             );
         }

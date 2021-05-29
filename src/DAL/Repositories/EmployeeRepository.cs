@@ -18,7 +18,7 @@ namespace DAL.Repositories
 
         public async Task<IEnumerable<Employee>> GetAllEmployees(bool trackChanges) =>
             await FindAll(trackChanges)
-                .OrderBy(c => c.Name)
+                .OrderBy(c => c.Position)
                 .ToListAsync();
 
         public async Task<Employee> GetEmployeeById(int employeeId)
