@@ -76,7 +76,6 @@ export class IssueCreateComponent implements OnInit {
     if (this.fileToUpload != null) {
       // 1
       this.uploadMiddleFile(issueId, this.fileToUpload);
-
       // 2
       // uploadFile(issueId: any, file: any): Observable<any> {
       //   let input = new FormData();
@@ -84,20 +83,17 @@ export class IssueCreateComponent implements OnInit {
       //
       //   return this.http.put(this.baseUrl + 'api/attachments/Upload/' + issueId, input);
       // }
-
     } else {
       this.router.navigate(['/issues/list']);
     }
   }
 
-
   public uploadMiddleFile(issueId: any, file: any) {
-    let input = new FormData();
+    const input = new FormData();
     input.append('file', file);
 
     // TODO concat INTPUT
     const apiUrl = `api/attachments/Upload/${this.issue.issueId}`;
-
 
     this.issueService.uploadFileFromService(apiUrl, input)
       .subscribe(
