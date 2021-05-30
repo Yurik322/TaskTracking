@@ -34,8 +34,6 @@ namespace WebUI.Extensions
             services.AddScoped<ILoggerManager, LoggerManager>();
         public static void ConfigureRepositoryManager(this IServiceCollection services) =>
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-        public static void ConfigureCompanyService(this IServiceCollection services) =>
-            services.AddScoped<ICompanyService, CompanyService>();
         public static void ConfigureIssueService(this IServiceCollection services) =>
             services.AddScoped<IIssueService, IssueService>();
         public static void ConfigureProjectService(this IServiceCollection services) =>

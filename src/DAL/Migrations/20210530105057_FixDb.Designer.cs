@@ -4,14 +4,16 @@ using DAL.EF;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DAL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210530105057_FixDb")]
+    partial class FixDb
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -73,6 +75,26 @@ namespace DAL.Migrations
                         .HasFilter("[UserId] IS NOT NULL");
 
                     b.ToTable("Employees");
+
+                    b.HasData(
+                        new
+                        {
+                            EmployeeId = 1,
+                            Age = 26,
+                            Position = "Software developer"
+                        },
+                        new
+                        {
+                            EmployeeId = 2,
+                            Age = 30,
+                            Position = "Software developer"
+                        },
+                        new
+                        {
+                            EmployeeId = 3,
+                            Age = 35,
+                            Position = "Administrator"
+                        });
                 });
 
             modelBuilder.Entity("DAL.Entities.Issue", b =>
@@ -265,6 +287,22 @@ namespace DAL.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "a72ef983-c21e-4316-ad04-26110859bb50",
+                            ConcurrencyStamp = "1c5de7b9-ed45-4519-a4bc-207618eef4c2",
+                            Name = "Viewer",
+                            NormalizedName = "VIEWER"
+                        },
+                        new
+                        {
+                            Id = "cff670c8-5523-4f8c-bee2-8e5fd1a73f22",
+                            ConcurrencyStamp = "25199674-53ac-47ed-b1ed-7b3122078f2a",
+                            Name = "Administrator",
+                            NormalizedName = "ADMINISTRATOR"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

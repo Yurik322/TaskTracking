@@ -158,16 +158,5 @@ namespace WebUI.Controllers
         {
             return await _projectService.GetIssuesByProject(id);
         }
-
-        [HttpGet("Privacy")]
-        [Authorize(Roles = "Administrator")]
-        public IActionResult Privacy()
-        {
-            var claims = User.Claims
-                .Select(c => new { c.Type, c.Value })
-                .ToList();
-
-            return Ok(claims);
-        }
     }
 }

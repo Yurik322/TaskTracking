@@ -42,7 +42,6 @@ namespace WebUI
             services.AddControllersWithViews();
             services.ConfigureLoggerService();
             services.ConfigureRepositoryManager();
-            services.ConfigureCompanyService();
             services.ConfigureIssueService();
             services.ConfigureProjectService();
             services.ConfigureAttachmentService();

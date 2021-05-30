@@ -10,7 +10,6 @@ namespace DAL.Repositories
     public class UnitOfWork : IUnitOfWork
     {
         private readonly ApplicationDbContext _repositoryContext;
-        private ICompanyRepository _companyRepository;
         private IEmployeeRepository _employeeRepository;
         private IIssueRepository _issueRepository;
         private IProjectRepository _projectRepository;
@@ -20,17 +19,6 @@ namespace DAL.Repositories
         public UnitOfWork(ApplicationDbContext repositoryContext)
         {
             _repositoryContext = repositoryContext;
-        }
-
-        public ICompanyRepository Company
-        {
-            get
-            {
-                if (_companyRepository == null)
-                    _companyRepository = new CompanyRepository(_repositoryContext);
-
-                return _companyRepository;
-            }
         }
 
         public IEmployeeRepository Employee

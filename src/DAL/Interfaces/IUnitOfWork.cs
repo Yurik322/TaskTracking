@@ -7,7 +7,6 @@ namespace DAL.Interfaces
 {
     public interface IUnitOfWork
     {
-        ICompanyRepository Company { get; }
         IEmployeeRepository Employee { get; }
         IIssueRepository Issue { get; }
         IProjectRepository Project { get; }
