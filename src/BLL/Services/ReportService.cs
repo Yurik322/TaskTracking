@@ -7,6 +7,7 @@ using BLL.EtitiesDTO.Report;
 using BLL.Interfaces;
 using DAL.Entities;
 using DAL.Interfaces;
+using System.Linq;
 
 namespace BLL.Services
 {

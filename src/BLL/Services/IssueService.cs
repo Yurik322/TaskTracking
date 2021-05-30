@@ -79,5 +79,13 @@ namespace BLL.Services
 
             return _mapper.Map<IEnumerable<ReportDto>>(reports);
         }
+
+        public async Task<double> PercentageCompleted(int taskId)
+        {
+            var duration = (double)(await _repository.Issue.GetIssueHours(taskId));
+            var hours = (double)(await _repository.Report.GetAllReportsHours(taskId));
+
+            return (hours / duration)*100;
+        }
     }
 }

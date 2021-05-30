@@ -21,6 +21,14 @@ namespace DAL.Repositories
                 .OrderBy(c=>c.Title)
                 .ToListAsync();
 
+        //TODO
+        public async Task<int> GetIssueHours(int taskId)
+        {
+            var task = await GetIssueById(taskId);
+
+            return task.UpdatedAt.Hour * 60 + task.UpdatedAt.Minute;
+        }
+
         public async Task<Issue> GetIssueById(int issueId)
         {
             return await FindByCondition(x => x.IssueId.Equals(issueId))

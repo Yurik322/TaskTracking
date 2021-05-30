@@ -19,6 +19,7 @@ namespace DAL.Entities
         public Priority Priority { get; set; }
         public Status StatusType { get; set; }
         public DateTime CreatedAt { get; set; }
+        //TODO DURATION
         public DateTime UpdatedAt { get; set; }
         public int ProjectId { get; set; }
 

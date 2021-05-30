@@ -15,5 +15,6 @@ namespace DAL.Interfaces
         void UpdateIssue(Issue issue);
         void DeleteIssue(Issue issue);
         Task<IEnumerable<Issue>> WhereIsIssue(int issueId);
+        Task<int> GetIssueHours(int taskId);
     }
 }

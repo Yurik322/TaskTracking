@@ -15,5 +15,6 @@ namespace DAL.Interfaces
         void UpdateReport(Report report);
         void DeleteReport(Report report);
         Task<IEnumerable<Report>> WhereIsReport(int reportId);
+        Task<int> GetAllReportsHours(int taskId);
     }
 }

@@ -21,6 +21,13 @@ namespace DAL.Repositories
                 .OrderBy(c => c.ReportDescription)
                 .ToListAsync();
 
+        //TODO
+        public async Task<int> GetAllReportsHours(int taskId)
+        {
+            return (await GetAllReports(true)).Where(x => x.IssueId == taskId)
+                .Sum(x => x.AssignmentDate.Hour * 60 + x.AssignmentDate.Minute);
+        }
+
         public async Task<Report> GetReportById(int reportId)
         {
             return await FindByCondition(x => x.ReportId.Equals(reportId))
