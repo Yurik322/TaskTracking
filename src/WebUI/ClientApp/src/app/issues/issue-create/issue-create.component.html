@@ -15,7 +15,6 @@
                     (ngModelChange)="issue.issueId=$event"
                     [(ngModel)]="issue.projectId"
                     (ngModelChange)="issue.projectId=$event">
-              <!--                    TODO-->
               <option [ngValue]='project.projectId' *ngFor="let project of projects">{{ project.name }}</option>
             </select>
           </div>

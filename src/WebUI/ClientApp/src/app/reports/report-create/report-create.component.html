@@ -17,16 +17,16 @@
                       [(ngModel)]="report.issueId"
                       (ngModelChange)="report.issueId=$event">
 
-                <option [ngValue]='issue.issueId' *ngFor="let issue of issues">{{ issue.issueId }}</option>
+                <option [ngValue]='issue.issueId' *ngFor="let issue of issues">{{ issue.title }}</option>
               </select>
             </div>
             <div class="col-md-6 ">
               <label>Employee</label>
-              <select name="issue" class="form-control" data-width="100%" required ngModel
-                      [(ngModel)]="report.issueId"
-                      (ngModelChange)="report.issueId=$event">
+              <select name="employee" class="form-control" data-width="100%" required ngModel
+                      [(ngModel)]="report.employeeId"
+                      (ngModelChange)="report.employeeId=$event">
 
-                <option [ngValue]='issue.issueId' *ngFor="let issue of issues">{{ issue.issueId }}</option>
+                <option [ngValue]='employee.employeeId' *ngFor="let employee of employees">{{ employee.employeeId }}</option>
               </select>
             </div>
           </div>
@@ -41,9 +41,9 @@
 
         <div class="form-group">
           <label>Assignment Date</label>
-          <textarea rows="4" name="assignmentDate" class="form-control" placeholder="assignmentDate"
-                    [ngModel]="report.assignmentDate"
-                    (ngModelChange)="report.assignmentDate=$event"></textarea>
+          <input type="date" class="form-control" name="assignmentDate"
+                 [ngModel]="report.assignmentDate"
+                 (ngModelChange)="report.assignmentDate=$event">
         </div>
 
         <div class="text-center form-group">

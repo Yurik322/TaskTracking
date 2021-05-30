@@ -1,1 +1,40 @@
-<p>employee-list works!</p>
+<h1>Employees <span class="label-small"> {{ sharedService.getCurrentProject()?.name || 'All' }} </span></h1>
+
+<div class="header-actions d-flex">
+  <div class="col-md-5">
+    <input type="text" [(ngModel)]='listFilter' class="form-control" placeholder="Search for employees...">
+  </div>
+  <div class="col-md-7 text-right">
+    <a [routerLink]="['/employees/create']" class="btn btn-primary"><span class="glyphicon glyphicon-plus small"></span>New Employee</a>
+  </div>
+</div>
+
+<div *ngIf="!employees || employees.length == 0">No employees found.</div>
+
+<table class='table table-striped' *ngIf='employees && employees.length > 0'>
+  <thead>
+  <tr>
+    <th>Id</th>
+    <th>Position</th>
+    <th>Age</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor='let employee of employees'>
+    <td>{{ employee.employeeId }}</td>
+    <td>
+      <a [routerLink]="['/employees', employee.employeeId, 'edit']">{{employee.position}}</a>
+    </td>
+    <td>{{ employee.age }}</td>
+    <td>
+      <a title="Employees" [routerLink]="['/issues', employee.employeeId, 'employees']" class="action-button">
+        <i class="fas fa-paperclip"></i>
+      </a>
+      <a (click)="deleteEmployee(employee)" role="button" class="action-button">
+        <i class="fas fa-times text-danger"></i>
+      </a>
+    </td>
+  </tr>
+  </tbody>
+</table>

@@ -1,1 +1,45 @@
-<p>report-edit works!</p>
+<p *ngIf="!report">Error while loading report</p>
+<div *ngIf="report" class="container-fluid form-group form-new">
+  <div class="row">
+    <div *ngIf="errorMessage" class="alert alert-danger" role="alert">Error: {{ errorMessage }}</div>
+    <div class="col-lg-2 visible-lg"></div>
+    <div class="col-xs-12 col-lg-8" style="background:#eee;">
+      <h4>Edit Report</h4>
+      <form #form="ngForm" (submit)="onSubmit(form)" novalidate>
+        <div class="form-group">
+          <div class="row">
+            <div class="col-md-6 ">
+              <label>Issue</label>
+              <input type="text" class="form-control" name="issue" required readonly
+                     [ngModel]="report.issueId"
+                     (ngModelChange)="report.issueId=$event">
+            </div>
+            <div class="col-md-6 ">
+              <label>Employee</label>
+              <input type="text" class="form-control" name="employee" required readonly
+                     [ngModel]="report.employeeId"
+                     (ngModelChange)="report.employeeId=$event">
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Description</label>
+          <textarea rows="4" name="description" class="form-control" placeholder="Details"
+                    [ngModel]="report.reportDescription"
+                    (ngModelChange)="report.reportDescription=$event"></textarea>
+        </div>
+        <div class="form-group">
+          <label>Assignment Date</label>
+          <input type="date" class="form-control" name="assignmentDate"
+                 [ngModel]="report.assignmentDate"
+                 (ngModelChange)="report.assignmentDate=$event">
+        </div>
+        <div class="text-center form-group">
+          <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Update</button>
+          <a [routerLink]="['/reports/list']" class="btn btn-primary">Cancel</a>
+        </div>
+      </form>
+    </div>
+    <div class="col-lg-2 visible-lg"></div>
+  </div>
+</div>

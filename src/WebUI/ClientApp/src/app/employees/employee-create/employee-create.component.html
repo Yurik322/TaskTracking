@@ -1,1 +1,32 @@
-<p>employee-create works!</p>
+<p *ngIf="!employee">Error while loading employee</p>
+<div *ngIf="employee" class="container-fluid form-group form-new">
+  <div class="row">
+    <div *ngIf="errorMessage" class="alert alert-danger" role="alert">Error: {{ errorMessage }}</div>
+    <div class="col-lg-3 visible-lg"></div>
+    <div class="col-xs-12 col-lg-6" style="background:#eee;">
+      <h4>Create Employee</h4>
+
+      <form #form="ngForm" (submit)="onSubmit(form)" novalidate>
+        <div class="form-group">
+          <label>Position</label>
+          <input #pname="ngModel" pattern=".....+" type="text" class="form-control" name="position" placeholder="Position" required
+                 [ngModel]="employee.position"
+                 (ngModelChange)="employee.position=$event">
+        </div>
+
+        <div class="form-group">
+          <label>Age</label>
+          <input type="number" class="form-control" name="age" value="18"
+                 [ngModel]="employee.age"
+                 (ngModelChange)="employee.age=$event">
+        </div>
+
+        <div class="text-center form-group">
+          <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Create</button>
+          <a [routerLink]="['/employees/list']" class="btn btn-primary">Cancel</a>
+        </div>
+      </form>
+    </div>
+    <div class="col-lg-3 visible-lg"></div>
+  </div>
+</div>
