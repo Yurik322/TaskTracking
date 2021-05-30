@@ -46,5 +46,11 @@ namespace DAL.Repositories
         {
             Delete(report);
         }
+
+        public async Task<IEnumerable<Report>> WhereIsReport(int reportId)
+        {
+            return await FindByCondition(i => i.Issue.IssueId == reportId)
+                .OrderByDescending(a => a.ReportId).ToListAsync();
+        }
     }
 }

@@ -1,0 +1,57 @@
+<div *ngIf="!issues">There are no issue to assign a new report...</div>
+<div *ngIf="report && issues" class="container-fluid form-group form-new">
+  <div *ngIf="errorMessage" class="alert alert-danger" role="alert">Error: {{ errorMessage }}</div>
+  <div class="row">
+    <div class="col-md-2 visible-lg"></div>
+    <div class="col-xs-12 col-md-8 py-2" style="background:#eee;">
+      <h4>Assign Report</h4>
+
+      <form #form="ngForm" (submit)="onSubmit(form)" novalidate>
+        <div class="form-group">
+          <div class="row">
+            <div class="col-md-6 ">
+              <label>Issue</label>
+              <select name="issue" class="form-control" data-width="100%" required ngModel
+                      [(ngModel)]="report.reportId"
+                      (ngModelChange)="report.reportId=$event"
+                      [(ngModel)]="report.issueId"
+                      (ngModelChange)="report.issueId=$event">
+
+                <option [ngValue]='issue.issueId' *ngFor="let issue of issues">{{ issue.issueId }}</option>
+              </select>
+            </div>
+            <div class="col-md-6 ">
+              <label>Employee</label>
+              <select name="issue" class="form-control" data-width="100%" required ngModel
+                      [(ngModel)]="report.issueId"
+                      (ngModelChange)="report.issueId=$event">
+
+                <option [ngValue]='issue.issueId' *ngFor="let issue of issues">{{ issue.issueId }}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Description</label>
+          <textarea rows="4" name="description" class="form-control" placeholder="Details"
+                    [ngModel]="report.reportDescription"
+                    (ngModelChange)="report.reportDescription=$event"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Assignment Date</label>
+          <textarea rows="4" name="assignmentDate" class="form-control" placeholder="assignmentDate"
+                    [ngModel]="report.assignmentDate"
+                    (ngModelChange)="report.assignmentDate=$event"></textarea>
+        </div>
+
+        <div class="text-center form-group">
+          <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Create</button>
+          <a [routerLink]="['/reports/list']" class="btn btn-primary">Cancel</a>
+        </div>
+      </form>
+    </div>
+    <div class="col-md-2 visible-lg"></div>
+  </div>
+</div>

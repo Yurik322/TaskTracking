@@ -11,6 +11,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { IssueService } from './shared/issue.service';
+import {AttachmentListComponent} from '../attachments/attachment-list/attachment-list.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,10 @@ import { IssueService } from './shared/issue.service';
       },
       {
         path: ':id/projects',
-        pathMatch: 'full',
+        component: IssueListComponent,
+      },
+      {
+        path: ':id/reports',
         component: IssueListComponent,
       },
       {

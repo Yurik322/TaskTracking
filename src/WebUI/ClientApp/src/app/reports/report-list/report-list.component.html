@@ -1,0 +1,44 @@
+<h1>Reports</h1>
+
+<div class="header-actions d-flex">
+  <div class="col-md-5">
+    <input type="text" [(ngModel)]='listFilter' class="form-control" placeholder="Search for report...">
+  </div>
+  <div class="col-md-7 text-right">
+    <a [routerLink]="['/reports/create']" class="btn btn-primary"><span class="glyphicon glyphicon-plus small"></span>New Report</a>
+  </div>
+</div>
+
+<div *ngIf="!reports || reports.length == 0">No reports found.</div>
+
+<table class='table table-striped' *ngIf='reports && reports.length > 0'>
+  <thead>
+  <tr>
+    <th>Id</th>
+    <th>Title</th>
+    <th>Date</th>
+    <th>employeeId</th>
+    <th>issueId</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor='let report of reports'>
+    <td>{{ report.reportId }}</td>
+    <td>
+      <a [routerLink]="['/reports', report.reportId, 'edit']">{{report.reportDescription}}</a>
+    </td>
+    <td>{{ report.assignmentDate | date:'yyyy-MM-dd HH:mm a'}}</td>
+    <td>{{ report.employeeId }}</td>
+    <td>{{ report.issueId }}</td>
+    <td>
+      <a title="Issues" [routerLink]="['/issues', report.reportId, 'reports']" class="action-button">
+        <i class="fas fa-paperclip"></i>
+      </a>
+      <a (click)="deleteIssue(report)" role="button" class="action-button">
+        <i class="fas fa-times text-danger"></i>
+      </a>
+    </td>
+  </tr>
+  </tbody>
+</table>

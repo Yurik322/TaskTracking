@@ -1,12 +1,6 @@
 export interface Employee {
-  // TODO
-  issueId?: number;
-  title: string;
-  description: string;
-  taskType: number;
-  priority: number;
-  statusType: number;
-  createdAt?: string;
-  updatedAt?: string;
-  projectId?: number;
+  employeeId?: number;
+  age: number;
+  position: string;
+  userId?: string;
 }

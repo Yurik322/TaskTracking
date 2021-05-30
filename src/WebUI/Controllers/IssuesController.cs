@@ -7,6 +7,7 @@ using AutoMapper;
 using BLL.EtitiesDTO;
 using BLL.EtitiesDTO.Attachment;
 using BLL.EtitiesDTO.Issue;
+using BLL.EtitiesDTO.Report;
 using BLL.Interfaces;
 using DAL.Entities;
 using DAL.Interfaces;
@@ -150,6 +151,13 @@ namespace WebUI.Controllers
                 _logger.LogError($"Something went wrong inside DeleteIssue action: {ex.Message}");
                 return StatusCode(500, "Internal server error" + ex);
             }
+        }
+
+        // GET: /issues/5/reports
+        [HttpGet("{id}/[action]")]
+        public async Task<IEnumerable<ReportDto>> Reports(int id)
+        {
+            return await _issueService.GetReportsByIssue(id);
         }
 
         // GET: /issues/5/attachments

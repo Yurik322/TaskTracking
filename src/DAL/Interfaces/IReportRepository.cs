@@ -9,10 +9,11 @@ namespace DAL.Interfaces
     public interface IReportRepository : IRepositoryBase<Report>
     {
         Task<IEnumerable<Report>> GetAllReports(bool trackChanges);
-        Task<Report> GetReportById(int projectId);
-        Report GetReportWithDetails(int projectId);
-        void CreateReport(Report project);
-        void UpdateReport(Report project);
-        void DeleteReport(Report project);
+        Task<Report> GetReportById(int reportId);
+        Report GetReportWithDetails(int reportId);
+        void CreateReport(Report report);
+        void UpdateReport(Report report);
+        void DeleteReport(Report report);
+        Task<IEnumerable<Report>> WhereIsReport(int reportId);
     }
 }

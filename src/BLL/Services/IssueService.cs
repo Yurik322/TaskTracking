@@ -6,6 +6,7 @@ using AutoMapper;
 using BLL.EtitiesDTO;
 using BLL.EtitiesDTO.Attachment;
 using BLL.EtitiesDTO.Issue;
+using BLL.EtitiesDTO.Report;
 using BLL.Interfaces;
 using DAL.Entities;
 using DAL.Interfaces;
@@ -69,6 +70,14 @@ namespace BLL.Services
                 (await _repository.Attachment.WhereIsAttachment(id));
 
             return _mapper.Map<IEnumerable<AttachmentDto>>(attachments);
+        }
+
+        public async Task<IEnumerable<ReportDto>> GetReportsByIssue(int id)
+        {
+            var reports = _mapper.Map<IEnumerable<Report>, IEnumerable<ReportDto>>
+                (await _repository.Report.WhereIsReport(id));
+
+            return _mapper.Map<IEnumerable<ReportDto>>(reports);
         }
     }
 }
