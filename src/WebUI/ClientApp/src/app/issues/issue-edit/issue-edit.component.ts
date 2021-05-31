@@ -20,7 +20,6 @@ export class IssueEditComponent implements OnInit {
 
   ngOnInit() {
     this.issueId = +this.activatedRoute.snapshot.params['id'];
-
     if (this.issueId >= 0) {
       const issueByIdUrl = `api/issues/${this.issueId}`;
       this.issueService.getData(issueByIdUrl).subscribe(result => {

@@ -17,5 +17,6 @@ namespace BLL.Interfaces
         Task DeleteIssue(int id);
         Task<IEnumerable<AttachmentDto>> GetAttachmentsByIssue(int id);
         Task<IEnumerable<ReportDto>> GetReportsByIssue(int id);
+        Task<double> PercentageCompleted(int id);
     }
 }

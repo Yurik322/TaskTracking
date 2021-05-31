@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using BLL.EtitiesDTO;
 using BLL.EtitiesDTO.Attachment;
 using BLL.EtitiesDTO.Issue;
+using Microsoft.AspNetCore.Http;
 
 namespace BLL.Interfaces
 {
@@ -15,5 +16,6 @@ namespace BLL.Interfaces
         Task CreateAttachment(AttachmentForCreationDto attachment);
         Task UpdateAttachment(int id, AttachmentForCreationDto attachment);
         Task DeleteAttachment(int id);
+        Task CreateFile(int issueId, IFormFile file);
     }
 }

@@ -29,20 +29,9 @@ export class IssueService {
     return this.http.delete(this.createCompleteRoute(route, this.envUrl.urlAddress));
   }
 
-  // TODO
-  // uploadFile(issueId: any, file: any): Observable<any> {
-  //   let input = new FormData();
-  //   input.append("file", file);
-  //
-  //   return this.http.put(this.baseUrl + 'api/attachments/Upload/' + issueId, input);
-  // }
-
   public uploadFileFromService = (route: string, body) => {
-    return this.http.put(this.createCompleteRoute(route, this.envUrl.urlAddress, ), body, this.generateHeaders());
+    return this.http.put(this.createCompleteRoute(route, this.envUrl.urlAddress, ), body);
   }
-  // public uploadFileFromService = (route: string, body) => {
-  //   return this.http.put(this.createCompleteRoute(route, this.envUrl.urlAddress), body, this.generateHeaders());
-  // }
 
   private createCompleteRoute = (route: string, envAddress: string) => {
     return `${envAddress}/${route}`;

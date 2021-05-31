@@ -153,6 +153,14 @@ namespace WebUI.Controllers
             }
         }
 
+        //TODO
+        // GET: /issues/5/percentage
+        [HttpGet("{id}/[action]")]
+        public async Task<double> Percentage(int id)
+        {
+            return await _issueService.PercentageCompleted(id);
+        }
+
         // GET: /issues/5/reports
         [HttpGet("{id}/[action]")]
         public async Task<IEnumerable<ReportDto>> Reports(int id)

@@ -21,7 +21,6 @@ export class EmployeeListComponent implements OnInit {
     this.activatedRoute.params.subscribe((params: Params) => {
       const issueId = params['id'];
       if (issueId > -1) {
-        // TODO
         const employeesByIssueUrl = `api/issues/${issueId}/employees`;
         this.employeeService.getData(employeesByIssueUrl)
           .subscribe(employees => this.employees = <Employee[]>employees, error => this.errorMessage = <any>error);

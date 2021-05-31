@@ -22,18 +22,16 @@ namespace WebUI.Controllers
     [ApiController]
     public class AttachmentsController : ControllerBase
     {
-        private readonly IWebHostEnvironment _env;
         private readonly IAttachmentService _attachmentService;
         private readonly ILoggerManager _logger;
         //TODO
         private readonly IUnitOfWork _repository;
 
-        public AttachmentsController(IAttachmentService attachmentService, ILoggerManager logger, IUnitOfWork repository, IWebHostEnvironment env)
+        public AttachmentsController(IAttachmentService attachmentService, ILoggerManager logger, IUnitOfWork repository)
         {
             _attachmentService = attachmentService;
             _logger = logger;
             _repository = repository;
-            _env = env;
         }
 
         // GET: /attachments
@@ -160,75 +158,12 @@ namespace WebUI.Controllers
             }
         }
 
-        // TODO
         // POST: /attachments/upload/{issueId}
         [HttpPut("[action]/{issueId}")]
-        public async Task<IActionResult> Upload(int issueId, IFormFile file = null)
+        public async Task<IActionResult> Upload(int issueId, [FromForm]IFormFile file)
         {
-            // Get issue to map the attachment
-            var issue = _repository.Issue.GetIssueById(issueId);
-            if (issue == null)
-                return NotFound();
-
-            // Basic validation
-            if (!IsValidFile(file))
-                return BadRequest();
-
-            // Save file
-            var fileName = Path.GetFileNameWithoutExtension(file.FileName) + "_" +
-                            DateTime.Now.ToString("yyyyMMddHHmmss") +
-                            Path.GetExtension(file.FileName);
-            var filePath = Path.Combine(_env.WebRootPath, fileName);
-            using (var fs = new FileStream(filePath, FileMode.Create))
-            {
-                await file.CopyToAsync(fs);
-                // file.CopyTo(fs);
-            }
-
-            // Save file record to db
-            Attachment attachment = new Attachment()
-            {
-                Name = Path.GetFileNameWithoutExtension(file.FileName),
-                CreatedAt = DateTime.Now,
-                Path = fileName,
-                FileType = GetFileType(file),
-                IssueId = issueId
-            };
-            _repository.Attachment.CreateAttachment(attachment);
-            await _repository.SaveAsync();
-
+            await _attachmentService.CreateFile(issueId, file);
             return Ok();
-        }
-
-        private FileType GetFileType(IFormFile file)
-        {
-            string[] allowedExtensions = { "png", "jpg", "jpeg" };
-            var fileExtension = Path.GetExtension(file.FileName);
-            if (allowedExtensions.Any(e => fileExtension.Contains(e)))
-                return FileType.Image;
-
-            // Anyway...
-            return FileType.Document;
-        }
-
-        private bool IsValidFile(IFormFile file)
-        {
-            string[] allowedExtensions = { "png", "jpg", "jpeg", "pdf", "doc", "docx" };
-            string fileExtension = Path.GetExtension(file.FileName);
-
-            // Invalid file
-            if (file == null || file.Length == 0)
-                return false;
-
-            // Maximum file size allowed: 500kb
-            if (file.Length > 512000)
-                return false;
-
-            // Only the above file extensions are allowed
-            if (!allowedExtensions.Any(e => fileExtension.Contains(e)))
-                return false;
-
-            return true;
         }
     }
 }

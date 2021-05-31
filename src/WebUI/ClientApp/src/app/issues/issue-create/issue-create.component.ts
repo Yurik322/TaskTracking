@@ -19,7 +19,7 @@ export class IssueCreateComponent implements OnInit {
 
   constructor(private issueService: IssueService,
               private projectService: ProjectService,
-              private activatedRoute: ActivatedRoute,
+              private activeRoute: ActivatedRoute,
               private router: Router) { }
 
   ngOnInit() {
@@ -33,7 +33,6 @@ export class IssueCreateComponent implements OnInit {
       statusType: 0,
       projectId: 0
     };
-
     this.getAllProjects();
   }
 
@@ -48,41 +47,27 @@ export class IssueCreateComponent implements OnInit {
         });
   }
 
-
-
   onSubmit(form: NgForm) {
     // Any file to upload?
     const apiUrl = 'api/issues';
-
     this.issueService.createIssue(apiUrl, this.issue)
-
       .subscribe(result => {
-          console.log('result =', this.issue);
-        if (this.issue.issueId > -1) {
-          // TODO
-          this.uploadFile(this.issue.issueId);
-        } else {
-          this.errorMessage = 'Invalid Request. Check your values!';
+          if (this.issue.issueId > -1) {
+            this.uploadFile(this.issue.issueId);
+          } else {
+            this.errorMessage = 'Invalid Request. Check your values!';
+          }
+        },
+        error => {
+          this.errorMessage = error;
+          console.log(error);
         }
-      },
-      error => {
-        this.errorMessage = error;
-        console.log(error);
-      }
-    );
+      );
   }
 
   uploadFile(issueId: any) {
     if (this.fileToUpload != null) {
-      // 1
       this.uploadMiddleFile(issueId, this.fileToUpload);
-      // 2
-      // uploadFile(issueId: any, file: any): Observable<any> {
-      //   let input = new FormData();
-      //   input.append("file", file);
-      //
-      //   return this.http.put(this.baseUrl + 'api/attachments/Upload/' + issueId, input);
-      // }
     } else {
       this.router.navigate(['/issues/list']);
     }
@@ -91,10 +76,7 @@ export class IssueCreateComponent implements OnInit {
   public uploadMiddleFile(issueId: any, file: any) {
     const input = new FormData();
     input.append('file', file);
-
-    // TODO concat INTPUT
     const apiUrl = `api/attachments/Upload/${this.issue.issueId}`;
-
     this.issueService.uploadFileFromService(apiUrl, input)
       .subscribe(
         data => {
@@ -109,13 +91,10 @@ export class IssueCreateComponent implements OnInit {
       );
   }
 
-
-
   fileChange(event) {
     const fileList: FileList = event.target.files;
     if (fileList.length > 0) {
       this.fileToUpload = fileList[0];
     }
   }
-
 }

@@ -29,7 +29,6 @@ export class ProjectEditComponent implements OnInit {
     }
   }
 
-
   onSubmit(form: NgForm) {
     if (this.projectId >= 0) {
       const apiUrl = `api/projects/${this.project.projectId}`;

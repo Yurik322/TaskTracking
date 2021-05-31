@@ -85,7 +85,7 @@ namespace BLL.Services
             var duration = (double)(await _repository.Issue.GetIssueHours(taskId));
             var hours = (double)(await _repository.Report.GetAllReportsHours(taskId));
 
-            return (hours / duration)*100;
+            return (duration/hours)*100;
         }
     }
 }
