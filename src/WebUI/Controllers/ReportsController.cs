@@ -105,7 +105,7 @@ namespace WebUI.Controllers
                     return BadRequest("Invalid model object");
                 }
 
-                var reportEntity = _reportService.GetReportById(id);
+                var reportEntity = await _reportService.GetReportById(id);
                 if (reportEntity == null)
                 {
                     _logger.LogError($"Reports with id: {id}, hasn't been found in db.");
@@ -129,7 +129,7 @@ namespace WebUI.Controllers
         {
             try
             {
-                var report = _reportService.GetReportById(id);
+                var report = await _reportService.GetReportById(id);
                 if (report == null)
                 {
                     _logger.LogError($"Report with id: {id}, hasn't been found in db.");

@@ -111,7 +111,7 @@ namespace WebUI.Controllers
                     return BadRequest("Invalid model object");
                 }
 
-                var issueEntity = _issueService.GetIssueById(id);
+                var issueEntity = await _issueService.GetIssueById(id);
                 if (issueEntity == null)
                 {
                     _logger.LogError($"Issues with id: {id}, hasn't been found in db.");
@@ -135,7 +135,7 @@ namespace WebUI.Controllers
         {
             try
             {
-                var issue = _issueService.GetIssueById(id);
+                var issue = await _issueService.GetIssueById(id);
                 if (issue == null)
                 {
                     _logger.LogError($"Issue with id: {id}, hasn't been found in db.");

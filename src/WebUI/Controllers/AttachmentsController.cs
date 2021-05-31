@@ -118,7 +118,7 @@ namespace WebUI.Controllers
                     return BadRequest("Invalid model object");
                 }
 
-                var attachmentEntity = _attachmentService.GetAttachmentById(id);
+                var attachmentEntity = await _attachmentService.GetAttachmentById(id);
                 if (attachmentEntity == null)
                 {
                     _logger.LogError($"Attachments with id: {id}, hasn't been found in db.");
@@ -142,7 +142,7 @@ namespace WebUI.Controllers
         {
             try
             {
-                var attachment = _attachmentService.GetAttachmentById(id);
+                var attachment = await _attachmentService.GetAttachmentById(id);
                 if (attachment == null)
                 {
                     _logger.LogError($"Attachment with id: {id}, hasn't been found in db.");

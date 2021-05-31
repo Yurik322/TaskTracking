@@ -106,7 +106,7 @@ namespace WebUI.Controllers
                     return BadRequest("Invalid model object");
                 }
 
-                var employeeEntity = _employeeService.GetEmployeeById(id);
+                var employeeEntity = await _employeeService.GetEmployeeById(id);
                 if (employeeEntity == null)
                 {
                     _logger.LogError($"Employees with id: {id}, hasn't been found in db.");
@@ -130,7 +130,7 @@ namespace WebUI.Controllers
         {
             try
             {
-                var employee = _employeeService.GetEmployeeById(id);
+                var employee = await _employeeService.GetEmployeeById(id);
                 if (employee == null)
                 {
                     _logger.LogError($"Employee with id: {id}, hasn't been found in db.");

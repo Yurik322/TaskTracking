@@ -110,7 +110,7 @@ namespace WebUI.Controllers
                     return BadRequest("Invalid model object");
                 }
 
-                var projectEntity = _projectService.GetProjectById(id);
+                var projectEntity = await _projectService.GetProjectById(id);
                 if (projectEntity == null)
                 {
                     _logger.LogError($"Projects with id: {id}, hasn't been found in db.");
@@ -134,7 +134,7 @@ namespace WebUI.Controllers
         {
             try
             {
-                var project = _projectService.GetProjectById(id);
+                var project = await _projectService.GetProjectById(id);
                 if (project == null)
                 {
                     _logger.LogError($"Project with id: {id}, hasn't been found in db.");
