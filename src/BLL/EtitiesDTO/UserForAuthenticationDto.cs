@@ -2,7 +2,10 @@
 
 namespace BLL.EtitiesDTO
 {
-   public  class UserForAuthenticationDto
+    /// <summary>
+    /// Data transfer object for user authentication model.
+    /// </summary>
+    public class UserForAuthenticationDto
     {
 
         [Required(ErrorMessage = "Email is required.")]

@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 
 namespace BLL.EmailService
 {
+    /// <summary>
+    /// Interface for email sender.
+    /// </summary>
     public interface IEmailSender
     {
         void SendEmail(Message message);

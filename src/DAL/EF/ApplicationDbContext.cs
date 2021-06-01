@@ -5,18 +5,25 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DAL.EF
 {
+    /// <summary>
+    /// Data storage.
+    /// </summary>
     public class ApplicationDbContext : IdentityDbContext<User>
     {
         public ApplicationDbContext(DbContextOptions options) : base(options)
         {
         }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        /// <summary>
+        /// Class for creating data.
+        /// </summary>
+        /// <param name="builder">parameter for new model adding.</param>
+        protected override void OnModelCreating(ModelBuilder builder)
         {
-            base.OnModelCreating(modelBuilder);
+            base.OnModelCreating(builder);
 
-            modelBuilder.ApplyConfiguration(new EmployeeConfiguration());
-            modelBuilder.ApplyConfiguration(new RoleConfiguration());
+            builder.ApplyConfiguration(new EmployeeConfiguration());
+            builder.ApplyConfiguration(new RoleConfiguration());
         }
 
         public DbSet<Employee> Employees { get; set; }

@@ -9,6 +9,9 @@ using DAL.Entities;
 
 namespace BLL
 {
+    /// <summary>
+    /// Class for mapping profile.
+    /// </summary>
     public class MappingProfile : Profile
     {
         public MappingProfile()

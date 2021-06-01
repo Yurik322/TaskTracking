@@ -15,6 +15,9 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace WebUI.Controllers
 {
+    /// <summary>
+    /// Issues controller.
+    /// </summary>
     [Route("api/issues")]
     [Authorize]
     [ApiController]

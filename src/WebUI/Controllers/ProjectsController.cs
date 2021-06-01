@@ -14,6 +14,9 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace WebUI.Controllers
 {
+    /// <summary>
+    /// Projects controller.
+    /// </summary>
     [Route("api/projects")]
     [Authorize]
     [ApiController]

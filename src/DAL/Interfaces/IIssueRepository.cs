@@ -6,6 +6,9 @@ using DAL.Entities;
 
 namespace DAL.Interfaces
 {
+    /// <summary>
+    /// Interface of repository that work with issues.
+    /// </summary>
     public interface IIssueRepository : IRepositoryBase<Issue>
     {
         Task<IEnumerable<Issue>> GetAllIssues(bool trackChanges);

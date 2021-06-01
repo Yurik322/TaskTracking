@@ -6,6 +6,9 @@ using System.Text;
 
 namespace DAL.Entities
 {
+    /// <summary>
+    /// Project entity model.
+    /// </summary>
     public class Project
     {
         public int ProjectId { get; set; }

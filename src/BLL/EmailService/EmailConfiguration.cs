@@ -4,6 +4,9 @@ using System.Text;
 
 namespace BLL.EmailService
 {
+    /// <summary>
+    /// Email configuration for email model.
+    /// </summary>
     public class EmailConfiguration
     {
         public string From { get; set; }

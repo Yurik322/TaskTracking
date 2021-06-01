@@ -6,6 +6,9 @@ using DAL.Entities;
 
 namespace DAL.Interfaces
 {
+    /// <summary>
+    /// Interface of repository that work with employees.
+    /// </summary>
     public interface IEmployeeRepository : IRepositoryBase<Employee>
     {
         Task<IEnumerable<Employee>> GetAllEmployees(bool trackChanges);

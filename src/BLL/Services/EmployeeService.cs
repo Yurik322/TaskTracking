@@ -11,6 +11,9 @@ using DAL.Interfaces;
 
 namespace BLL.Services
 {
+    /// <summary>
+    /// Class for employee services.
+    /// </summary>
     public class EmployeeService : IEmployeeService
     {
         private readonly IUnitOfWork _repository;
@@ -22,6 +25,10 @@ namespace BLL.Services
             _mapper = mapper;
         }
 
+        /// <summary>
+        /// Method for get all EmployeeDto objects.
+        /// </summary>
+        /// <returns>collection of EmployeeDto.</returns>
         public async Task<IEnumerable<EmployeeDto>> GetAllEmployees()
         {
             var companies =
@@ -30,6 +37,11 @@ namespace BLL.Services
             return _mapper.Map<IEnumerable<EmployeeDto>>(companies);
         }
 
+        /// <summary>
+        /// Method for get EmployeeDto object by id.
+        /// </summary>
+        /// <param name="id">id of EmployeeDto.</param>
+        /// <returns>object of EmployeeDto</returns>
         public async Task<EmployeeDto> GetEmployeeById(int id)
         {
             var employee = await _repository.Employee.GetEmployeeById(id);
@@ -37,6 +49,11 @@ namespace BLL.Services
             return _mapper.Map<EmployeeDto>(employee);
         }
 
+        /// <summary>
+        /// Method for create EmployeeForCreationDto.
+        /// </summary>
+        /// <param name="employee">new employee.</param>
+        /// <returns>new object.</returns>
         public async Task CreateEmployee(EmployeeForCreationDto employee)
         {
             var employeeEntity = _mapper.Map<Employee>(employee);
@@ -45,6 +62,12 @@ namespace BLL.Services
             await _repository.SaveAsync();
         }
 
+        /// <summary>
+        /// Method for update EmployeeForCreationDto.
+        /// </summary>
+        /// <param name="id">id of updated employee.</param>
+        /// <param name="employee">updated employee.</param>
+        /// <returns>updated object.</returns>
         public async Task UpdateEmployee(int id, EmployeeForCreationDto employee)
         {
             var employeeEntity = await _repository.Employee.GetEmployeeById(id);
@@ -54,6 +77,11 @@ namespace BLL.Services
             await _repository.SaveAsync();
         }
 
+        /// <summary>
+        /// Method for deleting EmployeeDto.
+        /// </summary>
+        /// <param name="id">id of employee.</param>
+        /// <returns>deleted object.</returns>
         public async Task DeleteEmployee(int id)
         {
             var employeeEntity = await _repository.Employee.GetEmployeeById(id);
@@ -62,6 +90,11 @@ namespace BLL.Services
             await _repository.SaveAsync();
         }
 
+        /// <summary>
+        /// Method for getting IssueDto by employee.
+        /// </summary>
+        /// <param name="id">id of employee.</param>
+        /// <returns>collection of issues.</returns>
         public async Task<IEnumerable<IssueDto>> GetIssuesByEmployee(int id)
         {
             var issues = _mapper.Map<IEnumerable<Issue>, IEnumerable<IssueDto>>

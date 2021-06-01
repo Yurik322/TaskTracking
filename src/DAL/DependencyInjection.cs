@@ -7,6 +7,10 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace DAL
 {
+    /// <summary>
+    /// Dependency Injection - mechanism that allows to make objects interacting in an application loosely coupled.
+    /// The most important thing for connecting an Identity.
+    /// </summary>
     public static class DependencyInjection
     {
         public static IServiceCollection AddDataServices(this IServiceCollection services, IConfiguration configuration)

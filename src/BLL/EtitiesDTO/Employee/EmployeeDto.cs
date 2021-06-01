@@ -5,6 +5,9 @@ using System.Text;
 
 namespace BLL.EtitiesDTO.Employee
 {
+    /// <summary>
+    /// Data transfer object for employee model.
+    /// </summary>
     public class EmployeeDto
     {
         public int EmployeeId { get; set; }

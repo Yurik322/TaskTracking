@@ -9,6 +9,9 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace WebUI.Controllers
 {
+    /// <summary>
+    /// Reports controller.
+    /// </summary>
     [Route("api/reports")]
     [Authorize]
     [ApiController]

@@ -10,6 +10,9 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace WebUI.Controllers
 {
+    /// <summary>
+    /// Employees controller.
+    /// </summary>
     [Route("api/employees")]
     [Authorize]
     [ApiController]

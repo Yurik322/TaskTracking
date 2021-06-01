@@ -8,6 +8,9 @@ using BLL.EtitiesDTO.Project;
 
 namespace BLL.Interfaces
 {
+    /// <summary>
+    /// Interface for project service.
+    /// </summary>
     public interface IProjectService
     {
         Task<IEnumerable<ProjectDto>> GetAllProjects();

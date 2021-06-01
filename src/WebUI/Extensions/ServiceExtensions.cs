@@ -8,11 +8,13 @@ using BLL.Services;
 using DAL.Interfaces;
 using DAL.Repositories;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace WebUI.Extensions
 {
+    /// <summary>
+    /// Class for services module that implement DependencyInjection.
+    /// </summary>
     public static class ServiceExtensions
     {
         public static void ConfigureCors(this IServiceCollection services) =>

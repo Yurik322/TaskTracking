@@ -3,6 +3,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace BLL.EtitiesDTO.Project
 {
+    /// <summary>
+    /// Data transfer object for project creation model.
+    /// </summary>
     public class ProjectForCreationDto
     {
 

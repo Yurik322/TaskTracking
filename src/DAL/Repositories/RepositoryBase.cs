@@ -9,6 +9,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DAL.Repositories
 {
+    /// <summary>
+    /// Base repository that have methods for all repositories.
+    /// </summary>
+    /// <typeparam name="T">parameter of model name.</typeparam>
     public class RepositoryBase<T> : IRepositoryBase<T> where T : class
     {
         protected ApplicationDbContext RepositoryContext;

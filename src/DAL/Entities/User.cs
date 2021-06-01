@@ -2,6 +2,9 @@
 
 namespace DAL.Entities
 {
+    /// <summary>
+    /// User entity model.
+    /// </summary>
     public class User : IdentityUser
     {
         public string FirstName { get; set; }

@@ -7,6 +7,9 @@ using MimeKit;
 
 namespace BLL.EmailService
 {
+    /// <summary>
+    /// Message for email model.
+    /// </summary>
     public class Message
     {
         public List<MailboxAddress> To { get; set; }

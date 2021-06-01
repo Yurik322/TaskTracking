@@ -4,6 +4,9 @@ using System.Text;
 
 namespace BLL.Interfaces
 {
+    /// <summary>
+    /// Interface for logger manager service.
+    /// </summary>
     public interface ILoggerManager
     {
         void LogInfo(string message);

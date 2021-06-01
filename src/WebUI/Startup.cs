@@ -48,7 +48,6 @@ namespace WebUI
             services.ConfigureReportService();
             services.ConfigureEmployeeService();
 
-
             services.AddAutoMapper(typeof(Startup));
 
             services.Configure<DataProtectionTokenProviderOptions>(opt =>

@@ -5,6 +5,9 @@ using System.Text;
 
 namespace BLL.EtitiesDTO
 {
+    /// <summary>
+    /// Data transfer object for forgot password model.
+    /// </summary>
     public class ForgotPasswordDto
     {
         [Required]

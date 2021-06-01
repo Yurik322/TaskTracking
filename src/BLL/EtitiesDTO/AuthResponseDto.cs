@@ -1,6 +1,9 @@
 ﻿namespace BLL.EtitiesDTO
 {
-   public  class AuthResponseDto
+    /// <summary>
+    /// Data transfer object for auth response model.
+    /// </summary>
+    public class AuthResponseDto
     {
         public bool IsAuthSuccessful { get; set; }
         public string ErrorMessage { get; set; }

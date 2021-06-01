@@ -4,6 +4,9 @@ using DAL.Entities.Enums;
 
 namespace BLL.EtitiesDTO.Issue
 {
+    /// <summary>
+    /// Data transfer object for issue creation model.
+    /// </summary>
     public class IssueForCreationDto
     {
         [StringLength(256, MinimumLength = 5)]

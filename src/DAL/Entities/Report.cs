@@ -5,6 +5,9 @@ using System.Text;
 
 namespace DAL.Entities
 {
+    /// <summary>
+    /// Report entity model.
+    /// </summary>
     public class Report
     {
         public int ReportId { get; set; }

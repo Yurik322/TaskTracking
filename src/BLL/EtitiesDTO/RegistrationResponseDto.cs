@@ -2,6 +2,9 @@
 
 namespace BLL.EtitiesDTO
 {
+    /// <summary>
+    /// Data transfer object for registration response model.
+    /// </summary>
     public class RegistrationResponseDto
     {
         public bool IsSuccessfulRegistration { get; set; }

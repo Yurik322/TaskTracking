@@ -6,6 +6,9 @@ using DAL.Entities;
 
 namespace DAL.Interfaces
 {
+    /// <summary>
+    /// Interface of repository that work with projects.
+    /// </summary>
     public interface IProjectRepository : IRepositoryBase<Project>
     {
         Task<IEnumerable<Project>> GetAllProjects(bool trackChanges);

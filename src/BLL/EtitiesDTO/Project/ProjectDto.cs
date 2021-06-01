@@ -3,6 +3,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace BLL.EtitiesDTO.Project
 {
+    /// <summary>
+    /// Data transfer object for project model.
+    /// </summary>
     public class ProjectDto
     {
         public int ProjectId { get; set; }

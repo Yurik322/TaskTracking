@@ -4,6 +4,9 @@ using System.Text;
 
 namespace BLL.EtitiesDTO.Report
 {
+    /// <summary>
+    /// Data transfer object for report model.
+    /// </summary>
     public class ReportDto
     {
         public int ReportId { get; set; }

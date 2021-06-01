@@ -6,6 +6,9 @@ using DAL.Entities.Enums;
 
 namespace DAL.Entities
 {
+    /// <summary>
+    /// Attachment entity model.
+    /// </summary>
     public class Attachment
     {
         public int AttachmentId { get; set; }

@@ -9,6 +9,9 @@ using MimeKit;
 
 namespace BLL.EmailService
 {
+    /// <summary>
+    /// Class for email sender.
+    /// </summary>
     public class EmailSender : IEmailSender
     {
         private readonly EmailConfiguration _emailConfig;
@@ -72,11 +75,6 @@ namespace BLL.EmailService
 
                     client.Send(mailMessage);
                 }
-                catch
-                {
-                    //log an error message or throw an exception, or both.
-                    throw;
-                }
                 finally
                 {
                     client.Disconnect(true);
@@ -96,11 +94,6 @@ namespace BLL.EmailService
                     await client.AuthenticateAsync(_emailConfig.UserName, _emailConfig.Password);
 
                     await client.SendAsync(mailMessage);
-                }
-                catch
-                {
-                    //log an error message or throw an exception, or both.
-                    throw;
                 }
                 finally
                 {

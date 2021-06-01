@@ -9,6 +9,9 @@ using Microsoft.AspNetCore.Http;
 
 namespace BLL.Interfaces
 {
+    /// <summary>
+    /// Interface for attachment service.
+    /// </summary>
     public interface IAttachmentService
     {
         Task<IEnumerable<AttachmentDto>> GetAllAttachments();

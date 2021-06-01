@@ -6,6 +6,9 @@ using System.Text;
 
 namespace DAL.Entities
 {
+    /// <summary>
+    /// Employee entity model.
+    /// </summary>
     public class Employee
     {
         public int EmployeeId { get; set; }

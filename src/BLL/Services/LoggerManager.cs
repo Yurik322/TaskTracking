@@ -7,6 +7,9 @@ using NLog;
 
 namespace BLL.Services
 {
+    /// <summary>
+    /// Class for logger manager services.
+    /// </summary>
     public class LoggerManager : ILoggerManager
     {
         private static NLog.ILogger logger = LogManager.GetCurrentClassLogger();

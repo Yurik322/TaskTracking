@@ -7,6 +7,9 @@ using DAL.Entities.Enums;
 
 namespace DAL.Entities
 {
+    /// <summary>
+    /// Issue entity model.
+    /// </summary>
     public class Issue
     {
         public int IssueId { get; set; }

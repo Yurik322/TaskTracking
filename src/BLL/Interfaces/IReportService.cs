@@ -7,6 +7,9 @@ using BLL.EtitiesDTO.Report;
 
 namespace BLL.Interfaces
 {
+    /// <summary>
+    /// Interface for report service.
+    /// </summary>
     public interface IReportService
     {
         Task<IEnumerable<ReportDto>> GetAllReports();

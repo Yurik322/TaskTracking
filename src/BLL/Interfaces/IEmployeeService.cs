@@ -6,6 +6,9 @@ using BLL.EtitiesDTO.Employee;
 
 namespace BLL.Interfaces
 {
+    /// <summary>
+    /// Interface for employee service.
+    /// </summary>
     public interface IEmployeeService
     {
         Task<IEnumerable<EmployeeDto>> GetAllEmployees();

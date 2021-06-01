@@ -13,6 +13,9 @@ using Microsoft.AspNetCore.WebUtilities;
 
 namespace WebUI.Controllers
 {
+    /// <summary>
+    /// Accounts controller.
+    /// </summary>
     [Route("api/accounts")]
     [ApiController]
     public class AccountsController : ControllerBase

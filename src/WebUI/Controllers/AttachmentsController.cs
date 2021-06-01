@@ -17,6 +17,9 @@ using Microsoft.AspNetCore.Http;
 
 namespace WebUI.Controllers
 {
+    /// <summary>
+    /// Attachments controller.
+    /// </summary>
     [Route("api/attachments")]
     [Authorize]
     [ApiController]
@@ -24,14 +27,11 @@ namespace WebUI.Controllers
     {
         private readonly IAttachmentService _attachmentService;
         private readonly ILoggerManager _logger;
-        //TODO
-        private readonly IUnitOfWork _repository;
 
-        public AttachmentsController(IAttachmentService attachmentService, ILoggerManager logger, IUnitOfWork repository)
+        public AttachmentsController(IAttachmentService attachmentService, ILoggerManager logger)
         {
             _attachmentService = attachmentService;
             _logger = logger;
-            _repository = repository;
         }
 
         // GET: /attachments

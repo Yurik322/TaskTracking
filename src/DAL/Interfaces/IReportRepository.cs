@@ -6,6 +6,9 @@ using DAL.Entities;
 
 namespace DAL.Interfaces
 {
+    /// <summary>
+    /// Interface of repository that work with reports.
+    /// </summary>
     public interface IReportRepository : IRepositoryBase<Report>
     {
         Task<IEnumerable<Report>> GetAllReports(bool trackChanges);

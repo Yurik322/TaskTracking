@@ -5,6 +5,9 @@ using System.Text;
 
 namespace BLL.EtitiesDTO.Employee
 {
+    /// <summary>
+    /// Data transfer object for employee creation model.
+    /// </summary>
     public class EmployeeForCreationDto
     {
         [Required(ErrorMessage = "Age is a required field.")]

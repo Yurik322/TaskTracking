@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 
 namespace DAL.Interfaces
 {
+    /// <summary>
+    /// Interface for getting lists from data context.
+    /// </summary>
     public interface IUnitOfWork
     {
         IEmployeeRepository Employee { get; }

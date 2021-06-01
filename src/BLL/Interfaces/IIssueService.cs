@@ -8,6 +8,9 @@ using BLL.EtitiesDTO.Report;
 
 namespace BLL.Interfaces
 {
+    /// <summary>
+    /// Interface for issue service.
+    /// </summary>
     public interface IIssueService
     {
         Task<IEnumerable<IssueDto>> GetAllIssues();

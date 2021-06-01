@@ -2,6 +2,9 @@
 
 namespace BLL.EtitiesDTO
 {
+    /// <summary>
+    /// Data transfer object for user registration model.
+    /// </summary>
     public class UserForRegistrationDto
     {
         public string FirstName { get; set; }

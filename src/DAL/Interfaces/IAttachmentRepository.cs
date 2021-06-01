@@ -6,6 +6,9 @@ using DAL.Entities;
 
 namespace DAL.Interfaces
 {
+    /// <summary>
+    /// Interface of repository that work with attachments.
+    /// </summary>
     public interface IAttachmentRepository : IRepositoryBase<Attachment>
     {
         Task<IEnumerable<Attachment>> GetAllAttachments(bool trackChanges);

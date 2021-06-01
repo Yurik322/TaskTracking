@@ -11,6 +11,9 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace BLL.JwtFeatures
 {
+    /// <summary>
+    /// Class for handling JwtSecurityToken.
+    /// </summary>
     public class JwtHandler
     {
         private readonly IConfiguration _configuration;

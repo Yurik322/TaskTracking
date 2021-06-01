@@ -5,6 +5,9 @@ using System.Text;
 
 namespace BLL.EtitiesDTO
 {
+    /// <summary>
+    /// Data transfer object for reset password model.
+    /// </summary>
     public class ResetPasswordDto
     {
         [Required(ErrorMessage = "Password is required")]
